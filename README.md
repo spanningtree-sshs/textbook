@@ -1,6 +1,8 @@
 # textbook
 Math textbook project of SpanningTree, a math club of Seoul Science High School.
 
+Author: SpanningTree contributors
+
 Shield: [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
 
 This work is licensed under a
