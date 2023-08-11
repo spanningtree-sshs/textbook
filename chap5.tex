@@ -1,0 +1,555 @@
+\part{함수}
+\chapter{함수}
+\section{극한}\label{sec:lim}
+\begin{definition}\label{def:e-d}
+    거리 공간 $A, B$와 $p\in A, L\in B$, 그리고 함수 $f:A\to B$에 대해, [모든 양수 $\varepsilon>0$에 대해] [어떤 양수 $\delta>0$이 존재하여] [[$d(p, y)<\delta$를 만족하는 $y\in A$에 대해] 항상 [$d(f(y), L)<\epsilon$가 성립한다면]] $\lim_{x\to p}f(x)=L$이라고 한다. 이때 $f(x)$는 $x=p$ 주변에서 극한 $L$을 가진다, 또는 $L$로 수렴한다고 한다. 이러한 $L$이 존재하지 않으면 발산한다고 한다.
+\end{definition}
+\section{함수의 연속}\label{sec:cont}
+\begin{definition}
+    함수 $f$의 $x=p$ 주위에서의 극한이 $f(p)$와 같으면 $f$는 $x=p$에서 연속이라고 한다. (정의역의) 모든 점에서 연속인 함수를 연속함수라고 한다. 
+\end{definition}
+\begin{remark}
+    $f: \mathbb{R}-\{0\}\to \mathbb{R}-\{0\}$, $f(x)=1/x$는 연속함수이다. 
+\end{remark}
+\begin{definition}\label{def:cont-top}
+    위상 공간 $A, B$와 함수 $f:A\to B$에 대해 $S\subset B$ open$\implies f^{-1}(S)\subset A$ open이면 $f$를 연속함수(continuous function)라고 한다. 
+\end{definition}
+\begin{theorem}[중간값 정리]\label{thm:ivt}
+    
+\end{theorem}
+\section{점근 표기법과 시간 복잡도}
+점근 표기법이란, 함수의 증감 추세를 비교적 간단한 다른 함수와 비교하는 표기법이다. 일반적으로는 Big-O notation이 쓰이며, 다음과 같이 정의한다.
+\begin{definition}\index{Big-O notation}\index{큰-O 표기법}
+    함수 $f, g:[0, \infty)\to \mathbb{R}$에 대해, 양의 실수 $x_0, c$가 존재하여 모든 실수 $x$에 대해 $x>x_0\Rightarrow |f(x)|\leq c|g(x)|$를 만족하면, $x\to\infty$에 대해 $f(x)=O(g(x))$라고 한다.
+\end{definition}
+위 정의는 간단히 `$\limsup_{x\to\infty}|f(x)/g(x)|<\infty$일 때, $f(x)=O(g(x))$이다.'로 표현할 수 있다.
+\begin{example}
+    $\lceil x\rceil=O(x)$이다.
+\end{example}
+\begin{remark}
+    $f(x)=O(g(x))$라는 표현에서 등호는 `같다'는 의미보다는 `경향을 띤다'는 의미로 통한다. 그래서 $O(g(x))$를 하나의 집합으로 보고 $f(x)\in O(g(x))$로 표기하기도 한다.
+\end{remark}
+Big-O notation 이외에도 점근 표기법에는 Little-o notation, Big-Omega notation, Little-omega notation, Big-Theta notation이 있다. 이 중 Big-Omega notation은 $\liminf_{x\to\infty}|f(x)/g(x)|>0$일 때 $f(x)=\Omega(g(x))$로 정의되며, Big-Theta notation은 $f(x)=O(g(x))$이며 $f(x)=\Omega(g(x))$일 때 $f(x)=\Theta(g(x))$로 정의된다. 
+\begin{remark}
+    앞선 정의들을 보면 Big-Theta notation이 Big-O notation보다 더 엄격한 표기임을 알 수 있다. 그러나 통상적으로는 Big-O을 더 많이 쓰며, 암묵적으로 Big-O를 Big-Theta처럼 사용한다.
+\end{remark}
+점근 표기법은 컴퓨터 과학에서 알고리즘의 시간/공간 복잡도를 나타내는데 많이 사용된다. 시간 복잡도는 입력의 크기를 나타내는 미지수(들)에 대해 수행 시간이 어느 정도인지를 나타내는 척도이다. 시간 복잡도는 주어진 입력에 대한 연산 횟수를 정확히 계산하기보다는 점근적으로 얼마인지를 나타내기에 점근 표기법을 이용하여 표현한다.
+\begin{example}
+    길이 $N$ 배열을 비교 기반 정렬을 통해 정렬할 때, 시간 복잡도 하한은 $O(N\log N)$이다.
+\end{example}
+\begin{proof}
+    비교 $k$번을 통해 구분할 수 있는 경우는 최대 $2^k$가지이므로 이를 이용해 가능한 모든 길이 $N$ 배열을 정렬하려면 $2^k\geq N!$이어야 한다. 따라서 $k=\Omega(N \log N)$(증명하여라).
+\end{proof}
+무한대 점근을 통하여 시간 복잡도를 표기하면 근사를 통해 `보기 좋은' 형태로 식을 정리할 수 있다. 이는 특히 \textit{분할 정복}(Divide and Conquer)이라 불리는 알고리즘의 시간 복잡도를 표기할 때 유용하다. 다음 연습문제를 통해 알아보자.
+\begin{exercise}
+    함수 $T(n),\ f(n)$, 상수 $a>1,\ b>1$에 대해 $T(n)=aT(n/b)+f(n)$를 모든 $n$에 대해 만족하면 $T(n)$은
+    \begin{equation}\label{eq:mastereq}
+        T(n)=\sum_{i=0}^{\log_b n}a^i f(n/b^i) +O(n^{\log_b a})
+    \end{equation}
+    로 표현됨을 보여라($\Sigma$의 첨자가 실수여도 $\lceil x\rceil=O(x)$이므로 점근적으로 동일하다는 것을 관찰하면 좋다).
+\end{exercise}
+물론, \Cref{eq:mastereq}로는 $T(n)$이 어떤 경향성을 가지는지 알아보기 어렵다. 그러므로 해당 식을 통해 유도된 더 `보기 좋은' 정리를 알아보자.
+\begin{theorem}[Master theorem]\label{thm:master}\index{master theorem}\index{마스터 정리}
+    함수 $T(n),\ f(n)$, 상수 $a>1,\ b>1$에 대해 $T(n)=aT(n/b)+f(n)$를 모든 $n$에 대해 만족하면 다음이 성립한다.
+    \begin{enumerate}[(A)]
+        \item\label{item:mcase1} 어떤 양의 실수 $\epsilon$에 대해 $f(n)=O(n^{\log_b a-\epsilon})$이면 $T(n)=O(n^{\log_b a})$이다.
+        \item\label{item:mcase2} $f(n)=\Theta(n^{\log_b a})$이면 $T(n)=\Theta(n^{\log_b a}\log n)$이다.
+        \item\label{item:mcase3} 어떤 양의 실수 $\epsilon$에 대해 $f(n)=\Omega(n^{\log_b a+\epsilon})$이며, 어떤 상수 $c<1$에 대해 $af(n/b)\leq cf(n)$이면 $T(n)=\Theta(f(n))$이다.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \ref{item:mcase1}에서
+    \begin{align*}
+        \sum_{i=0}^{\log_b n}a^i f(n/b^i) 
+        &\leq \sum_{i=0}^{\log_b n}a^i (n/b^i)^{\log_b a-\epsilon} 
+        = n^{\log_b a-\epsilon}\sum_{i=0}^{\log_b n}b^{\epsilon i} \\
+        &= n^{\log_b a-\epsilon} \frac{b^{\epsilon(\log_b n+1)}-1}{b^\epsilon-1}
+        =n^{\log_b a-\epsilon}\frac{n^\epsilon b^\epsilon-1}{b^\epsilon-1} \\
+        &\leq n^{\log_b a}\frac{b^\epsilon}{b^\epsilon-1}=O(n^{\log_b a})
+    \end{align*}
+    를 만족하므로, \Cref{eq:mastereq}에 의해 $T(n)=O(n^{\log_b a})+O(n^{\log_b a})=O(n^{\log_b a})$. \\
+    \ref{item:mcase2}에서
+    \begin{equation*}
+        \sum_{i=0}^{\log_b n}a^i f(n/b^i)
+        =\sum_{i=0}^{\log_b n}a^i (n/b^i)^{\log_b a}
+        =n^{\log_b a}\sum_{i=0}^{\log_b n} 1
+        =\Theta(n^{\log_b a}\log n)
+    \end{equation*}
+    이므로, \Cref{eq:mastereq}에 의해 $T(n)=\Theta(n^{\log_b a}\log n)+O(n^{\log_b a})=\Theta(n^{\log_b a} \log n)$. \\
+    \ref{item:mcase3}에서 \Cref{eq:mastereq}에서 하한 $T(n)=\Omega(f(n))$은 자명. $af(n/b)\leq cf(n)$이므로 $a^i f(n/b^i) \leq c^i f(n)$이기에 \Cref{eq:mastereq}에서
+    \begin{align*}
+        T(n) &=\sum_{i=0}^{\log_b n}a^i f(n/b^i) +O(n^{\log_b a})
+        \leq f(n)\sum_{i=0}^{\log_b n}c^i + O(n^{\log_b a}) \\
+        &\leq f(n)\sum_{i=0}^{\infty}c^i +O(n^{\log_b a})
+        =f(n)\frac{1}{1-c}+O(n^{\log_b a})=O(f(n))
+    \end{align*}
+    이므로 $T(n)=\Theta(f(n))$.
+\end{proof}
+위 정리는 아래의 연습문제에서 소개할 상황에서 가장 빈번하게 쓰인다.
+\begin{exercise}\label{exer:master}
+    \Cref{thm:master}에서 $f(n)=\Theta(n^{\log_b a}\log^k n) \ (k\geq 0)$이면 $T(n)=\Theta(n^{\log_b a}\log^{k+1} n)$임을 보여라.
+\end{exercise}
+\begin{example}
+    병합 정렬(Merge sort)의 시간 복잡도는 길이 $n$ 배열에 대해 $O(n\log n)$이다. 병합 정렬의 시간 복잡도를 $T(n)$이라 했을 때, 분할 과정에서 $2T(n/2)$, 병합 과정에서 $\Theta(n)$의 시간 복잡도를 가져 $T(n)$은 $T(n)=2T(n/2)+\Theta(n)$을 만족한다. 이는 \Cref{exer:master}의 상황과 일치하므로 $T(n)=\Theta(n\log n)$이 성립한다.
+\end{example}
+출처: \url{https://www.cs.cornell.edu/courses/cs3110/2012sp/lectures/lec20-master/mm-proof.pdf}
+\section{코시 함수 방정식}
+코시 함수 방정식이란 방정식 $f(x+y)=f(x)+f(y)$를 말한다. 물론 선형 함수 $f(x)=cx$은 자명히 이 방정식을 만족한다. 
+\begin{exercise}
+    코시 함수 방정식의 해 $f$와 유리수 $q$에 대해 $f(qx)=qf(x)$여야 함을 보여라. 
+\end{exercise}
+\begin{corollary}
+코시 함수 방정식의 해 $f: \mathbb{Q}\to\mathbb{Q}$는 $f(x)=cx$뿐이다. 
+\end{corollary}
+\begin{question}
+이 방정식의 비선형 해 $f: \mathbb{R}\to\mathbb{R}$이 존재하는가?
+\end{question}
+잘 생각해 보면 $f(1)$이 $f(\pi)$의 값에 영향을 줄 방법은 전혀 없음을 알 수 있다. 즉 $f(1)=1, f(\pi)=3$으로 정해도 될 것으로 보인다. 물론 이로부터 $f(2-3\pi)$의 값은 -7로 결정된다. \\
+이를 추상화해 보자. $\{1, \pi\}$의 원소가 독립적으로 $f$ 값을 가질 수 있는 이유는 $\pi$가 1의 유리수배가 아니기 때문이다. 반면 
+ $\{1, \pi, 2-3\pi\}$의 세 원소에 임의의 값을 할당할 수 없는 이유는 $2-3\pi=2\cdot(1)+(-3)\cdot(\pi)$의 관계가 있기 때문이다. 이는 이항을 통해 $2\cdot(1)+(-3)\cdot(\pi)+(-1)\cdot(2-3\pi)=0$으로 쓸 수 있다. 즉, 원소들에 적절한 유리수 계수를 곱한 후 더했을 때 0이 된다면 이 잡합들에 마음대로 함숫값을 부여할 수 없다(단 모든 계수가 0인 경우는 제외해야 할 것이다). 이제 다음 정의가 자연스럽다. 
+\begin{definition}
+유한집합 $S=\{s_i\}$가 있을 때, $a_i\in F$에 대해 $\sum a_is_i$를 $S$의 $F$-linear combination($F$-선형결합)이라고 한다. 
+\end{definition}
+\begin{definition}
+유한집합 $S=\{s_i\}$가 있을 때 $S$의 $F$-선형결합이 0이 되는 방법이 하나뿐이면(즉, 모든 계수가 0) $S$를 $F$-linearly independent($F$-선형독립)이라고 한다. 
+\end{definition}
+무한집합 $S$에 대해서는 유한 부분집합을 취하여 정의하는데, 일반적인 무한집합에서 합을 논하기는 어렵기 때문이다. 
+\begin{definition}
+    집합 $S$에 대해, $S$의 선형결합은 $S$의 어떤 유한 부분집합에 대한 선형결합을 뜻한다. $S$가 선형 독립이라는 것은 $S$의 임의의 유한 부분집합이 선형 독립임을 의미한다. 
+\end{definition}
+\begin{remark}
+위 정의에서 사실 $F$가 field이고 $S$가 $F$-vector space $V$의 부분집합이라는 조건이 필요하다. 벡터 공간에 대한 논의는 선형대수학 교재(e.g. 이인석 - ``선형대수와 군'')나, \Cref{chap:linalg}를 참고하라. 
+\end{remark}
+이 정의로 위 문단을 다시 쓰면, $\mathbb{Q}$-선형독립인 몇 개의 실수들에 대해서는 $f$의 값을 임의로 정해 줄 수 있고, $S\subset \mathbb{R}$에 대해 $f$의 값을 결정하면 $S$의 $\mathbb{Q}$-선형결합 전체의 집합에 대해서 $f$의 값이 결정된다. 
+따라서 우리가 해야 할 일은 $\mathbb{Q}$-선형독립이며, $\mathbb{Q}$-선형결합 전체의 집합이 $\mathbb{R}$이 되는 집합 $S$를 찾는 것이다. 이런 집합 $S$를 basis(기저), 더 정확히는 $\mathbb{R}$의 $\mathbb{Q}$-basis라고 한다. \\
+모든 벡터 공간에 기저가 존재한다는 사실은 선택 공리(\cref{axm:choice})와 동치임이 알려져 있다. 
+\begin{example}
+$\{(0, 1), (1, 0)\}\subset \mathbb{R}^2$는 $\mathbb{R}^2$의 $\mathbb{R}$-basis이다. 
+\end{example}
+\begin{example}
+$\{1, t, t^2, \cdots\}$는 $F[t]$의 $F$-basis이다. 
+\end{example}
+\begin{exercise}
+$\mathbb{R}$의 모든 $\mathbb{Q}$-basis는 무한집합임을 보여라. 
+\end{exercise}
+이제 $\mathbb{R}$의 $\mathbb{Q}$-basis $S$ 하나를 (존재한다고 가정하고) 고정하자. $f$는 $f|_S$에 의해 완전히 결정된다. 따라서 코시 함수 방정식의 선형 해는, 사실은 아무런 제약 조건이 없는 $f|_S$가 우연히 선형 함수가 된 경우에만 만들어진다! 직관적으로 말하면, `코시 함수 방정식의 거의 모든 해는 선형이 아니다.'\\
+코시 함수 방정식의 비선형 해에 대한 여러 성질이 알려져 있다. 직관적으로 비선형 해를 이해할 수 있는 강력한 정리를 소개한다. 
+\begin{theorem}\label{nonlin}
+코시 함수 방정식의 비선형 해 $f$의 그래프 $G=\{(x, f(x))|x\in \mathbb{R}\}$는 좌표평면에서 조밀하다. 즉, 좌표평면 위 임의의 원반을 하나 그려도 $f$의 그래프는 그 원반과 교점을 갖는다. 
+\end{theorem}
+\begin{exercise}
+\cref{nonlin}에서, 사실 임의의 원반과 $f$의 그래프가 갖는 교점은 무한히 많다. \cref{nonlin}만을 이용해 증명하여라. 
+\end{exercise}
+\begin{exercise}
+\cref{nonlin}를 증명하여라. Hint: 비선형 해 $f$에 대해, $f(a)/a\neq f(b)/b$인 두 수 $a, b\neq 0$를 잡자. 
+\end{exercise}
+이런 성질은 물론 우리가 한 번도 본 적 없는 것이다. 
+\begin{exercise}
+연속의 정의를 이용하여, 한 점에서라도 연속인 함수의 그래프는 좌표평면에서 조밀하지 않음을 증명하여라. 
+\end{exercise}
+\begin{exercise}
+증가함수의 그래프는 좌표평면에서 조밀하지 않음을 증명하여라.
+\end{exercise}
+다음 연습문제로 마무리하자. 
+\begin{exercise}
+$f(x+y)=f(x)+f(y), f(1/x)=1/f(x)$를 만족하는 함수 $f: \mathbb{R}\to\mathbb{R}$을 모두 찾아라. 
+\end{exercise}
+출처: \url{https://en.wikipedia.org/wiki/Cauchy's_functional_equation}
+
+%\chapter{실, 복소함수의 미분}
+
+
+\chapter{선형대수학}
+\label{chap:linalg}
+\section{서론}
+\label{sec:linalgint}
+이 단원에서는 \textit{선형}인 연산과 함수들의 기본적인 성질을 탐구할 것이다.
+선형이란, 덧셈과 상수의 곱셈에 대해서 가환인 것들을 말한다.
+예를 들어서, 실수 2개의 쌍들의 집합인 $\mathbb{R}^2$은
+\begin{align}
+\begin{split}
+\label{eq:linear1}
+    (a_1, a_2) + (b_1, b_2) &= (a_1 + b_1, a_2 + b_2) \\
+    a(b_1, b_2) &= (a b_1, a b_2)
+\end{split}
+\end{align}
+와 같이 덧셈과, 상수의 곱셈을 정의할 수 있다.
+그러면 함수 $L: \mathbb{R}^2 \to \mathbb{R}^2$가 선형이라는 것의 정의는, 다음 식이 모든 $x, y \in \mathbb{R}^2$와 $a \in \mathbb{R}$에 대해 성립하는 것이다.
+\begin{align*}
+    L(x + y) &= L(x) + L(y) \\
+    L(ax) &= aL(x)
+\end{align*}
+이런 함수들을 우리는 행렬로 나타낼 수 있음을 볼 것이다.
+
+유한한 집합 $A, B$에 대하여, $f: A \to B$가 단사임과 전사임은 동치이다.
+\textit{기저}(basis)라는 도구는 선형인 함수들을 제한된 정의역에 대한 일반 함수로 다룰 수 있게 해준다.
+이것을 사용해 $A, B$가 어떤 유한한 조건을 만족하면, 선형인 $f: A \to B$가 단사임과 전사임이 동치임을 보일 수 있다.
+
+우리의 예시인 $\mathbb{R}^2$로 다시 돌아와, 다음 함수를 고려하자.
+\begin{equation}
+\label{eq:diag1}
+    f(x) = (ax_1, bx_2)
+\end{equation}
+이 함수는 $\mathbb{R}^2$에서 자기 자신으로 가는 선형 함수이다.
+더욱더, $f$를 $n$번 $x$에 적용하면, 그 결과를 $(a^n x_1, b^n x_2)$로 쉽게 계산할 수 있다.
+일반적인 선형 함수에 대해서 이런 계산을 할 수 있을지 우리는 살펴볼 것이다.
+이것은 임의의 선형 함수 $f$에 대해서, $f(x) = \lambda x$인 $x$를 찾는 문제와 긴밀히 연결되어 있다.
+\Cref{eq:diag1}과 같은 꼴로 변환하는 테크닉은 점화식 등을 일반항으로 정리하는데 쓸 수 있다.
+
+\section{벡터 공간}
+우리는 먼저 \Cref{eq:linear1}의 조건들을 공리적으로 다룰 것이다.
+\Cref{eq:linear1}에 먼저 두가지 수학적 물체가 존재함에 주목해라.
+먼저 곱할 수 있는 상수는 실수와 비슷하게, 덧셈과 곱셈이 자유로운, 임의의 체 (cf. \Cref{def:reals})의 원소로 하는 것이 적당해 보인다.
+\begin{remark}
+    추상적으로 생각하기 부담스러운 독자는 임의의 체를 실수나 복소수라고 생각하여도 된다.
+\end{remark}
+
+상수가 아니지만 더하고 상수를 곱할 수 있는 물체들을 우리는 관용적으로 \textit{벡터}라고 부른다.
+\Cref{sec:linalgint}에서 다룬 벡터는 실수들의 쌍인 $(a, b)$이다.
+그러나 우리는 벡터들을 이런 쌍이 아닌 어떤 연산에 관한 성질들을 만족하는 추상적인 물체들로 볼 것이다.
+다음 두번째 예시가 이 관점의 장점을 말해준다.
+
+\begin{example}
+    임의의 체 (예시: 유리수, 실수, 복소수) $F$위의 모든 다항식들의 집합 $F[x]$는 $F$위의 벡터 공간을 이룬다.
+\end{example}
+\begin{example}
+    실수에 정의된 모든 실함수들의 공간, 모든 연속인 실함수들의 공간, 모든 미분 가능한 실함수들의 공간, 상수함수들의 공간은 모두 각각 벡터 공간을 이룬다.
+\end{example}
+\begin{example}
+    우리가 \Cref{sec:linalgint}에서 본 실수 2개의 쌍들의 공간, 그리고 더욱 더 일반적으로 임의의 자연수 $n \in \mathbb{N}$에 대해서 체 $F$의 원소 $n$개의 순서쌍들의 공간은 \Cref{eq:linear1}과 비슷한 연산 아래에서 벡터 공간을 이룬다.
+    특수한 경우로 유클리드 공간 $\mathbb{R}^n$과 공간 $\mathbb{C}^n$이 있다.
+    특별한 말이 없으면, $F^n$은 $F$위의 $F$의 원소 $n$개의 순서쌍들의 벡터 공간을 뜻할 것이다.
+\end{example}
+
+다음 정확한 정의는 정확히 무슨 연산 법칙들이 성립하는지를 정확하게 말하여 주나, 너무 강조해서 볼 필요는 없다.
+\begin{definition}
+\label{def:vecspace}
+    체 $F$위의 벡터 공간 $V$이란, 이항 연산 $\cdot : F \times V \to V$와 $+ : V \times V \to V$를 가지고, 다음 성질을 만족하는 집합을 말한다.\index{벡터 공간}\index{vector space}
+    \begin{enumerate}[(a)]
+        \item 덧셈의 교환법칙과 결합법칙이 성립한다.
+        즉 임의의 $v, w, u \in V$에 대해서, $(v + w) + u = v + (w + u)$이고, $v + w = w + v$이다.
+        \item 덧셈의 항등원, 즉 $v + 0 = 0 + v = v$가 모든 $v \in V$에 대해서 성립하는 벡터 $0$이 존재한다.
+        이 벡터를 관용적으로 영벡터라고 한다.
+        \item 각 $v \in V$에 대하여, 덧셈의 역원인, 즉 $v + w = w + v = 0$를 만족하는 벡터 $w$가 존재한다.
+        우리는 이 벡터를 $-v$로 표기한다.
+        \item 각 $a, b \in F, v \in V$에 대해서 결합법칙 $a(bv) = (ab)v$가 성립한다. (우리는 연산 $\cdot$를 주로 생략하고 표기한다.)
+        \item 각 $a, b \in F, v, w \in V$에 대해서 분배법칙 $(a + b)v = av + bv$와 $a(v + w) = av + aw$가 성립한다.
+        \item 체 $F$의 항등원 $1$과 모든 $v \in V$에 대해 $1v = v$가 성립한다.
+    \end{enumerate}
+    벡터 공간 $V$의 원소들을 우리는 벡터라고 부르고, $F$의 원소들을 우리는 관용적으로 스칼라라고 한다.\index{벡터}\index{vector}\index{스칼라}\index{scalar}
+\end{definition}
+우리는 다음 논의에서 모든 벡터 공간을 어떤 고정된 체 $F$위의 벡터 공간이라고 생각할 것이다.
+
+해당 정의에서 다음 ``자명한'' 사실들을 유도할 수 있다.
+\begin{exercise}
+    벡터 공간 $V$에서 항등원이 유일하고, 각 벡터 $v \in V$에 대한 덧셈의 역원 또한 유일함을 증명하여라.
+\end{exercise}
+\begin{exercise}
+    \begin{enumerate}[(a)]
+        \item 모든 $v \in V$에 대하여, $0v = 0$이 성립함을 증명하시오.
+        \item 모든 $a \in F$에 대하여, $a0 = 0$이 성립함을 증명하시오.
+        \item 위 두 연습문제에서 등장하는 $0$ 4개 중, 하나는 나머지와 다르다.
+        어떤 것인지, 어떻게 다른지 찾으시오.
+        \item 만약 $a \in F$와 $v \in V$에 대해 $av = 0$가 성립하면, $a = 0$이거나 $v = 0$임을 증명하시오.
+        \item 스칼라 $-1$과 $v$의 곱인 $(-1)v$과, $v$의 덧셈에 대한 역원 $-v$가 같음을 증명하시오.
+    \end{enumerate}
+\end{exercise}
+
+\begin{definition}
+\label{def:subspace}
+    벡터 공간 $V$의 부분집합 $S$가 $V$의 연산 아래에 벡터 공간이 될 때, 우리는 $S$를 부분공간이라고 한다.\index{subspace}\index{부분공간}
+\end{definition}
+
+\begin{lemma}
+    벡터 공간 $V$의 부분집합 $S$가 부분공간일 필요충분조건은, 모든 $a, b \in F$와 $v, w \in S$에 대해, $av + bw \in S$인 것이다.
+\end{lemma}
+\begin{proof}
+    만약 상수곱과 덧셈에 대해 $S$가 닫혀있다면, 항등원 조건은 $0v = 0$에서 ($S$가 공집합이면 증명할 것이 없다), 역원 조건은 $(-1)v + v = 0$에서, 나머지 연산의 조건은 $V$가 벡터 공간이라는 사실에서 바로 자명하다.
+\end{proof}
+
+\begin{example}
+    실수 위의 공간 $\mathbb{R}^2$의 부분공간 $S$는 $\{0\}$, $\mathbb{R}^2$이거나, 어떤 벡터 $v \in \mathbb{R}^2$에 대해서 $\{cv : c \in \mathbb{R}\}$꼴의 원점을 지나는 직선이다.
+\end{example}
+\begin{exercise}
+    이 예시를 증명하시오. [\textit{힌트}: $0$이 아닌 벡터 $x \in S$를 선택하고, 실수 $c$에 대해 $cx$꼴이 아닌 벡터가 있는 경우와 없는 경우로 나누어라.]
+\end{exercise}
+
+벡터 공간 $V$의 두 부분공간 $W_1, W_2$에 대해서, $W_1 \cap W_2$ 또한 연산에 대해 닫혀 있으므로, 또한 부분공간이다.
+일반적으로 (무한할 수 있는) 아무 부분 공간들의 집합 $\mathcal{F}$에 대해서, $\cap_{W \in \mathcal{F}} W$은 부분공간이다.
+반대로, 두 부분공간 $W_1, W_2$를 포함하는 부분공간을 만들기 위해서는, $W_1 \cup W_2$로는 충분하지 않다. (예시: $\{(a, 0)\} \cup \{(0, a)\}$)
+두 부분공간 $W_1, W_2$를 포함하는 ``제일 작은'' 부분공간은
+\begin{equation*}
+    W_1 + W_2 = \{x_1 + x_2 : x_1 \in W_1, x_2 \in W_2\}
+\end{equation*}
+이다.
+부분공간임을 확인하기 위해서는, 두 $x, y \in W_1 + W_2$에 대해 $x = x_1 + x_2, y = y_1 + y_2$가 어떤 $x_1, y_1 \in W_1$와 $x_2, y_2 \in W_2$에 대해 성립하고,
+\begin{equation*}
+    ax + by = (ax_1 + by_1) + (ax_2 + by_2) \in W_1 + W_2
+\end{equation*}
+를 계산 하면 된다.
+
+벡터 공간의 구조를 보존 하는 함수를 선형이라고 한다.
+\begin{definition}
+    두 벡터 공간 $V, W$에 대해, 함수 $f : V \to W$가 모든 벡터 $x, y \in V$와 스칼라$a, b \in F$에 대해
+    \begin{equation*}
+        f(ax + by) = af(x) + bf(y)
+    \end{equation*}
+    를 만족하면, 이 함수를 선형이라고 한다. \index{linear map} \index{선형 함수}
+\end{definition}
+\begin{example}
+    닫힌 구간 $[0, 1]$위의 모든 복소 연속함수들의 벡터 공간 $C[0, 1]$에서 $L : C[0, 1] \to C[0, 1]$을 어떤 $g \in C[0,1]$에 대해 $L(f) (x) = g(x)f(x)$로 정의하면, $L$은 선형 함수이다.
+\end{example}
+\begin{example}
+    공간 $\mathbb{R}^3$에서 $\mathbb{R}^2$로 가는 함수 $f$를 
+    \begin{equation*}
+        f(x_1, x_2, x_3) = (3x_2 - x_3, x_1 + 6x_2)
+    \end{equation*}
+    로 정의하면, $f$는 선형이다.
+\end{example}
+
+\begin{definition}
+    선형 함수 $f: V \to W$에 대해, $f$의 치역을 $\ImageMap f$, $f(x) = 0$인 $V$의 부분집합을 $\KernelMap f$이라고 한다.
+\end{definition}
+\begin{exercise}
+    선형 함수 $f: V \to W$에 대해, $\KernelMap f, \ImageMap f$가 각각 $V$와 $W$의 부분공간임을 증명하시오.
+\end{exercise}
+\begin{exercise}
+    선형 함수 $f: V \to W$에 대해, $f(0) = 0$임을 증명하시오.
+\end{exercise}
+
+물리에서 벡터 $(2, 1, -1)$을 $2i + j - k$로 표현하듯이, 모든 벡터들을 상수들과 특정한 벡터들의 곱과 합으로 표현하는 것이 쓸모 있을 수 있다.
+벡터들의 집합 $S$가 있을 때, $S$의 원소들의 상수배와 합으로 표현 가능한 모든 벡터들을 생각해 보자.
+표현 가능한 두 벡터들의 합과, 그것의 상수배 또한 $S$로 표현 가능하므로, 이 집합은 부분공간이다.
+
+다음 정리는 집합 $S$를 포함하는 ``가장 작은'' 부분 공간을 설명한다.
+
+\begin{definition}
+    스칼라 $a_i \in F$와 $v_i \in V$에 대해서,
+    \begin{equation*}
+        \sum_{i = 1}^n a_i v_i
+    \end{equation*}
+    를 $v_i$들의 선형 결합(Linear combination)이라고 한다. \index{linear combination} \index{선형 결합}
+\end{definition}
+
+\begin{theorem}
+\label{thm:smallspan}
+    벡터 공간 $V$의 부분집합 $S$에 대해서, $W$를 $S$를 포함하는 모든 부분공간들의 교집합으로 정의하고, $W'$을
+    \begin{equation*}
+        W' = \{a_1 x_1 + \dots + a_n x_n : n \in \mathbb{N}, x_i \in S, a_i \in F\},
+    \end{equation*}
+    즉 $S$의 선형 결합들의 집합으로 정의하자.
+    그러면 $W = W'$이다.
+\end{theorem}
+\begin{proof}
+    먼저 $W \subset W'$임을 보기 위해서는, $W'$또한 $S$를 포함하는 부분공간임에서 자명하다.
+    반대로, $W' \subset W$를 증명하기 위해서는, 모든 $S$를 포함하는 부분공간 $X$가 $W'$를 포함하는 것을 보이면 된다.
+    그러나 $X$는 덧셈과 상수곱에 대해 닫혀 있으므로 이것은 자명하다.
+\end{proof}
+
+\begin{definition}
+    \Cref{thm:smallspan}에서 설명된, 벡터 공간 $V$의 부분집합 $S$를 포함하는 가장 작은 부분공간 $W$를 $S$가 생성하는 부분공간(Subspace) 이라고 하고, $\Span S$로 표기한다. \index{subspace!generated by} \index{부분공간!생성된}
+\end{definition}
+
+\begin{exercise}
+    두 부분공간 $W_1, W_2$에 대해서 $W_1 + W_2$가, $W_1, W_2$를 모두 포함하는 모든 부분공간들의 교집합임을 보이시오. [\textit{힌트}: \Cref{thm:smallspan}의 테크닉을 사용하라.]
+\end{exercise}
+
+그러나, 우리가 만약 표현하는 벡터들의 집합을 너무 크게 잡으면, 이것 또한 문제가 된다.
+즉 예시로, $\mathbb{R}^3$에서
+\begin{align*}
+    x_1 = (1, 0, 0) &\quad x_2 = (0, 1, 0) \\
+    x_3 = (0, 0, 1) &\quad x_4 = (1, 1, 0)
+\end{align*}
+으로 정의하면, $\Span \{x_1, x_2, x_3, x_4\} = \mathbb{R}^3$이나, 벡터 $(1, 1, 1)$은 $x_4 + x_3 = 2x_1 + 2x_2 + x_3 - x_4$으로 그 표현이 유일하지 않다.
+
+이 현상을 조사해 보자.
+집합 $S$에 대해 $v \in \Span S$가 두가지 선형 결합으로 표현되면,
+\begin{equation*}
+    v = a_1 s_1 + \dots + a_n s_n = a'_1 s'_1 + \dots + a'_m s'_m
+\end{equation*}
+가 어떤 $a_i, a'_i \in F, s_i, s'_i \in S$에 대해 성립한다.
+왼쪽 두 표현을 이항하고, 인덱스를 적당히 밀어주면,
+\begin{equation}
+\label{eq:linind1}
+    a_1 s_1 + \dots + a_{n'} s_{n'} = 0 
+\end{equation}
+가 어떤 $a_i \in F, s_i \in S$에 대해 성립하는 것과 동치이다.
+만약 두 표현이 같으면, $s_i$가 모두 같도록 적당히 조정을 해주고 나서는, \Cref{eq:linind1}에서 모든 $a_i = 0$일 것이다.
+
+\begin{definition}
+    어떤 벡터들의 집합 $S$이 모든 자연수 $n$, $a_i \in F$와 $s_i \in S$에 대해,
+    \begin{equation*}
+        a_1 s_1 + \dots + a_n s_n = 0
+    \end{equation*}
+    이 서로 모두 다른 $s_i$에 대해 성립하였을 때, 각 $i$에 대해 $a_i = 0$이면, $S$를 선형 독립(Linearly independent)이라고 한다. \index{선형 독립} \index{linear independence}
+\end{definition}
+\begin{example}
+    모든 실수열들의 벡터공간 ($1$이상의 자연수에 정의된 실함수들의 공간이라고 봐도 된다)을 $V$라고 하자.
+    이 공간에서 $0$벡터는 모든 자연수에 $0$을 대응하는 함수이다.
+    
+    $V$에서 벡터 $v_i$를 $i$번째 성분이 $2^{-i}$이고 나머지 성분이 $0$인 벡터로 정의하고,
+    \begin{equation*}
+        v_{\infty} = (2^{-1}, 2^{-2}, 2^{-3}, \dots ) = (n \mapsto 2^{-n})
+    \end{equation*}
+    으로 정의한 후, $S = \{v_\infty\} \cup \{v_i : i\in \mathbb{N}\}$로 정의하자.
+    그러면 $S$는 선형 독립이다.
+
+    이것을 보기 위해서는, 만약,
+    \begin{equation*}
+        \sum_{i = 1}^n a_i v_i = 0 
+    \end{equation*}
+    이면, 각 $i$번째 성분이 $0$이므로, $a_i = 0$임을 보면 되고,
+    \begin{equation*}
+        a v_\infty + \sum_{i = 1}^n a_i v_i = 0
+    \end{equation*}
+    이면, $n + 1$ 번째 성분이 $0$이므로 $a = 0$이고, 위와 같은 논리에 의해서 다시 모든 $a_i = 0$이다.
+\end{example}
+\begin{exercise}
+    어떠한 선형 독립인 집합 $S$의 원소도 될 수 없는 벡터를 임의의 벡터 공간 $V$에서 하나 찾아라.
+\end{exercise}
+
+\begin{definition}
+    벡터공간 $V$의 부분집합 $S$가 $\Span S = V$를 만족하고, 선형 독립이면, $S$를 기저 (Basis) 라고 한다. \index{basis} \index{기저}
+\end{definition}
+\begin{example}
+    공간 $\mathbb{R}^3$의 부분집합
+    \begin{equation*}
+        \{(1, 0, 0), (0, 1, 0), (0, 0, 1)\}
+    \end{equation*}
+    은 $\mathbb{R}^3$의 기저이다.
+    비슷하게 $\mathbb{R}^n$에 대해, $e_i$를 $i$번째 성분이 $1$이고 나머지 성분이 $0$인 벡터로 정의하면, $\{e_i\}$는 $\mathbb{R}^n$의 기저이다.
+\end{example}
+\begin{exercise}
+    모든 실수열들의 벡터공간 $V$ (위의 예시와 같다)과, 유한한 개수를 제외한 모든 성분이 $0$인 실수열들의 $V$의 부분공간 $W$를 고려하자.
+    벡터 $e_i$를 $i$번째 성분이 $1$이고 나머지 성분이 $0$인 벡터로 정의하면, $\{e_i\}$는 $V$와 $W$중 어느 공간의 기저인지 찾고 증명하시오.
+\end{exercise}
+
+다음 정리는 기저가 ``딱 알맞게'' $V$를 표현함을 보여준다.
+\begin{theorem}
+\label{thm:basischar}
+    벡터 공간 $V$의 부분집합 $S$에 대해 다음 조건은 동치이다.
+    \begin{enumerate}[(a)]
+        \item 집합 $S$가 $V$의 기저이다. \label{item:basiscond}
+        \item 모든 $v \in V$가 $s_i$의 순서 바뀜을 제외하면, $0$이상 자연수 $n$에 대해 
+        \begin{equation*}
+            v = \sum_{i = 1}^n a_i s_i
+        \end{equation*}
+        으로 $0 \neq a_i \in F$와 서로 다른 $s_i \in S$으로 유일하게 표현된다. (빈 합은 $0$으로 취급한다.) \label{item:uniquespan}
+        \item 집합 $S$는 $\Span S = V$를 만족하나, 어떤 $T \subset S$또한 $\Span T = V$를 만족하면, $T = S$이다. \label{item:minspan}
+        \item 집합 $S$는 선형 독립이나, $S \subset T$에 대해 $T$가 선형 독립이면, $T = S$이다. \label{item:maxind}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    먼저 \ref{item:basiscond}가 성립한다고 가정하자.
+    벡터 $v \in V$가 두가지 표현이 있으면, 서로 빼서 $0$을 표현할 수 있고, 기저 조건에 의해 모든 계수가 $0$이므로, \ref{item:uniquespan}가 성립한다.
+    반대로 \ref{item:uniquespan}가 성립하면, $v = 0$ 대입 시 선형 독립임이 확인되고, 모든 벡터가 표현되므로 $\Span S = V$이다.
+
+    \ref{item:basiscond}가 성립하고, $T \subset S$또한 $\Span T = V$를 만족한다고 하자.
+    만약 $v \in S \backslash T$가 존재하면, 
+    \begin{equation*}
+        v = \sum_{i = 1}^n a_i t_i
+    \end{equation*}
+    가 어떤 $0 \neq a_i \in F$와, 서로 다른 $t_i \in T$에 대해 성립하고, 모두 왼쪽으로 이항하면 $S$의 선형 독립에 의해 모든 계수가 $0$이나, $v$의 계수는 $1$이므로 모순이다.
+    반대로, \ref{item:minspan}가 성립하고, $0 \neq a_i \in F$와 서로 다른 $s_i \in S$에 대해
+    \begin{equation*}
+        \sum_{i = 1}^n a_i s_i = 0
+    \end{equation*}
+    이 성립한다고 하자.
+    만약 $1 \leq n$이면 (즉, $0$이 아닌 계수가 존재하면),
+    \begin{equation}
+    \label{eq:nonuniqueexpressionvec}
+        s_1 = -\sum_{i = 2}^n \frac{a_i}{a_1} s_i
+    \end{equation}
+    가 성립하고, $S$에서 $s_1$을 제거한 집합을 $S_1$이라고 하면, 모든 $v \in V$의 $S$의 벡터들의 선형 결합에, $s_1$에 \Cref{eq:nonuniqueexpressionvec}를 대입시, $v$가 $S_1$의 벡터들의 선형 결합으로도 표현될 수 있음을 볼 수 있다.
+    즉 $\Span S_1 = V$이고, $S_1 \subset S$이나 $S_1 \neq S$ 이므로 모순이다.
+
+    마지막으로, $S$가 \ref{item:basiscond}를 만족한다고 했을 때 \ref{item:maxind}임을 보이자.
+    어떤 $S \subset T$이고 선형 독립인 $T$를 잡자.
+    만약 $v \in T \backslash S$가 존재하면, $\Span S = V$이므로,
+    \begin{equation*}
+        v = \sum_{i = 1}^n a_i s_i
+    \end{equation*}
+    가 $0 \neq a_i \in F$와 서로 다른 $s_i \in S$에 대해 성립하고 (필요시 $S$의 순서를 바꾸면 된다), 다시 왼쪽으로 이항하면, $T$의 선형 독립성에 의해 모순임을 볼 수 있다.
+    반대로, \ref{item:maxind}를 만족하는 $S$가 있을 때, $\Span S \neq V$이면, $v \in V \backslash \Span S$가 존재한다.
+    집합 $S$에 $v$를 추가한 것을 $S_1$이라고 하면, 어떠한 $a, a_i \in F$에 대해
+    \begin{equation*}
+        a v + \sum_{i = 1}^n a_i v_i = 0
+    \end{equation*}
+    이라고 할 때, $a \neq 0$이면
+    \begin{equation*}
+        v = - \sum_{i = 1}^n \frac{a_i}{a} v_i
+    \end{equation*}
+    에서 $v \in \Span S$이므로 모순이다.
+    즉 $a = 0$이고, $S$의 선형 독립성에 의해 $a_i = 0$ 또한 성립해, $S_1$이 선형 독립이다.
+    이것은 \ref{item:maxind}에 모순이다.
+\end{proof}
+
+기저의 두 조건인 $\Span S = V$와 선형 독립은 각각 집합의 확장과 축소에 대해 불변인 성질이다.
+즉, $\Span S = V$는 기저의 크기가 일정 이상, 선형 독립은 일정 이하로 제한하는 것에서, 우리는 기저의 크기가 어떠한 기저에 대해서도 불변일 것임을 예측할 수 있다.
+\begin{theorem}
+\label{thm:spanindsiz}
+    벡터 공간 $V$에서 두 유한집합 $S, T$가, $\Span S = V$를 만족하고, $T$는 선형 독립이라고 하자.
+    그러면 $|T| \leq |S|$이다.
+\end{theorem}
+\begin{proof}
+    집합 $S$의 원소들을 $s_1, \dots, s_n$이라고 하고, $T$의 원소들을 $t_1, \dots, t_m$이라고 하자.
+    만약 $|S| < |T|$이면, 우리는 $S$의 원소들을 $T$로 대체한 다음, $\Span S = V$ 조건에서 $T$가 선형 독립이 아니라는 결론을 유도할 것이다.
+
+    $t_1$은 어떤 $0 \neq a_i \in F$와 (다시, 적당한 재배열 후) 서로 다른 $s_i \in S$에 대해
+    \begin{equation*}
+        t_1 = \sum_{i = 1}^k a_i s_i
+    \end{equation*}
+    로 표현되고, $k = 0$이면, $t_1 = 0$에서 모순이다.
+    즉
+    \begin{equation*}
+        s_1 = \frac{1}{a_1} t_1 - \sum_{i = 2}^k \frac{a_i}{a_1} s_i
+    \end{equation*}
+    에서, $S$에서 $s_1$을 제거하고 $t_1$을 추가한 집합을 $S_1$이라고 하면, $\Span S_1 = V$이다.
+    집합 $T$에서 $t_1$을 제거한 것을 $T_1$이라고 하면, $T_1$ 또한 선형 독립이다.
+
+    일반적으로, $S_l$과 $T_l$이 주어져 있고, $0 \leq n - l$이면, $S_l$은 $T$의 원소 $l$개와 $S$의 원소 $n - l$개로 이루어져 있고, $T_l$은 $T$의 원소 $m - l$개로 이루어져 있으며, $\Span S_l = V$를 만족하고, $T_l$은 선형 독립이다.
+    여기서 $T_l$에 있는 아무 원소를 $t$라고 하면, $t$는 $S_l$의 원소들의 상수곱과 합으로 표현되고, 만약 $t$가 $S_l \cap T$의 원소들로만 표현되면 $T$의 선형 독립에 모순이다.
+    즉 $t$는 $S_l \cap S$의 어떤 원소 $s$를 포함하는 선형 결합에 의해 표현되므로, 반대로 이 $s$는 $t$와 $S_l \backslash \{s\}$의 선형 결합으로 표현된다.
+    즉 $S_l$에서 $s$를 제거하고 $t$를 포함해 $S_{l + 1}$을 만들고, $T_l$에서 $t$를 제거해 $T_{l + 1}$을 만들면, 이 과정을 계속 반복할 수 있다.
+
+    결국 만약 $|S| < |T|$, 즉 $n < m$이면, $T_n$은 원소 개수가 $0 < m - n$으로 비어 있지 않고, 집합 $S_n$은 $\Span S = V$를 만족하므로, $S_n$의 선형 결합으로 모든 $T_n$의 원소를 표현할 수 있으나, 어떤 $T_n$의 원소를 $t$라고 하면,
+    \begin{equation*}
+        t = \sum_{i = 1}^n a_i t_i
+    \end{equation*}
+    에서 $T$의 선형 독립에 모순임을 볼 수 있다.
+\end{proof}
+
+\begin{corollary}
+\label{cor:invariantdim}
+    만약 어떤 벡터 공간 $V$가 유한한 크기의 기저 $B$를 가진다면, 모든 기저의 크기는 같다.
+\end{corollary}
+\begin{proof}
+    만약 다른 기저 $B'$이 존재해 $B'$이 무한하다면, $B'$에서 $B$보다 많은 수의 원소를 선택하여도 선형 독립이나, $\Span B = V$이므로 \Cref{thm:spanindsiz}에 모순이고, 같은 논리로 $|B'|$이 유한하고 $|B| < |B'|$이여도 모순이다.
+    반대로, $|B'| < |B|$이면, $\Span B' = V$이고 $B$가 선형 독립이므로 모순이다.
+\end{proof}
+
+\begin{definition}
+    어떤 벡터 공간 $V$가 유한한 크기의 기저를 가진다면, 우리는 그 벡터 공간이 유한차원이라고 하고, $\dim V < \infty$라고 한다.
+    반대로, 유한한 크기의 기저가 없다면, 우리는 그 벡터 공간이 무한차원이라고 하고, $\dim V = \infty$라고 한다.
+    유한차원 벡터 공간 $V$에 대해 $\dim V$는 $V$의 어떤 기저의 크기를 뜻하고, 이 값은 기저의 선택에 대해 \Cref{cor:invariantdim}에 의해 무관하다. \index{차원} \index{dimension}
+\end{definition}
+\begin{example}
+    공간 $\{0\}$은 $0$차원이고, 일반적으로 $\mathbb{R}^n$은 $i$번째 성분이 $1$이고 나머지 성분이 $0$인 벡터들의 기저 $e_i$를 가지므로, 차원 $n$이다.
+\end{example}
+
+\section{행렬의 관점}
+\begin{definition}\label{def:determinant}
+
+\end{definition}
+\section{선형 사상의 관점}
+
+\section{벡터 공간의 연산}
+
+\begin{definition}
+\label{def:dirprodvec}
+\end{definition}
+
+\begin{definition}
+\label{def:tenprodvec}
+\end{definition}
+

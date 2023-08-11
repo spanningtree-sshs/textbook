@@ -1,0 +1,552 @@
+\part{도형의 방정식}
+\chapter{이산기하와 그래프 이론}
+이산기하란 이산적인 기하 형상들, 예를 들면 다각형, 격자점, 또는 몇몇 그래프와 같은 대상을 다루는 학문이다. 
+\section{미술관 문제}
+\begin{question}
+$n$각형 형태의 미술관이 있다. $n$개의 변은 서로 겹치지 않는다(이를 두고 simple이라고 한다). 
+미술관 내부에 몇 대의 감시 카메라를 달아 미술관 전체를 지키려 한다. 일반적으로 몇 대의 카메라면 충분한가?
+\end{question}
+\begin{theorem}
+$[n/3]$대면 충분하다. 단, $[x]$는 $x$ 이하의 최대 정수이다. 실제로 이는 최적의 값이다. 즉, 항상 $[n/3]$대의 카메라를 요구하는 $n$각형 미술관이 존재한다.
+\end{theorem}
+\begin{proof}
+미술관을 삼각 분할한 후 총 3가지 색을 이용해 미술관의 꼭짓점을 칠하자. 단 분할된 삼각형의 세 꼭짓점의 색이 모두 다르도록 한다(가능성 증명은 아래 책으로 넘긴다).
+이제 가장 적은 색의 꼭짓점에 카메라를 달면 $[n/3]$대 이하이다.
+\end{proof}
+\begin{exercise}
+ $k$대의 카메라를 요구하는 $3k$각형 미술관을 찾아라.
+\end{exercise}
+\begin{remark}
+상세한 증명 및 확장은 Joseph O'Rourke의 책 \textit{Art Gallery Theorems and Algorithms}(\url{http://www.science.smith.edu/~jorourke/books/ArtGalleryTheorems/Art_Gallery_Full_Book.pdf})를 참고하라. 
+\end{remark}
+\section{정사각형의 등면적 분할}
+정사각형을 항상 2개 이상의 삼각형으로 쪼갤 수 있다는 것은 자명하다. 더군다나, 그 개수가 짝수라면 모든 삼각형을 합동으로 만드는 것도 어렵지 않다. 하지만 만약 홀수라면 어떻게 될까?
+\begin{theorem}[Monsky's theorem]\index{몬스키 정리}\index{Monsky's theorem}
+    정사각형을 홀수 개의 넓이가 같은 삼각형으로 쪼개는 것은 불가능하다.
+\end{theorem}
+어려운 증명이지만, guided tour을 통해 천천히 따라가 보자. 이번에는 미술관 문제와는 조금 다른 방식으로 각 꼭짓점을 3가지 색으로 칠하려 한다. 
+\begin{lemma}[Sperner's lemma]\index{스페르너 보조정리}\index{Sperner's lemma}
+단순 다각형 $R$이 삼각형 $T_i$들로 분할되어 있고, 모든 꼭짓점은 $A, B, C$ 세 가지 색 중 하나로 칠해져 있다고 하자. 만약 $R$의 각 변은 두 가지 이하의 색만을 포함하며, $R$의 원래 변들 중 한 끝점이 $A$, 다른 끝점이 $B$인 변($AB$-선분이라고 하자)의 수가 홀수라면, 세 꼭짓점의 색이 모두 다른 $T_i$가 존재한다. 
+\end{lemma}
+\begin{definition}
+사이에 다른 점을 갖지 않는 선분을 기초 선분이라고 하자. 
+\end{definition}
+\begin{exercise}
+    $R$의 변은 $T_i$의 꼭짓점들에 의해 기초 선분들로 쪼개진다. 이들 중 $AB$-선분의 수가 홀수임을 보여라. 
+\end{exercise}
+기초 선분을 벽으로, $AB$-기초 선분을 벽에 달린 문으로 생각하자. 그렇다면 $R$은 삼각형 방들로 쪼개어진 미궁이 된다. 이제부터 $R$의 변에 달린 문(즉, 입구)을 통해 미궁으로 들어갈 것이다. 한 번 쓴 문은 다시 쓸 수 없다고 하자.  
+\begin{definition}
+    $R$ 밖으로 빠져나왔거나 더 이상 다른 문이 없어 이동이 불가능해질 때까지 문을 통해 움직이는 것을 `최대 이동'이라고 하자. 
+\end{definition}
+\begin{exercise}
+    한 문에서 시작하는 최대 이동은 유일함을 보여라. Hint: 문이 3개 달린 방은 없다. 
+\end{exercise}
+\begin{exercise}
+    들어갔을 때 탈출(다시 $R$ 외부로 나오는 것)이 가능한 문을 `좋은 문', 불가능한 문을 `나쁜 문'이라고 하자. `좋은 문'의 수는 짝수임을 보여라. 따라서 `나쁜 문'이 존재한다. 
+\end{exercise}
+\begin{exercise}
+    `나쁜 문'에서 시작하는 `최대 이동'을 통해 어떤 방에 도달하는가? 설명하여라. 
+\end{exercise}
+
+그렇다면, 정사각형의 점들에 세 가지 색을 잘 주면 세 꼭짓점의 색이 모두 같은 삼각형이 있을 것이다. 먼저 색칠 방법을 살펴본 다음 다시 논의하자. 
+\begin{definition}\index{초노름}\index{ultranorm}
+    체 $F$에 대해, 함수 $|\,|:F\to [0, \infty)$가
+    \begin{enumerate}[(1)]
+        \item $|x|\cdot|y|=|xy|$
+        \item $|x+y|\leq \max(|x|,|y|)$
+        \item $|x|=0\iff x=0$
+    \end{enumerate}
+    을 만족하면 $|\,|$를 ultranorm이라고 한다. 
+\end{definition}
+\begin{exercise}
+    자명한 ultranorm을 하나 찾아라. 
+\end{exercise}
+\begin{exercise}
+    $|1|=|-1|=1$임을 보여라. 
+\end{exercise}
+\begin{exercise}
+    (2)에서 $|x|\neq |y|$이면 항상 등호가 성립함을 보여라. Hint: $|x|>|y|$를 가정하고 $|x+y|=|x|$임을 보이자. 
+\end{exercise}
+\begin{exercise}
+    $|2|<1$인 ultranorm $|\,|$에 대해 홀수의 ultranorm은 항상 1임을 보여라. 
+\end{exercise}
+\begin{definition}\index{p-adic valuation}
+    0이 아닌 정수 $n$에 대해, $\nu_p(n)=\max_k p^k|n$으로 정의하자. 유리수 $m/n$에 대해 $\nu_p(m/n)=\nu_p(m)-\nu_p(n)$으로 확장한다. $\nu_p$를 p-adic valuation이라고 한다. 
+\end{definition}
+\begin{exercise}
+    $|x|_p=p^{-\nu_p(x)}$(단, $|0|_p=0$)으로 $\mathbb{Q}$ 위에 p-adic norm을 정의하자. $|\,|_p$는 ultranorm이 됨을 보여라. 즉, $|\,|_2$는 $|2|_2<1$을 만족하는 $\mathbb{Q}$ 위의 ultranorm이다. 
+\end{exercise}
+\begin{exercise}
+    $\mathbb{Q}$ 위의 ultranorm이 $|2|<1$를 만족한다면, $|x|=|x|_2^c$를 만족하는 $0<c<\infty$가 존재함을 보여라. \url{https://en.wikipedia.org/wiki/Ostrowski's_theorem}을 읽어 보아도 좋다. 
+\end{exercise}
+\begin{remark}
+    $|\,|_2$를 확장해 $\mathbb{R}$ 위의 $|2|<1$을 만족하는 ultranorm을 찾을 수 있다는 것이 알려져 있다. 이제부터 이러한 ultranorm의 존재를 가정하자. 즉, $|\,|$은 이제부터 $|2|<1$을 만족하는 $\mathbb{R}$ 위의 ultranorm을 의미한다. 
+\end{remark}
+이제 단위 정사각형 위의 점을 3가지 색으로 칠할 것이다. $|x|, |y|<1$인 점은 A로, $x|\geq 1, |x|\geq |y|$인 점은 B로, $|y|\geq 1, |x|<|y|$인 점은 C로 칠하자. 
+\begin{exercise}
+    $(0, 0), (0, 1), (1, 0), (1, 1)$은 각각 무슨 색으로 칠해지는가?
+\end{exercise}
+\begin{exercise}
+    A에 속한 임의의 점 $(p, q)$에 대해, $(x, y)$와 $(x+p, y+q)$는 색이 같음을 보여라. 
+\end{exercise}
+\begin{exercise}
+    한 직선 위에는 최대 두 가지 색의 점만 있을 수 있음을 보여라. Hint: 아니라고 가정하면, 평행이동을 통해 원점, B에 속한 점, C에 속한 점이 한 직선 위에 있게 된다. 이는 왜 모순인가?
+\end{exercise}
+\begin{exercise}
+    세 꼭짓점의 색이 모두 다른 삼각형 $T$에 대해, $|T|>1$임을 보여라. 
+\end{exercise}
+\begin{exercise}
+    Monsky's theorem의 증명을 완성하여라. 
+\end{exercise}
+출처: \url{http://alpha.math.uga.edu/~pete/Monsky70.pdf} \\
+마지막으로 위 정리와 직접적으로 관련되어 있지는 않지만, 재미있는 \textit{SpanningTree}의 문제 하나를 소개한다.
+\begin{question}
+    임의의 삼각형을 유한 개의 등변 사다리꼴로 분할할 수 있는가?
+\end{question}
+\section{잘라 붙이기}
+\cref{thm:b-t}에서 보았듯이 한 입체를 여러 조각으로 잘라서 재조합해 다른 입체를 만드는 것은 꽤나 쉬운 일이다. 그러나 이 정리는 부피를 잴 수 없는 조각들을 마구 남긴다. 따라서, `좋은 조각들'만을 이용해서 잘라 붙이기를 다시 해 보자. 다른 말로, 다각형이나 다면체 조각만을 사용하자는 뜻이다.
+\begin{definition}\index{가위 합동}\index{scissors congruence}
+    몇 개의 다각형(다면체)을 겹치지 않게 이어붙여서 $A$와 $B$를 각각 만들 수 있을 때, $A, B$를 equidecomposable(등분해성), 또는 scissors congruent(가위 합동)이라고 한다. 이 절에 한해서 $A\sim B$로 표기하자. 
+\end{definition}
+\begin{lemma}
+    $A\sim B$라면 $A$와 $B$는 면적(부피)이 같다. 
+\end{lemma}
+\begin{question}
+    위 보조정리의 역도 성립하는가?
+\end{question}
+이제부터 우리는 그 답이 2차원에서는(그리고 당연히 1차원에서도) `예', 3차원부터는 `아니오'라는 것을 증명할 것이다. 
+3차원에서 부피가 같은 정사면체와 정육면체가 가위 합동인지는 힐베르트가 제시한 23개의 문제 중 하나였으며, Max Dehn이 해결하였다. 
+\begin{theorem}[Wallace–Bolyai–Gerwien]\index{Wallace–Bolyai–Gerwien theorem}
+    두 다각형 $A, B$의 면적이 같다면 $A\sim B$이다. 
+\end{theorem}
+증명해 보자. 
+\begin{exercise}
+    $\sim$은 동치 관계임을 보여라. 
+\end{exercise}
+\begin{exercise}
+    임의의 삼각형은 어떤 직사각형과 가위 합동임을 보여라. 
+\end{exercise}
+\begin{exercise}
+    임의의 직사각형은 폭이 1인 어떤 직사각형과 가위 합동임을 보여라. 시간을 조금 들여서 고민해 보자. Hint: 한 평행사변형을 잘라 붙여서 다른 폭을 갖는 평행사변형을 만드는 것이 핵심이다. 
+\end{exercise}
+\begin{exercise}
+    증명을 완료하여라. 
+\end{exercise}
+이제 3차원일 때를 살펴보자. 같은 과정을 할 수 있을까? 문제가 되는 부분은 바로 사면체를 직육면체로 만드는 과정에 있다. 사면체의 공간적 구조가 삼각형보다 복잡하다는 것의 한 증거는 바로 임의의 삼각형으로는 평면을 타일링할 수 있지만 임의의 사면체로는 그렇지 않다는 것이다. \\
+정사면체의 예시를 갖고 생각해 보자. 정사면체에는 무리수가 많이 존재하는데, 예를 들어 두 면 사이의 각(이면각) $\omega$에 대해 $\omega/\pi$가 있다. 편의상 각의 유리성을 따질 때는 $\pi$로 나누어 생각한다. 
+\begin{exercise}
+    $\cos(\omega)=1/3$임을 보여라. 
+\end{exercise}
+\begin{remark}
+    $\omega/\pi$가 무리수라는 것은 본 증명에 필요하다. 여기서는 생략하고 R. Schwartz의 \textit{Dehn's Dissection Theorem}을 인용하는 것으로 대신한다. 
+\end{remark}
+그러나 직육면체의 변을 만들기 위해서는 $\pi/2$라는 유리수 각이 필요하다. 이 각을 만들기 위해서는 $\omega$들을 붙이는 것으로는 부족하므로, 기존의 각을 쪼개어 새로운 각을 만들어 `빈틈'을 채워야 한다. 그러나 이는 또 다른 무리수를 만들 뿐이다. \\
+평면상에서도 무리수 각을 갖는 도형이 충분히 존재하지 않냐고 반문할 수 있지만---이들의 합은 물론 $\pi$의 정수 배가 되므로 잘 모으면 그 `무리수'들이 없어질 수 있는 것이다. 따라서 이 상황과 정사면체의 상황은 조금 다르다. \\
+한 대상이 다른 대상으로 변할 수 없다는 것을 보이는 주요한 방법은 불변량(invariant)이다. 예를 들어, 다음 유명한 문제를 기억하는가?
+\begin{example}
+    $8\times 8$ 체스판에서 두 어두운 색 칸을 제거하자. $2\times 1$ 도미노 $31$개를 갖고 이 체스판을 완전히 덮을 수 없는데, 도미노를 덮는 과정에서 (밝은 색 칸의 수-어두운 색 칸의 수)는 $2$로 유지되므로 0이 될 수 없기 때문이다. 
+\end{example}
+다른 유명한 불변량 문제로는 샘 로이드의 14-15 퍼즐이 있다.
+\begin{example}
+14-15퍼즐의 불변량은 (순열의 홀짝성+빈칸의 $x$좌표+빈칸의 $y$좌표)의 홀짝성이다. 
+\end{example}
+다시 본 문제로 돌아오자. 모든 이면각의 총합을 불변량으로 하고 싶지만 그럴 수 없는 이유가 몇 가지 있다. 
+\begin{enumerate}
+    \item 이면각들의 총합은 이면각들이 입체 내부에 모이면 $2\pi$씩 변할 수 있고, 표면에 모이면 $\pi$씩 변할 수 있다. 
+    \item 한 변을 둘로 쪼갤 때 같은 이면각이 두 개가 된다. 
+\end{enumerate}
+첫 번째 문제는 이면각을 $\pi$로 나눈 나머지를 생각해 해결할 수 있다. 즉, 각도를 $\mathbb{R}/\pi\mathbb{Z}$의 원소로 생각하는 것이다. 그리고 두 번째 문제는 이면각에다 그에 상응하는 변의 길이를 곱하면 된다. 즉, 한 변이 1인 정육면체가 있다면 그 한 변에 대응하는 불변량은 $1\times \pi/2$이 되고, 정육면체 전체에 대응하는 불변량은 $12\cdot(1\times \pi/2)$이다. \\
+여기서, $1\times \pi/2$를 단순히 실수 사이의 곱셈으로 생각할 수 없음에 유의하라. 따라서 다른 기호 $\otimes$를 사용하자. 그러나 앞에 곱해진 12는 우리의 이론에 따르면 `곱셈' 안으로 자유롭게 들어갈 수 있어야 한다. 다른 말로, $12\cdot(1\otimes \pi/2)=12\otimes \pi/2=1\otimes 6\pi$라는 것이다. 이를 위해서는 유리수만이 곱셈 기호 앞뒤를 자유롭게 `드나들' 수 있도록 하면 된다. 이를 엄밀하게는 텐서곱(tensor product)이라고 한다. 여기서는 텐서곱이 정확히 무엇인지는 다루지 않고, 다만 우리의 `곱셈'이 일반적인 곱셈이 아니라는 것 정도만 유념하고 지나가도록 하자. 정의에 대해서는 \cref{def:tenprodvec}을 참조하라. \\
+이제 준비가 모두 되었다. 
+\begin{definition}
+    다면체 $P$에 대해 $P$의 Dehn invariant $D(P)$를, $P$의 모든 변 $l_i$와 그 이면각 $\theta_i$에 대해 $\sum l_i \otimes \theta_i \in \mathbb{R} \otimes \mathbb{R}/{\pi \mathbb{Z}}$로 정의한다. 
+\end{definition}
+\begin{remark}
+    Dehn invariant는 (부피와 마찬가지로) 3차원에서 $\sim$의 불변량이다. 
+\end{remark}
+이제 힐베르트의 문제를 해결해 보자. 
+\begin{theorem}
+    부피가 같은 정사면체와 정육면체 $P, Q$는 가위 합동이 아니다.
+\end{theorem}
+\begin{proof}
+    $D(P)=6(l\otimes \omega)=l\otimes 6\omega \neq l\otimes 0(\because 6\omega\neq n\pi)=0$인 반면, $D(Q)=12(l' \otimes \pi/2)=l' \otimes 6 \pi=l' \otimes 0=0$이므로 $P$와 $Q$는 가위 합동일 수 없다. 
+\end{proof}
+\section{그래프 채색과 5색 정리}
+평면에 그려진 모든 지도를 4가지 색으로 이웃한 영역이 항상 다른 색이 되도록 칠할 수 있다는 이야기는 유명하며, 4색 정리라고 한다. 4색 정리는 Appel과 Haken이 컴퓨터를 이용하여 증명한 것으로 널리 알려져 있다. 4색 정리의 증명은 방대해 직접 다룰 수 없지만, 대신 여기서는 그 핵심적 접근 중 하나가 담겨 있는 5색 정리의 증명을 살펴볼 것이다. 
+\begin{definition}\label{def:graph}\index{그래프}\index{graph}
+    그래프 $G=(V, E)$는 꼭짓점의 집합 $V$와 변의 집합 $E$로 이루어진다. $E$의 각 원소는 $V$의 두 원소의 쌍이다. 이 쌍이 순서를 상관한다면 유향 그래프, 그렇지 않다면 무향 그래프라고 한다. 일반적으로 그래프라고 하면 무향 그래프를 의미한다. 
+\end{definition}
+\begin{remark}
+    집합론에서 $a, b$를 순서를 상관하여 묶는 방식은 $\{a, \{a, b\}\}$, 순서에 상관없이 묶는 방식은 $\{a, b\}$로 볼 수 있다. 
+\end{remark}
+\begin{definition}
+    두 꼭짓점을 양 끝 점으로 하는 변이 존재할 때 이들을 이웃하다고 한다. 어떤 두 꼭짓점이 몇 개의 변들을 통해 이어질 때 이들을 연결되었다고 한다. 모든 점쌍이 연결된 그래프를 연결 그래프라고 한다. 
+\end{definition}
+\begin{definition}\index{채색수}\index{chromatic number}
+    그래프의 채색수(chromatic number) $\chi(G)$을, 그래프의 이웃한 꼭짓점을 다른 색으로 칠하기 위한 서로 다른 색의 최소 개수로 정의한다. 
+\end{definition}
+\begin{definition}
+    $n$개의 꼭짓점을 가지며 서로 다른 꼭짓점끼리 정확히 하나의 변으로 연결된 그래프를 완전 그래프 $K_n$이라고 한다. 
+\end{definition}
+\begin{remark}
+    $\chi(K_n)=n$이다. 
+\end{remark}
+\begin{definition}
+    꼭짓점 $v\in V$의 차수 $\deg(v)$를 $v$에 연결된 변의 개수로 정의한다. 
+\end{definition}
+\begin{definition}
+    그래프의 꼭짓점들을 평면 위의 점으로, 변을 두 꼭짓점을 잇는 곡선으로 하여 변들끼리 겹치지 않게 평면 위에 그릴 수 있다면 이 그래프를 평면 그래프라고 한다. 
+\end{definition}
+\begin{lemma}
+    평면 지도에 대해 한 영역을 꼭짓점으로 하고, 이웃한 영역을 변으로 연결하여 얻어지는 그래프는 평면 그래프이다. 
+\end{lemma}
+따라서 평면 지도를 색칠하는 문제는 평면 그래프의 채색수를 구하는 문제와 같다. 
+\begin{theorem}[Euler]\label{thm:euler}
+    연결된 평면 그래프에 대해 꼭짓점의 개수를 $V$, 변의 개수를 $E$, 면의 개수를 $F$라고 하자. 이때 면은 유계가 아닌 연결성분(외부) 또한 포함하여 센다. 예를 들어 삼각형에 대해 $F=2$이다. 이때 항상 $V-E+F=2$가 성립한다. 
+\end{theorem}
+\begin{proof}
+    $V+E$에 대해 귀납적으로 증명할 수 있다. 예를 들어 새로운 꼭짓점을 연결할 때는 $V$와 $E$가 1씩 늘고, 이미 있는 꼭짓점들 사이에 변 하나를 추가할 때는 $E$와 $F$가 1씩 는다. 자세한 증명은 독자에게 맡긴다. 
+\end{proof}
+\begin{theorem}
+    모든 평면 그래프에는 차수가 5 이하인 꼭짓점이 존재한다. 
+\end{theorem}
+\begin{proof}
+아니라고 가정하자. $6V\leq 2E$, $3F\leq 2E$이므로 $V-E+F=2$에 모순이다. 
+\end{proof}
+\begin{corollary}
+    모든 평면 그래프는 6색으로 칠할 수 있다. 
+\end{corollary}
+\begin{definition}
+    그래프에 대한 (참이 아닌) 명제 $P(G)$의 최소 반례란 $\neg P(G)$인 $G$ 중 $V$가 최소인 $G$(중 하나)를 말한다. $P(G)$의 최소 반례를 가정했더니 모순이 나온다면 물론 $P(G)$는 모든 $G$에 대해 성립한다. 이는 수학적 귀납법과 동치이다. 
+\end{definition}
+\begin{exercise}
+    증명하여라. Hint: 최소 반례 $G$와 $G$의 차수 5 이하인 꼭짓점 $v$를 가정하고, $G-\{v\}$를 생각하자. 
+\end{exercise}
+\begin{theorem}\label{thm:fivecolor}\index{5색 정리}\index{five-color theorem}
+    모든 평면 그래프는 5색으로 칠할 수 있다. 
+\end{theorem}
+\begin{exercise}
+    귀류법을 사용한다. 최소 반례 $G$를 가정하고, 차수가 5 이하인 $G$의 한 꼭짓점을 $v$라고 하자. 다음 성질들을 보여라. 
+    \begin{enumerate}
+        \item $G$는 연결 그래프이다.
+        \item $\chi(G)=6$이다. 
+        \item $\deg(v)=5$이다. 
+        \item $v$와 이웃하는 5개 꼭짓점의 색은 모두 다르다. 
+        \item $\chi(G-\{v\})=5$이다. 
+    \end{enumerate}
+\end{exercise}
+\begin{proof}
+    연습문제와 같은 가정에서 시작하자. $v$와 연결된 5개 꼭짓점을 시계 방향으로 $v_1, v_2, v_3, v_4, v_5$라고 하자. 이제 $v_1$의 색과 $v_3$의 색을 갖는 꼭짓점 및 이들을 잇는 변만을 남긴다. 이때 $v_1$과 $v_3$이 적당한 경로로 연결되어 있지 않다면, $v_1$을 포함하는 연결성분의 색을 반전시킬 수 있다. 이제 다시 나머지 꼭짓점들을 되돌려놓으면 $v$ 주위에는 이제 4가지 색만이 쓰이므로 $\chi(G)\leq 5$이므로 가정에 모순이다. 따라서 $v_1$과 $v_3$을 연결하는, 2색을 교대로 사용하는 경로가 존재한다. 마찬가지로 $v_2$와 $v_4$를 연결하는 alternating chain도 존재한다. 그런데 이 두 chain은 $G$의 평면성에 의해 한 꼭짓점에서 만나야 한다. 모순.
+\end{proof}
+이제 채색수 개념을 일반화한 채색다항식을 살펴보자. 
+\begin{definition}\label{def:chrpoly}\index{채색 다항식}\index{chromatic polynomial}
+    그래프 $G$에 대해, $G$의 채색 다항식 $\chi_G$란 $\chi_G(k)$가 $G$를 $k$색으로 채색하는 방법의 수가 되게 하는 함수이다. 
+\end{definition}
+\begin{exercise}
+    $\chi_{K_n}(k)=k(k-1)\cdots (k-n+1)$임을 보여라.
+\end{exercise}
+\begin{definition}
+    그래프 $G$의 이웃한 두 꼭짓점 $x, y$에 대해 $G$에서 변 $xy$를 지운 그래프를 $G-xy$, $G-xy$에서 $x$와 $y$를 한 꼭짓점으로 만들어 버린(즉 몫연산을 취한) 그래프를 $G/xy$라고 한다. 
+\end{definition}
+단순그래프 $G$에 대해 $G-xy$를 $k$색으로 칠하자. 이제 $x$와 $y$가 같은 색인 경우는 본질적으로 $x$와 $y$를 한 꼭짓점으로 붙인 다음 채색한 경우로 볼 수 있고, 다른 색인 경우는 반대로 $x$와 $y$를 잇는 변을 그린 후 채색한 경우와 같다. 따라서, 
+\begin{theorem}[Deletion-contraction]\label{thm:del-cont}
+    $\chi_G=\chi_{G-xy}-\chi_{G/xy}$가 성립한다. 
+\end{theorem}
+\begin{remark}
+    이제 $n$개의 꼭짓점을 갖는 그래프 $G$의 채색 `다항식'이 실제로 다항식이며 $n$차 이하임을 확인할 수 있다. 
+\end{remark}
+응용 하나를 살펴보자. 
+\begin{definition}\index{tree}\index{트리}
+    회로, 즉 자기 자신으로 돌아오는 경로가 없는 그래프를 숲(forest)이라고 한다. 연결된 숲을 나무(tree)라고 한다.
+\end{definition}
+다음은 아마도 본 교재에서 가장 중요한 정의일 것이다. 
+\begin{definition}\index{spanning tree}\index{스패닝 트리}
+    그래프 $G$에 대해, $G$에서 몇몇 변을 삭제해 만들어진 트리를 $G$의 \textit{SpanningTree}라고 한다. 
+\end{definition}
+\begin{exercise}
+    \cref{thm:del-cont}의 증명을 본따, $G$의 \textit{SpanningTree} 개수 $t(G)$에 대한 점화식을 하나 찾아라. 
+\end{exercise}
+\begin{exercise}
+    아무 그래프 하나를 그린 후 그 스패닝 트리의 수를 세 보아라.
+\end{exercise}
+\section{그래프의 평면성 판정}
+위 절에서는 평면 그래프의 한 성질을 살펴보았다. 그러나 잠시 후 만나겠지만, 채색수가 2인 비-평면 그래프도 존재한다. 따라서 이 절에서는 평면 그래프를 판정할 다른 조건을 살펴볼 것이다. \\
+먼저 평면 그래프가 아닌 그래프 두 개로 시작하자. 
+\begin{theorem}
+    $K_5$는 평면그래프가 아니다.
+\end{theorem}
+\begin{proof}
+    변이 너무 많다. $2e\geq 3f$이므로 면은 최대 6개일 수밖에 없는데, $5-10+6<2$. 
+\end{proof}
+이번에는 다른 형태의 그래프가 필요하다. 
+\begin{definition}
+    완전 이분 그래프 $K_{m, n}$은 $m$개의 A-꼭짓점들과 $n$개의 B-꼭짓점들이 있어서, 서로 다른 타입의 꼭짓점들끼리는 항상 연결되어 있고 같은 타입은 전혀 연결되어 있지 않은 그래프를 말한다. 
+\end{definition}
+다음 정리는 배관 문제라는 이름으로 본 적이 있을지도 모른다. 
+\begin{theorem}
+    $K_{3, 3}$은 평면 그래프가 아니다. 
+\end{theorem}
+\begin{proof}
+    평면 그래프라고 가정하면 한 면이 항상 4개 이상의 꼭짓점으로 이루어져야 한다(타입이 교대하므로). 따라서 $2e\geq 4f$이고, \cref{thm:euler}에 모순.
+\end{proof}
+\begin{exercise}
+    $K_4$와 $K_{2, n}$은 모두 평면 그래프임을 보여라. 따라서 위 예시들은 어떤 의미에서 `최소'이다. 
+\end{exercise}
+이제 평면 그래프의 위계를 살펴보자. 
+\begin{definition}
+    한 그래프의 subdivision은 그 그래프의 변 위에 꼭짓점을 새로 추가해 만들어진 그래프를 말한다. 
+\end{definition}
+\begin{remark}
+    $G$와 $G$의 subdivision의 평면성은 항상 같다. 
+\end{remark}
+\begin{definition}
+    그래프 $G$가 그래프 $H$의 부분 그래프(subgraph)라는 것은 $H$에서 몇몇 꼭짓점과 변을 삭제해 $G$를 만들 수 있다는 것이다. 
+\end{definition}
+\begin{remark}
+    $G$가 평면 그래프라면 그 subgraph 역시 평면 그래프이다. 
+\end{remark}
+Kuratowski의 놀라운 발견은 바로 평면성을 이야기하는 데 이 정도면 충분하다는 것이다. 
+\begin{theorem}[Kuratowski]\label{thm:kuratowski}\index{Kuratowski's theorem}
+    $G$가 평면 그래프임은 $G$의 subgraph 중 $K_{3, 3}$ 또는 $K_5$의 subdivision과 동형인 그래프(a.k.a. Kuratowski subgraph)가 없다는 것과 동치이다. 
+\end{theorem} 
+증명은 Adam Sheffer의 강의록(\url{http://www.math.caltech.edu/~2014-15/2term/ma006b/10 Planar3.pdf} 및 \url{http://www.math.caltech.edu/~2014-15/2term/ma006b/11 Planar4.pdf})을 읽어 보길 바란다.
+
+\chapter{이차곡선과 사영기하}
+\section{이차곡선의 여러 가지 정의}
+물리학에서 역제곱장에서 움직이는 물체의 궤적이 에너지에 따라 원, 타원, 포물선, 또는 쌍곡선 형태의 궤적을 가진다는 사실을 배운 것을 기억하는가? 총 에너지가 음수라면 유계인 원 또는 타원형의 궤적, 0이라면 포물선 궤적, 양수라면 쌍곡선 궤적을 그린다. 즉 탈출 속도는 포물선 궤적을 그리게 하는 속도이다. 역제곱장의 운동방정식으로부터 시작해 보자. 
+\begin{equation*}
+    \Ddot{\textbf{r}}=-k\textbf{r}/|\textbf{r}|^3
+\end{equation*}
+이제 극좌표계를 이용해 이를 변형할 것이다. 원점과의 거리를 $r$, 편각을 $\theta$라고 하자. 
+\begin{equation*}
+    \Ddot{re^{i\theta}}=-ke^{i\theta}/r^2
+\end{equation*}
+이제 $r$과 $\theta$를 분리할 준비를 하자. 
+\begin{equation*}
+    (\Ddot{r}+ir\Ddot{\theta}+2i\Dot{r}\Dot{\theta}-r\Dot{\theta}^2)e^{i\theta}=-ke^{i\theta}/r^2
+\end{equation*}
+양변을 $e^{i\theta}$로 나눈 후 실수부와 허수부를 각각 취하여 다음을 얻는다. 
+\begin{equation*}
+    (\Ddot{r}-r\Dot{\theta}^2)=-k/r^2
+\end{equation*}
+\begin{equation*}
+    r\Ddot{\theta}+2\Dot{r}\Dot{\theta}=0
+\end{equation*}
+\begin{exercise}
+    두 번째 식으로부터 $r^2\Dot{\theta}$가 일정함을 도출해 내어라. 이것은 어떠한 물리량의 보존 법칙에 상응하는가?
+\end{exercise}
+$r^2\Dot{\theta}=l$를 첫 번째 식에 대입하면, 아래와 같은 $r$의 시간 미분으로 이루어진 미분방정식을 얻을 수 있다. 
+\begin{equation*}
+    \Ddot{r}-l^2/r^3=-k/r^2
+\end{equation*}
+\begin{exercise}
+    궤도를 구한다는 것은 $r$을 시간이 아닌 $\theta$에 대한 함수로 나타내는 것이다. $r$의 시간 미분을 $\theta$ 미분으로 바꾸어 궤도 방정식을 구하여라. [Hint: $r=u^m$으로 치환하여 $(du/d\theta)^2$ 또는 $d^2u/d\theta^2$항이 없어지는 $m$을 찾아라.]    
+\end{exercise}
+최종적으로 역제곱장에서 물체는 $(l^2/k)/r=1+e\cos(\theta-\theta_0)$의 궤도를 따라 운동한다. $l^2/k=\alpha$로 치환하면 $r=\alpha/(1+e\cos(\theta-\theta_0))$의 식을 얻는다.
+\begin{exercise}
+    $r(\theta)$의 궤도 방정식을 $f(x,y)=0$ (단, $f$는 $x$, $y$에 대한 다항식)으로 바꾸어라. $\textbf{r}=re^{i\theta}=r(\cos\theta+i\sin\theta)=x+iy$를 이용하라. 결과를 보면 왜 이 곡선들--타원, 포물선, 쌍곡선--이 이차곡선이라 불리는지 알게 될 것이다.
+\end{exercise}
+\begin{exercise}
+    뒤에서 보겠지만 이차곡선은 $e<1$, $e=1$, $e>1$로 분류할 수 있다. 이 분류는 회전($\theta_0$)과 확대축소($\alpha$)에 무관해야 한다. $f(x,y)$의 이차항이 $Ax^2+Bxy+Cy^2$인 이차곡선에 대하여 이를 나타내는 $A$, $B$, $C$에 대한 식 $\Delta(A, B, C)$을 찾아라. [Hint: $\Delta<0$, $\Delta=0$, $\Delta>0$은 각각 $e<1$, $e=1$, $e>1$과 대응될 것이다.] 
+\end{exercise}
+\begin{exercise}
+    이제 다시 물리학으로 돌아가자. $r=\alpha/(1+e\cos\theta)$의 궤도를 도는 질량 $m$의 물체가 있다. 이 물체의 각운동량과 에너지를 $\alpha$, $e$에 대한 식으로 나타내어라. 궤도의 분류(i.e. $e$와 1의 대소관계)는 각운동량에 의존하지 않고 오직 에너지--정확히는 에너지의 부호--에만 의존하는 것이 신기하지 않나. 
+\end{exercise}
+
+앞에서 보았듯이 역제곱장의 물체는 $\alpha/r=1+e\cos\theta$의 궤도를 따라 운동한다. 그리고 $e$의 값에 따라 궤도가 원, 타원, 포물선, 쌍곡선이 가능하다. 궤도의 모양이 계의 에너지와 각운동량에 의해 결정되는 것을 보았을 때 이들 곡선 사이에는 연속적인 연결이 있음을 짐작해 볼 수 있다. 이 세 가지 곡선--원은 타원의 한 종류로 본다--은 이차곡선이라 불린다. 독자에게 가장 친숙한 이차곡선의 정의는 두 정점까지의 거리 합이 일정한 점의 자취 타원, 정점과 정직선까지의 거리가 동일한 점의 자취 포물선, 두 정점까지의 거리 차가 일정한 점의 자취 쌍곡선일 것이다. 하지만 이 정의는 이차곡선의 연속성과 가장 동떨어진 정의라고 생각된다. 이차곡선에 대한 대체 정의 세 가지를 알아보자.
+\begin{definition}
+    타원은 두 정점까지의 거리 합이 일정한 점의 자취이다. 포물선은 한 정점까지의 거리와 한 정직선까지의 거리가 동일한 점의 자취이다. 쌍곡선은 두 정점까지의 거리 차가 일정한 점의 자취이다. 
+\end{definition}
+\begin{theorem}
+    (대체 정의1)이차곡선은 한 정직선(준선)까지의 거리에 대한 한 정점(초점)까지의 거리의 비가 $e$로 일정한 점의 자취이다. $e<1$이면 타원, $e=1$이면 포물선, $e>1$이면 쌍곡선이다.
+\end{theorem}
+\begin{proof}
+    $e=1$: 포물선의 정의와 동일하다. \\
+    $e<1$: 아폴로니우스의 원 - 대칭성 - 초점 2개 \\
+    $e>1$: in same way
+\end{proof}
+\begin{exercise}
+    대체 정의1를 이용하여 원점이 초점인 이차곡선의 극좌표 방정식을 구하여라. 이제 독자들은 확실히 역제곱장에서 운동하는 물체의 궤도가 이차곡선임을 알게 되었을 것이다.
+\end{exercise}
+\begin{theorem}
+    (대체 정의2)이차곡선은 원뿔과 평면의 교선으로 정의된다. 원뿔의 축과 평면, 모선이 이루는 각을 각각 $\alpha$, $\beta$라 하면, $\alpha>\beta$이면 타원, $\alpha=\beta$이면 포물선, $\alpha<\beta$이면 쌍곡선이다.
+\end{theorem}
+\begin{remark}
+    이러한 이유에서 이차곡선은 원뿔곡선(conic section)으로 불리기도 한다. 
+\end{remark}
+\begin{exercise}
+    이차곡선의 정의와 대체 정의2 동치임을 보여라. 그리고 대체 정의1에서 정의된 $e$가 $\cos\alpha/\cos\beta$임을 보여라. [Hint. 원뿔의 모든 모선에 접하는 구 한 개와 그 접점들을 지나는 평면을 생각해보라.]
+\end{exercise}
+\begin{theorem}
+    (대체 정의3)이차곡선은 좌표평면에서 $Ax^2+Bxy+Cy^2+Dx+Ey+F=0$으로 표현되는 도형이다.
+\end{theorem}
+\begin{proof}
+    대체 정의1과 대체 정의3이 동치임을 금방 확인할 수 있을 것이다.
+\end{proof}
+\begin{exercise}
+    이차곡선의 대체 정의1 또는 대체 정의2를 통해 역제곱장에서 물체의 운동이 이차곡선임을 보이시오. 
+\end{exercise}
+
+\section{원뿔과 사영}
+
+\begin{theorem}[Pascal]\label{thm:pascal}\index{파스칼의 정리}\index{Pascal's theorem}
+    원뿔곡선 $C$ 위의 점들이 (어떤 순서로든) 육각형을 이룬다고 하자. 세 쌍의 대변의 교점은 한 직선 위에 있다. 
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+\chapter{도형의 면적: 측도론}
+
+\chapter{미분기하}
+우리는 3차원 공간 상에서의 도형과 기하적인 값들을 다루기 위해 벡터 미적분을 사용한다. 이 벡터 미적분을 조금 확장해서 일반적인 공간에서 할 수 있게 하는 것이 미분기하이다.
+\section{다양체}
+\index{다양체}
+\index{manifold}
+미분기하에서 관심을 가지는 공간은 다양체라는 공간이다. 다양체란 국소적으로 보았을 때 $\mathbb{R}^n$인 공간이다. 이 챕터에서는 다양체의 엄밀한 정의는 다루지 않고, 미분기하에서 다루는 대상인 vector와 differential form에 집중할 것이다. 앞으로는 미분가능다양체만을 다루도록 한다.
+쉽게 생각해볼 수 있는 다양체의 예시로는 2차원 구, 토러스 등이 있다. 다양체의 이미지를 떠올릴 때 이런 식으로 떠올리면 이해에 도움이 될 것이다.
+
+\section{벡터}
+우선 vector에 대해 알아보자. 이 장에서는 벡터공간의 원소로서의 벡터와의 구분을 위해 기하적인 벡터는 영어로 쓰겠다.
+
+m차원 다양체 $M$상에 매개변수 $\lambda$로 주어지는 곡선이 있다 하자. 함수 $f(x)$를 이 곡선을 따라 미분하는 것을 생각해 보면, 편미분 연쇄 법칙에 따라 $\frac{df}{d\lambda}=\sum_{i=1}^m \frac{dx_i}{d\lambda}\frac{\partial f}{\partial x_i}$로 쓸 수 있다. $f$의 임의성에 의해 $f$를 뗄 수 있고, 따라서 $\frac{d}{d\lambda}=\sum_{i=1}^m \frac{dx_i}{d\lambda}\frac{\partial}{\partial x_i}$로 쓸 수 있다.
+여기서 $\frac{\partial}{\partial x_i}$ 부분을 벡터의 기저로, $\frac{dx_i}{d\lambda}$ 부분을 벡터의 성분으로 보면 곡선 상의 미분 $\frac{d}{d\lambda}$를 벡터로 볼 수 있고, 이것이 vector의 정의가 된다.
+
+3차원 미적분학에서 사용했던 `크기와 방향이 있는 값'으로서의 기하적인 벡터와 이 vector가 같다는 것은 기저를 변환해보면 알 수 있다. vector는 미분 연산자이지만, 기하적인 양으로서 직관적으로 생각할 때는 미분 기호의 `탈을 쓴' 화살표라 보면 된다. 기저벡터 ${e_i}$가 미분 기호의 탈을 써서 $\frac{\partial}{\partial x_i}$가 되는 것이다.
+
+\begin{exercise}
+    좌표평면에서 직교좌표계를 극좌표계로 변환할 때 vector가 변환되는 행렬이 화살표로서의 벡터가 변환되는 행렬과 같음을 보여라.
+\end{exercise}
+\section{1-형식}
+vector는 자주 사용해왔던 익숙한 개념이지만, 1-형식, 즉 one-form은 처음 들어 볼 것이다. 간단하게 말하면 one-form은 vector와 쌍대를 이루는 개념이다. 다음 설명을 통해 기하적인 직관을 얻어 보도록 하자.
+
+우리는 미적분을 배우며 무한소라는 개념을 다뤄 왔다. 이 무한소를 확장한 개념이 differential form이고, differential form 중 1차원, 즉 `무한소 길이'가 one-form이라 생각하면 된다. 함수 $f$에 대해 $df$로 예를 들어 보자. $df$에 대해서도 vector에서 했던 것과 똑같이 편미분 연쇄법칙을 사용하여 $\sum_{i=1}^m \frac{\partial f}{\partial x_i} dx_i$로 쓸 수 있을 것이다. 그러면 $dx_i$를 기저로, $\frac{\partial f}{\partial x_i}$를 성분으로 하여 무한소를 벡터로 생각할 수 있다.
+
+one-form이 vector와 다른 점은 기저의 변환에 대해 반응하는 방식이다. vector에서 기저를 변환했을 때 one-form에 대한 변환행렬은 vector에서의 것의 역변환이 된다.
+\begin{exercise}
+    좌표평면에서 직교좌표계를 극좌표계로 변환할 때 one-form이 변환되는 행렬이 vector의 변환행렬과 역행렬 관계에 있음을 보여라.
+\end{exercise}
+
+vector와 one-form은 서로가 서로의 dual이다. vector는 반변벡터, contravariant vector로도 불리고, one-form은 공변벡터, covariant vector, dual vector로도 불린다.
+
+vector의 성분과 one-form의 성분은 기저바꿈에 대해 반대로 반응한다. 여기서 알아둬야 할 것은 이들은 기하적인 값으로, 원래 정의는 기저의 선택에 무관하다는 것이다. 즉 이들은 좌표를 바꿔도 성분과 기저는 바뀌지만 그 실체인 vector(one-form) 그 자체는 바뀌지 않는다. 그리고 성분과 기저가 결합되어 있는 형태로 보아, 성분이 바뀌는 것을 표현하는 변환행렬과 기저가 바뀌는 것을 표현하는 변환행렬은 서로 역행렬 관계를 가져야 한다는 것을 알 수 있다. 이것을 수식으로 표현하면 아래와 같이 표현될 것이다.
+\begin{equation}
+    \vec{V}'=V' e' =V\Lambda \Lambda^{-1} e=Ve=\vec{V}
+\end{equation}
+여기서 쓴 표현이 제대로 된 표현은 아니다. vector와 one-form의 성분 표기법을 소개하기 전에 기저와 성분이 반대로 바뀌는 과정을 표현하려고 쓴 것이다.
+
+그런데 one-form과 vector의 성분은 서로 반대로 변한다는 것을 위에서 보았다. 그렇다면, vector의 성분과 one-form의 기저가 같은 방식으로 변하고, one-form의 성분과 vector의 기저가 같은 방식으로 변한다는 결론을 내릴 수 있다.
+
+이쯤에서 물리에서 자주 사용하는 표기법을 소개하겠다. vector는 알파벳 위에 bar를, one-form은 알파벳 위에 tilde를 써서 표현하고, 성분으로 쓸 때는 변환규칙에 따라 첨자의 위치를 바꾼다. 그리고 반복되는 첨자의 합이 나오면 시그마 기호를 생략한다. 주로 vector의 기저는 $\{\Bar{e}\}$, one-form의 기저는 $\{\Tilde{\omega}\}$로 쓴다.
+\begin{equation}
+    \Bar{V}=V^i \Bar{e}_i
+\end{equation}
+\begin{equation}
+    \Tilde{\alpha}=\alpha_i \Tilde{\omega}^i
+\end{equation}
+\section{텐서}
+이제는 이들의 성분을 늘린 텐서에 대해 알아보도록 하자. 우선 텐서에 대해 설명하기 전에, vector와 one-form에 대해 조금 더 깊게 알아보자.
+\subsection{접공간}
+다양체에는 각 점마다 할당된 벡터공간인 접공간이 존재한다. 다양체 $M$의 점 $p$에 할당된 접공간을 tangent space의 t를 따와 $T_p M$으로 쓴다. 그리고 그 점에 있는 vector들이 바로 $T_p M$의 원소이다. $T_p M$은 각 점의 vector가 '사는' 곳으로 생각할 수 있다. 모든 점에 대해 이러한 $T_p M$들을 모은 공간을 접다발이라 한다.
+one-form에 대해서도 같은 식으로 one-form이 사는 공간을 생각할 수 있는데, 그 공간은 접공간과 쌍대를 이룬다는 의미에서 cotangent space, cotangent bundle(여접다발)이라 하고, *을 붙여 $T_p^* M$으로 쓴다.
+\subsection{내적}
+vector와 one-form의 실체가 기저의 선택에 무관한 이유를 떠올려 보자. 이들의 성분과 기저가 기저바꿈에 대해 반대로 반응하여 그 실체는 불변인 것이었다. 그렇다면 이들의 성분을 연결한 값 또한 vector 성분과 one-form 성분이 반대로 바뀌어 총 값은 기저에 무관할 것임을 추론할 수 있다. 이런 맥락 안에서 vector $\Bar{V}$와 one-form $\Tilde{\alpha}$의 내적을 아래와 같이 정의할 수 있다.
+\begin{equation}
+    (\Bar{V}, \Tilde{\alpha})=V^i \alpha_i
+\end{equation}
+이 연산은 내적이므로 선형성을 만족한다. $\delta^i_{\,j}$는 크로네커 델타라 불리는 기호로, $i=j$일 때 1이고 나머지일 때 0인 기호이다. 단위행렬을 성분으로 쓴 걸로 생각하면 편하다.
+\begin{equation}
+    (V^i \Bar{e}_i, \alpha_j \Tilde{\omega}^j)=V^i \alpha_j (\Bar{e}_i, \Tilde{\omega}^j)=V^i \alpha_j \delta^j_{\,i}=V^i \alpha_i
+\end{equation}
+기저를 미분 기호로 보면 조금 더 직관적인 이해가 가능하다.
+\begin{equation}
+(\Bar{e}_i, \Tilde{\omega}^j)=\left (\frac{\partial}{\partial x^i}, dx^j \right)=\delta^j_{\,i}
+\end{equation}
+유념할 것은, 이 내적은 우리가 기하에서 배운 내적과는 다르다. 사실 이게 더 일반적인 것인데, 내적은 어떤 대상과 그 쌍대가 되는 대상을 이어 준다. 이 내적이 유클리드 기하에서의 내적과 연결되는 과정을 나중에 볼 것이다.
+
+이러한 맥락에서 우리는 one-form과 vector를 다른 관점에서 볼 수 있다. one-form은 vector를 받아 실수를 출력하는 함수이고, vector는 one-form을 받아 실수를 출력하는 함수이다.
+\subsection{텐서}
+이제 텐서를 도입해보자. 우리는 지금까지 첨자가 한 개인 대상만을 다뤘지만, 첨자의 개수를 여러 개로 늘리고 싶다. 그러면 어떻게 해야 할까? 답은 간단하다. $T_p M$과 $T_p^* M$의 원소가 vector와 one-form이므로 그 공간들을 단순히 곱해서 나온 공간의 원소는 여러 개의 첨자를 가지는 텐서가 될 것이다. 이런 식으로 $T_p M$ $n$개와 $T_p^* M$ $m$개를 곱한 공간의 원소 $\mathbb{T}$를 $(n, m)$ 텐서라 한다. 그리고 이러한 텐서는 $n$개의 one-form과 $m$개의 vector를 받아 실수를 출력하는 함수가 된다. 물론 이 함수는 선형성을 만족한다. $(n, m)$ 텐서를 성분으로 쓰면 아래와 같다.
+\begin{equation}
+    \mathbb{T}=T^{i_1 i_2 ... i_n}_{\qquad\quad j_1 j_2 ... j_m}\Bar{e}_{i_1}\Bar{e}_{i_2}...\Bar{e}_{i_n}\Tilde{\omega}^{j_1}\Tilde{\omega}^{j_2}...\Tilde{\omega}^{j_m}
+\end{equation}
+기저 부분을 보면 알 수 있듯, 그저 vector와 one-form을 여러 개 곱해 놓은 것에 불과하다.
+\subsection{축약}
+텐서는 vetor나 one-form과 내적을 확장한 개념 격인 축약이라는 연산을 할 수 있다. 우선 텐서를 함수 형태로 표현하면 아래와 같이 나타난다.
+\begin{equation}
+    \mathbb{T}(\quad,\quad,\quad ...\; ; \quad, \quad,\quad ...)
+\end{equation}
+세미콜론을 기준으로 앞의 빈칸은 one-form이, 뒤의 빈칸은 vector가 들어가는 자리이다. 이 자리 중 하나에 vector나 one-form을 넣는 것이 축약이며, 기저 표현으로는 아래와 같이 쓸 수 있다.
+\begin{equation}
+    \mathbb{T}(\Tilde{\alpha},\quad,\quad ...\; ; \quad, \quad,\quad ...)=\alpha_{i_1} T^{i_1 i_2 ... i_n}_{\qquad\quad j_1 j_2 ... j_m}\Bar{e}_{i_2}...\Bar{e}_{i_n}\Tilde{\omega}^{j_1}\Tilde{\omega}^{j_2}...\Tilde{\omega}^{j_m}
+\end{equation}
+$i_1$은 dummy index, 나머지는 실제로 '유효한' index임에 주의하자.
+
+one-form과 vector를 서로를 받아 실수를 출력하는 함수라 했으므로, vector와 one-form의 축약(=내적)은 아래와 같다.
+\begin{equation}
+    \Bar{V}(\Tilde{\alpha})=\Tilde{\alpha}(\Bar{V})=\alpha_i V^i=(\Tilde{\alpha},\Bar{V})
+\end{equation}
+아래 예시처럼 텐서와 텐서 간의 축약이나 두 성분을 모두 축약하는 것도 가능하다.
+\begin{equation}
+    A_{ijk} B^{ijl}
+\end{equation}
+축약에 대한 직관을 조금 쓰자면, 성분 표기로 썼을 때 두 텐서 간의 인덱스들 중 축약할 인덱스를 dummy index로 만들면서 `유효한 첨자'의 개수를 줄이는 과정으로 볼 수 있다. 이를테면 위 예시에서 축약된 결과는 $(1,1)$ 텐서가 될 것이다. 조금 더 시각적인 이해를 원한다면 구글에 Penrose graphical notation을 검색해 보라.
+\subsection{텐서 첨자 연산 예시}
+\textbf{변환행렬.}
+vector, one-form의 성분은 기저바꿈에 반응하는 방식이 반대라고 하였다. 즉 해당 기저 변환 아래 변환행렬이 역행렬 관계를 가진다.
+
+변환행렬을 $\Lambda^i_{\; j}$라 하자. 그러면 변환 $\Lambda$에 대해 vector의 성분은 ${v^i}'=\Lambda^i_{\; j} v^j$처럼 변환되고, one-form의 성분은 $\alpha_i'={[\Lambda^{-1}]}^j_{\;i} \alpha_j$처럼 변환될 것이다. 이때 $\Lambda^i_{\;j}[\Lambda^{-1}]^j_{\;k}=\delta^i_{\;k}$이다. (역행렬.)
+
+일반적으로 텐서의 변환은 위의 규칙을 따라, 각 윗첨자마다 $\Lambda$를 축약시키고, 아랫첨자마다 $\Lambda^{-1}$을 축약시킨다.
+\\\\
+\textbf{메트릭 텐서.}
+메트릭 텐서 $g$는 vector를 one-form으로 바꿔 주는 텐서로, vector와 축약해서 one-form을 만든다는 것에서 $(0,2)$텐서임을 유추할 수 있다. vector $\Bar{V}$를 one-form $\Tilde{V}$로 바꾸는 것을 아래와 같이 쓸 수 있다.
+\begin{equation}
+    g(\Bar{V},\quad)=\Tilde{V}(\quad)
+\end{equation}
+이를 성분으로 쓰면 아래와 같다.
+\begin{equation}
+    g_{ij} V^j=V_i
+\end{equation}
+즉, $g$는 윗첨자를 아래로 내려 주는 역할을 한다.
+
+여기서 아래첨자를 위로 올려 주는 텐서를 생각해볼 수 있다. 이러한 (2,0)텐서 $g$를 inverse metric이라 한다. 이때 inverse metric은 $g^{ij} g_{jk}=\delta^i_{\; k}$를 만족한다. (역행렬.) metric과 inverse metric은 성분 표기로 썼을 때 첨자의 위치를 통해 구분할 수 있기에 따로 문자를 다르게 쓰지는 않는다. 성분 표기로 아래첨자를 올려 주는 것을 쓰면 아래와 같다.
+\begin{equation}
+    g^{ij}V_j=V^i
+\end{equation}
+메트릭 텐서는 대칭 텐서이다. 즉, $g_{ij}=g_{ji}$를 만족한다. inverse metric 또한 대칭 텐서임을 쉽게 확인할 수 있다.
+
+metric을 통해 첨자를 내린 vector와 다른 vector를 내적할 수 있다. 이를 성분 표기로 쓰면 $V^ig_{ij}U^j=V^iU_i=V_iU^i$가 되며, 이 식에서 좌변의 것이 바로 기존의 기하적인 벡터 간의 내적이 된다.
+
+다시 말해 메트릭 텐서는 공간의 벡터 간의 내적을 결정하는 `내적 규칙'이며, 벡터 간의 내적 규칙이 정의되면 벡터의 크기를 정의할 수 있고 두 벡터 간의 각을 정의할 수 있으므로, 메트릭 텐서를 알면 공간의 기하를 아는 것이 된다.
+
+유클리드 공간에서 메트릭 텐서는 $g_{ij}=\delta_{ij}$로 주어지며, 따라서 유클리드 공간에서의 내적은 벡터의 각 성분끼리 곱해서 단순히 모두 더하는 것이 된다. 또한 유클리드 공간에서 메트릭 텐서가 $\delta_{ij}$로 주어지기 때문에 유클리드 공간에서는 vector와 one-form의 구분이 크게 중요하지 않다.
+\\\\
+\textbf{레비-치비타 텐서.}
+레비-치비타 텐서는 레비-치비타 심볼을 `텐서화'시키고 일반화시킨 것이다. 우선, 레비 치비타 심볼은 $\epsilon_{ijk}$로 표기하며, $ijk$가 123과 cyclic하게 같을 때는 1, 213과 cyclic하게 같을 때는 -1, 나머지 경우에는 0의 값을 가지는 기호이다. 그러면 이 정의를 확장해서, $ijk$를 123에서 두 숫자를 골라 바꾸는 시행을 짝수 번 반복해 얻을 수 있다면 1, 홀수 번 반복해 얻을 수 있다면 -1, 어느 쪽도 아니라면 0의 값을 가지는 것으로 재정의할 수 있다. 두 정의는 동치임을 쉽게 확인할 수 있다. 이때 123에서 두 숫자를 짝수 번 바꿔 얻는 순열을 even permutation, 홀수 번 바꿔 얻는 순열을 odd permutation이라 한다.
+
+이 정의를 통해 $\epsilon_{ijk}$의 첨자 개수를 늘려 일반화할 수 있다. 일반화된 레비-치비타 심볼 $\epsilon_{i_1 i_2 i_3 ... i_n}$은 아래와 같이 정의된다.
+\begin{equation}
+    \epsilon_{i_1 i_2 i_3 ... i_n}=
+    \begin{cases}
+    1, & \mbox{if }i_1 i_2 i_3 ... i_n\mbox{ is an even permutation of 123...n}\\
+    -1, & \mbox{if }i_1 i_2 i_3 ... i_n\mbox{ is an odd permutation of 123...n}\\
+    0, & \mbox{else}
+    \end{cases}
+\end{equation}
+여기서 주의할 것은 레비-치비타 심볼은 텐서가 아니라는 것이다. 기저를 바꿔보면 불변이 아님을 쉽게 확인할 수 있다.
+
+레비-치비타 심볼을 사용하면 외적을 깔끔하게 표현할 수 있다. 유클리드 공간에서 벡터의 외적을 레비-치비타 심볼을 사용해 표현하면 아래와 같다.
+\begin{equation}
+    (a \times b)^k=\epsilon_{ij}^{\;\;k}a^ib^j
+\end{equation}
+이때 $\epsilon_{ij}^{\;\;k}=g^{km}\epsilon_{ijm}$이다.
+
+출처: geometrical methods of mathematical physics - Bernard F. Schutz
+
+% \begin{enumerate}
+%     \item 점과 좌표
+%     \item 직선의 방정식
+%     \item 원
+%     \item 도형의 이동
+%     \item 부등식의 영역
+% \end{enumerate}

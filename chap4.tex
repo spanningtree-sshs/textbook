@@ -1,0 +1,710 @@
+\part{방정식과 부등식}
+
+\chapter{절대부등식}
+\section{산술 기하 평균 부등식}
+\begin{definition}\index{평균}\index{평균!산술}\index{mean}\index{mean!arithmetic}
+$n$개의 실수 $a_1, \cdots, a_n$에 대해 이들의 산술평균(arithmetic mean)을 $\ArithMean(a_1, \cdots, a_n)=\frac1n \sum a_i$로 정의한다.
+\end{definition}\index{평균!기하}\index{mean!geometric}
+$n$개의 음 아닌 실수 $a_1, \cdots, a_n$에 대해 이들의 기하평균(geometric mean)을 $\GeomMean(a_1, \cdots, a_n)=\sqrt[n]{\prod a_i}$로 정의한다. 
+\begin{definition}\index{평균!조화}\index{mean!harmonic}
+$n$개의 0 아닌 실수 $a_1, \cdots, a_n$에 대해 이들의 조화평균(harmonic mean)을 $\HarmMean(a_1, \cdots, a_n)=1/\ArithMean(1/a_1, \cdots, 1/a_n)$으로 정의한다. 
+\end{definition}
+\begin{theorem}[산술 기하 평균 부등식]\label{thm:am-gm}\index{산술 기하 평균 부등식}\index{AM-GM inequality}
+$n$개의 음 아닌 실수 $a_1, \cdots, a_n$에 대해, $\ArithMean(a_1, \cdots, a_n)\geq \GeomMean(a_1, \cdots, a_n)$이 성립한다. 등호는 정확히 $a_1=\cdots=a_n$일 때만 성립한다. 
+\end{theorem}
+\begin{exercise}
+양수 $a_i$들에 대해 $\GeomMean(a_1, \cdots, a_n)\geq \HarmMean(a_1, \cdots, a_n)$가 성립함을 \cref{thm:am-gm}으로부터 보여라. 
+\end{exercise}
+여기서는 Cauchy의 forward-backward induction\index{양방향 귀납법}\index{forward-backward induction}을 이용해 \cref{thm:am-gm}을 보일 것이다. 
+\begin{exercise}
+    $n=2$일 때를 증명하여라. 즉, $a, b\geq 0$에 대해 $\frac{a+b}{2}\geq \sqrt{ab}$임을 보여라. 
+\end{exercise}
+\begin{exercise}    
+    $n=n_1$일 때와 $n=n_2$일 때 \cref{thm:am-gm}이 성립한다면 $n=n_1n_2$일 때도 성립함을 보여라. Hint: ``평균은 평균의 평균이다...''
+\end{exercise}
+\begin{exercise}
+    $n$일 때 성립한다면 $n-1$일 때도 성립함을 보여라. Hint: $a_n=\ArithMean(a_1, \cdots, a_{n-1})$을 대입하자. 
+\end{exercise}
+\begin{exercise}
+    증명을 완료하여라. 
+\end{exercise}
+여기서, \begin{equation*}
+    1/\HarmMean(a_1, \cdots, a_n)=\ArithMean(1/a_1, \cdots, 1/a_n)
+\end{equation*}에 주목하자. 잘 생각해 보면 $\GeomMean$에 대해서도 비슷한 식을 세울 수 있다: 
+\begin{equation*}
+    \log \GeomMean(a_1, \cdots, a_n)=\ArithMean(\log a_1, \cdots, \log a_n)
+\end{equation*}
+따라서 AM-GM 부등식을
+\begin{equation*}
+    \log \ArithMean(a_1, \cdots, a_n)\geq \ArithMean(\log a_1, \cdots, \log a_n)
+\end{equation*}
+으로 다시 쓸 수 있다. 또한 이 부등식이 성립하는 이유는 $\log$의 그래프가 위로 볼록하기 때문이라고 추측해 볼 수 있다. 일반화해 보자. 
+\begin{definition}\label{def:convex}\index{볼록함수}\index{convex function}
+    함수 $f$가 어떤 구간에서 임의의 실수 $0\leq c\leq 1$에 대해 $$f(ca+(1-c)b)\leq(\geq) cf(a)+(1-c)f(b)$$를 만족할 때 $f$가 그 구간에서 아래로(위로) 볼록하다고, 영어로는 convex(concave)라고 한다. 아래로 볼록한 함수를 간단히 볼록하다고도 한다. 등호가 $c=0, 1$에서만 성립한다면 $f$를 strictly convex(concave)라고 한다. 
+\end{definition}
+\begin{remark}
+    즉, 볼록함수는 할선이 항상 그래프보다 위에 있는 함수이다. 
+\end{remark}
+\begin{theorem}[젠센 부등식]\label{thm:Jensen}\index{젠센 부등식}\index{Jensen's inequality}
+$n$개의 실수 $c_i$가 $c_i\geq 0, \sum c_i=1$을 만족한다고 하자. 아래로 볼록한 함수 $f: \mathbb{R}\to\mathbb{R}$에 대해 $$f\left(\sum c_ia_i\right)\leq \sum c_if(a_i)$$가 성립한다. 특히 $f$가 strictly convex이고 $\forall i, c_i>0$이라면 등호는 $a_1=\cdots=a_n$일 때만 성립한다. 
+\end{theorem}
+\begin{exercise}
+\cref{thm:am-gm}과 같은 방식으로 증명할 수 있다. 증명하여라. 기하적으로도 설명해 보라. 
+\end{exercise}
+\begin{remark}
+    이 정리에 $c_i=1/n, f=-\log$를 대입하면 \cref{thm:am-gm}을 얻는다. 
+\end{remark}
+\begin{remark}
+    확률변수 $X$와 볼록함수 $f$에 대해 젠센 부등식의 다른 형태 $f(\mathbb{E}[X])\leq \mathbb{E}[f(X)]$도 짚고 넘어가자. 
+\end{remark}
+다음은 기하평균의 성질을 표현하는 다른 부등식이다.
+\begin{theorem}[Carleman]
+\label{thm:carlemanineq} \index{Carleman's inequality} \index{카를만의 부등식}
+    모든 $0 \leq a_n$과 $N$에 대해, 다음이 성립한다.
+    \begin{equation*}
+        \sum_{n = 1}^N \GeomMean(a_1, \dots, a_n) \leq e \sum_{n = 1}^N a_n
+    \end{equation*}
+\end{theorem}
+
+\begin{exercise}
+    다음은 \Cref{thm:carlemanineq}의 한 증명이다.
+    먼저, $(1 + 1/m)^m \leq e$가 모든 자연수 $m$에 대해서 성립한다는 사실은 자유롭게 사용하여도 된다.
+
+    \begin{enumerate}[(a)]
+        \item \Cref{thm:am-gm}을 사용하여 바로 증명을 시도해보아라.
+        \item 위 증명이 안되는 이유는 \Cref{thm:am-gm}는 $a_1, a_2, \dots, a_n$의 크기가 다를 때, 잃는 것이 많기 때문이다.
+        즉 이 문제를 해결하기 위해 적당히 선택된 $c_m$에 대해 $a'_m = a_m c_m$로 놓고 증명을 마쳐라. [\textit{힌트}: $(c_1 c_2 \dots c_n)^{-1/n} n^{-1}$이 $e$에 가깝도록 선택을 해 보아라.]
+    \end{enumerate}
+\end{exercise}
+
+\section{\texorpdfstring{$\mathbb{C}^n$ 공간 위 부등식}{C\textasciicircum n 공간 위 부등식}}
+\label{sec:cninequality}
+자연수 $n$에 대해서, $\mathbb{C}^d$ 집합 위의 다음 함수들을 고려하자.
+\begin{align}
+\label{eq:pnormdef}
+\begin{split}
+    \|x\|_p &= \left( \sum_{i = 1}^d |x_i|^p \right)^{1/p} \quad (1 \leq p < \infty) \\
+    \|x\|_\infty &= \max_{1 \leq i \leq d} |x_i|
+\end{split}
+\end{align}
+이 때 지수 $p$는 $\infty$의 값 또한 가질 수 있고, $1/\infty = 0$으로 생각할 것이다.
+
+\begin{definition}
+    집합 $\mathbb{C}^d$과 $\|x\|_p$를 묶어서, 간편하게 공간 $L^p_d$으로 표기한다.
+\end{definition}
+\begin{remark}
+    공간 $L^p$를 따로 정의하는 것은, 우리의 부등식 대부분이 무한수열이나, $(-\infty, \infty)$위의 적당한 함수에 대해 성립하기 때문이다.
+    이 때에는 수렴성이 중요해지기 때문에, 적당한 의미에서 $|x|^r$의 합 (적분 또는 급수)가 수렴하는 수학적인 물체들의 집합을 $L^r$로 표기한다.
+    우리는 이 전통을 따라, $\mathbb{C}^d$의 경우에서도 $L^r, L^p$등으로 따로 그 지수를 표기할 것이다.
+\end{remark}
+\begin{exercise}
+    \Cref{eq:pnormdef}의 함수가 모든 $1 \leq p \leq \infty$와, $c \in \mathbb{C}, x \in L^p_d$에 대해, $\|cx\|_p = |c|\|x\|_p$를 만족함을 보이시오.
+    또한, $\|x\|_p = 0$과 $x = 0$이 필요충분조건임을 보이시오.
+\end{exercise}
+
+\begin{definition}
+\label{def:lpspace1}
+    두 $x, y \in \mathbb{C}^d$에 대해, $xy = (x_i y_i) \in \mathbb{C}^d$으로 정의한다.
+\end{definition}
+\begin{lemma}
+\label{lem:ineqyoung1}
+    실수 $1 < p, q$가 $1/p + 1/q = 1$이라고 가정하자.
+    두 복소수 $x, y$에 대해, $|xy| \leq |x|^p/p + |y|^q/q$이 성립한다.
+\end{lemma}
+\begin{exercise}
+    \Cref{lem:ineqyoung1}을 증명하시오. [\textit{힌트}: 자연로그 $\log$는 $(0, \infty)$에서 위로 볼록하다.]
+\end{exercise}
+
+다음 두 부등식은 널리 알려져 있다.
+자신 있는 독자는 증명을 먼저 시도해보는 것도 좋을 것이다.
+
+\begin{theorem}[H\"older]
+\label{thm:holderineq}
+    두 $1 \leq p, q \leq \infty$가 $1/p + 1/q = 1$을 만족한다고 하자.
+    그러면 $x \in L^p_d, y \in L^q_d$에 대해, $\|xy\|_1 \leq \|x\|_p \|y\|_q$가 성립한다.
+    \index{H\"older's inequality}\index{횔더 부등식}
+\end{theorem}
+\begin{proof}
+    \Cref{lem:ineqyoung1}에 $x_i/\|x\|_p, {y_i}/\|y\|_q$를 대입하면,
+    \begin{equation*}
+        \frac{|x_i {y_i} |}{\|x\|_p \|y\|_q} \leq \frac{1}{p} \left(\frac{|x_i|}{\|x\|_p}\right)^p + \frac{1}{q} \left(\frac{|{y_i}|}{\|y\|_q}\right)^q
+    \end{equation*}
+    를 얻고, 모든 $i$에 대해서 양변을 더하면,
+    \begin{equation*}
+        \frac{\|xy\|_1}{\|x\|_p \|y\|_q} \leq \frac{1}{p} + \frac{1}{q}
+    \end{equation*}
+    에서 증명이 끝났다.
+\end{proof}
+
+\begin{exercise}[Generalized H\"older]
+\label{exer:genholder}\index{H\"older's inequality!generalized}\index{횔더 부등식!의 일반화}
+    세 $1 \leq p, q, r \leq \infty$에 대해서,
+    \begin{equation*}
+        \frac{1}{p} + \frac{1}{q} = \frac{1}{r}
+    \end{equation*}
+    이 성립하면, 두 $x \in L^p_d, y \in L^q_d$에 대해 $\|xy\|_r \leq \|x\|_p\|y\|_q$를 증명하여라.
+    [\textit{힌트}: $0 \leq p \leq 1$이고 $a, b$가 양수이면 $a^pb^{1 - p} \leq p a + (1 - p) b$이 성립한다. 이를 이용해 $\|x\|_p = \|y\|_q = 1$인 경우를 고려해라.]
+\end{exercise}
+
+\begin{theorem}[Minkowski]
+\label{thm:minkowineq}
+    임의의 $1 \leq p \leq \infty$에 대해서, $\|x + y\|_p \leq \|x\|_p + \|y\|_p$가 성립한다.
+    \index{Minkowski's inequality}\index{민코프스키 부등식}
+\end{theorem}
+\begin{proof}
+    만약 $p = 1$이거나 $p = \infty$이면 매우 쉽다.
+    즉 $1 < p < \infty$임을 가정하자.
+
+    삼각부등식을 $|x_i + y_i|$에 적용하면
+    \begin{equation*}
+        |x_i + y_i|^p \leq |x_i| |x_i + y_i|^{p - 1} + |y_i| |x_i + y_i|^{p - 1}
+    \end{equation*}
+    을 얻고, 모든 $i$에 대해 다 더한 뒤, 각 항에 횔더 부등식을 $1/p + 1/q = 1$인 $q$에 적용하자.
+    \begin{equation*}
+        \|x + y\|^p_p \leq (\|x\|_p + \|y\|_p) \left(\sum |x_i+y_i|^{q (p - 1)} \right)^{1/q} 
+    \end{equation*}
+    이 때, $q(p - 1) = p$이므로, 다시 이 식을 쓰면,
+    \begin{equation*}
+        \|x + y\|^p_p \leq (\|x\|_p + \|y\|_p) (\|x + y\|_p)^{p/q}
+    \end{equation*}
+    이므로, 양변을 $\|x + y\|^{p/q}_p$로 나누면 증명이 끝났다.
+\end{proof}
+
+\begin{theorem}[H\"older, Converse]
+\label{thm:holderconv}
+    지수 $1 \leq p, q \leq \infty$가 $1/p + 1/q = 1$을 만족한다고 가정하자.
+    만약 모든 $y \in L^q_d$에 대해서, $\|xy\|_1 \leq C \|y\|_q$가 성립시, $\|x\|_p \leq C$가 성립한다.
+    \index{H\"older's inequality!converse} \index{횔더 부등식!역}
+\end{theorem}
+\begin{exercise}
+    \Cref{thm:holderconv}를 증명하시오.
+\end{exercise}
+
+서로 다른 $p_1, p_2$에 대해서, $\|x\|_{p_1}, \|x\|_{p_2}$의 연관을 물어볼 수 있다.
+즉 $x$를 고정하고, $\|x\|_p$를 $p$의 함수로 보는 관점 또한 유효하다.
+\begin{theorem}
+\label{thm:pnormint1}
+    두 지수 $1 \leq p_1 < p_2 \leq \infty$에 대해서, 아무 $0 \leq t \leq 1$에 관해 지수 $1/p = t/p_1 + (1 - t)/p_2$로 정의하자.
+    그러면 모든 $x \in \mathbb{C}^d$에 대해,
+    \begin{equation*}
+        \|x\|_p \leq \|x\|^{t}_{p_1} \|x\|^{1 - t}_{p_2}
+    \end{equation*}
+    가 성립한다.
+\end{theorem}
+\begin{proof}
+    만약 $p_2 = \infty$이면 $|x_i|^p \leq |x_i|^{p_1} \|x\|_\infty^{p - p_1}$로 쉽게 증명 가능하다.
+    즉 $p_2 < \infty$인 경우를 해보자.
+    우리는 어떤 상수 $0 \leq \alpha \leq 1$에 대해 $p = \alpha p_1 + (1 - \alpha) p_2$임을 알고, 우리가 했듯이 로그가 위로 볼록한 사실을 사용해, 다음을 보일 수 있다.
+    \begin{equation*}
+        \alpha \log |x_i|^{p_1} + (1 - \alpha) \log |x_i|^{p_2} \leq \log (\alpha |x_i|^{p_1} + (1 - \alpha)|x_i|^{p_2} )
+    \end{equation*}
+    여기에서 식을 정리하면,
+    \begin{equation}
+    \label{eq:pnormint1}
+        |x_i|^p \leq \alpha |x_i|^{p_1} + (1 - \alpha) |x_i|^{p_2}
+    \end{equation}
+    을 볼 수 있고, $x_i$를 모두 다 더하면, $\|x\|_{p_1} = \|x\|_{p_2} = 1$인 경우에 해당 부등식을 얻을 수 있다.
+    더욱 더 나아가, 양변에 $0 < C$를 곱하면, 우리의 결론은 $\|x\|^{p_1}_{p_1} = \|x\|^{p_2}_{p_2} = C$일 때에도 성립한다.
+\end{proof}
+
+\begin{exercise}
+    \Cref{thm:pnormint1}의 증명을 완료하시오. [\textit{힌트}: \Cref{eq:pnormint1}에서, $x_i$ 대신 $\beta x_i$을 고려해라.]
+\end{exercise}
+
+\begin{exercise}
+    \Cref{thm:pnormint1}를, $|x|^{(1 - t)p + tp}$와 횔더 부등식을 사용해서 증명하시오.
+\end{exercise}
+
+이제 두 $\mathbb{C}^d$에 대한 합성곱 연산을 정의할 것이다.
+\begin{definition}
+\label{def:finconv}
+    두 $x, y \in \mathbb{C}^d$의 합성곱(Convolution) \index{합성곱}\index{convolution} $x * y$는 다음과 같이 정의한다.
+    \begin{equation*}
+        (x * y)(i) = \sum_{1 \leq j \leq n} x(j)y(i - j)
+    \end{equation*}
+    여기서 $i$와 $j$는 $\mathbb{Z}/n\mathbb{Z}$, 즉 $i, j \mod{n}$으로 본다.
+\end{definition}
+\begin{remark}
+    우리는 앞으로 간편함을 위해, 특별한 말이 없으면 $\sum$의 인덱스를 $1$에서 $d$까지, 그리고 모든 $x\in \mathbb{C}^d$에 대해서, $x(n)$은 $x(n \pmod{d})$로 해석할 것이다.
+\end{remark}
+
+\begin{exercise}
+    벡터 $x, y, z \in \mathbb{C}^n$에 대해, $x * y = y * x$와 $(x * y) * z = x * (y * z)$를 증명하시오.
+    또한, $a, b \in \mathbb{C}$에 대해, $(ax + by) * z = a (x * z) + b (y * z)$를 증명하시오.
+\end{exercise}
+
+\begin{example}
+    복소수 $\omega$가 $\omega^n = 1$를 만족한다고 가정하자.
+    그러면 $n$차 복소다항식 $p(x), q(x)$을 각각
+    \begin{align*}
+    \begin{split}
+        p(x) &= p_0 + p_1x + \dots + p_{n - 1}x^{n - 1} \\
+        q(x) &= q_0 + q_1x + \dots + q_{n - 1}x^{n - 1}
+    \end{split}
+    \end{align*}
+    로 정의하고, $x(i) = p_i, y(i) = q_i$로 정의하면 (여기서 $0 = n$으로 생각한다),
+    \begin{equation*}
+        p(\omega)q(\omega) = (x * y)(0) + (x * y)(1)\omega + \dots + (x * y)(n - 1)\omega^{n - 1}
+    \end{equation*}
+    이 성립한다.
+\end{example}
+
+\begin{example}
+    면이 $n$개이고, 각각 $0$에서 $n - 1$이 적혀있는 주사위 $A$에서 $i$가 쓰여진 면이 나올 확률이 $a_i$이고, $B$에서 마찬가지로 $b_i$이라고 하자.
+    주사위 $A, B$를 나타내는 $a, b \in \mathbb{C}^d$을 $a = (a_i), b = (b_i)$로 정의하면, $(a * b)(i)$는, 각각 $A, B$를 굴려 나온 값의 합이 $i \pmod{n}$일 확률이다.
+\end{example}
+
+합성곱 연산에 대한 다음 부등식을 증명할 것이다.
+\begin{theorem}[Young]
+\label{thm:youngconvineq} \index{Young's convolution inequality}\index{영의 합성곱 부등식}
+    지수 $1 \leq p, q, r \leq \infty$가 다음을 만족하면,
+    \begin{equation*}
+        \frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}
+    \end{equation*}
+    두 $x \in L^p_d, y \in L^q_d$에 대해, $\|x * y\|_r \leq \|x\|_p \|y\|_q$가 성립한다.
+\end{theorem}
+
+여기에 증명이 하나 있다. (필자가 추천하지는 않는 증명이다.)
+\begin{proof}
+    만약 $r = \infty$이면 횔더 부등식에서 바로 유도가 가능하다.
+    즉 $r < \infty$라고 가정 가능하다.
+
+    먼저 $(x * y)(n)$을 다음과 같이 쓰자.
+    \begin{equation*}
+        |(x * y)(n)| = \sum_m |x(m)|^{\frac{r}{r + 1}} |y(n - m)|^{\frac{1}{r + 1}} |x(m)|^{\frac{1}{r + 1}} |y(n - m)|^{\frac{r}{r + 1}}
+    \end{equation*}
+    나누어진 두 부분에 횔더 부등식을 적용하자.
+    우리의 지수에 대한 조건을
+    \begin{equation*}
+        \frac{1}{\frac{r + 1}{r} p} + \frac{1}{\frac{r + 1}{r} q} = 1
+    \end{equation*}
+    으로 쓰면, 횔더 부등식의 조건을 만족함을 볼 수 있고, 적용시
+    \begin{equation*}
+        |(x * y)(n)| \leq \left( \sum_m |x(m)|^p |y(n - m)|^{\frac{p}{r}}\right)^{\frac{r}{(r + 1)p}} \left( \sum_m |x(m)|^{\frac{q}{r}} |y(n - m)|^q\right)^{\frac{r}{(r + 1)q}}
+    \end{equation*}
+    첫번째 항에서 $|y|^q$ 꼴을 만들기 위해 지수 $\alpha = rq/p$를 준비한다.
+    그리고 $|x|^p$를 유지하기 위해, $1/\alpha + 1/\alpha' = 1$이라고 할 때, $|x|^p$를 각각 $|x|^{\frac{p}{\alpha}}|x|^{\frac{p}{\alpha'}}$로 쪼갠다.
+    다시 횔더 부등식 지수 $\alpha, \alpha'$에 대해 적용하면,
+    \begin{equation*}
+        \left( \sum_m |x(m)|^p |y|^{\frac{p}{r}}(n - m)\right) \leq \left(\sum_m |x(m)|^p \right)^{\frac{1}{\alpha'}} \left(\sum_m |x(m)|^p |y(n - m)|^q \right)^{\frac{1}{\alpha}}
+    \end{equation*}
+    을 얻는다.
+    비슷한 방법으로 두번째 항을 $\beta = rp/q$로 정리하고, $x, y$의 단독항을 $\|x\|_p, \|y\|_q$로 쓰면,
+    \begin{equation*}
+        |(x * y)(n)| \leq \left( \sum_m |x(n)|^p |y(m - n)|^q \right)^{\frac{1}{r + 1} (\frac{1}{p} + \frac{1}{q})} \|x\|_p^{\frac{r}{r + 1}(1 - \frac{p}{qr})} \|y\|_q^{\frac{r}{r + 1}(1 - \frac{q}{pr}}
+    \end{equation*}
+    을 얻는다.
+    양쪽을 $r$승한 뒤에, 모든 $n$에 대해서 더하면, 원하는 부등식이 나온다.
+\end{proof}
+
+\begin{exercise}
+    버튼을 누르면 $1, \dots, n$중 하나를 각각 $p_1, \dots, p_n$의 확률로 출력하는 기계가 있다.
+    이 기계의 버튼을 두번 눌러, 그 합을 $n$으로 나눈 나머지를 얻는 시행을 시행 $A$라고 하자.
+    만약 $p_i < t$가 어떤 $1/n < t < 1$에 대해, 모든 $i$에 대해 성립시, 시행 $A$를 $m$번 하여 나온 값이 모두 같을 확률이 $t^{m - 1}$ 이하임을 증명하시오.
+    [\textit{힌트}: 시행 1회당 오직 하나가 일어나는 사건들의 벡터를 $x$라고 하자. 그러면 $\|x\|^p_p$는 $x$를 $p$번 독립시행시, 같은 사건이 $p$번 일어날 확률이다. \Cref{thm:youngconvineq}를 사용하시오.]
+\end{exercise}
+
+\begin{exercise}
+    \Cref{thm:youngconvineq}를 다음과 같이 일반화 하시오.
+    만약, $1 \leq i \leq n$ 각각에 대해, $x_i \in L^{p_i}_d$가 존재하고, 지수들이 다음 식을 만족하면,
+    \begin{equation*}
+        \sum_{i = 1}^n \frac{1}{p_i} = n - 1 + \frac{1}{r}
+    \end{equation*}
+    부등식 $\|x_1 * x_2 * \dots * x_n\|_r \leq \|x_1\|_{p_1}\|x_2\|_{p_2}\dots \|x_n\|_{p_n}$ 이 성립한다.
+\end{exercise}
+
+\section{\texorpdfstring{$L^p$}{L\textasciicircum p} 공간 위 부등식}
+우리는 지금까지 \Cref{def:lpspace1}에서 성립하는 매우 다양한 부등식들을 보았다.
+그러나 우리는 복소수의 중요한 성질들을 쓰기 보다는, 절댓값 함수의 몇가지 중요한 성질들만을 사용하여 모든 식을 이끌어 내었다.
+즉, 우리는 지금까지 사용했던 정의를 살짝 추상적으로 바꾸어 손쉽게 더 많은 부등식들을 얻을 수 있다.
+
+\begin{definition}
+    실수나, 복소수 위 정의된 벡터공간 $V$위의 함수 $\|\cdot\| : V \to \mathbb{R}$가 다음을 만족하면, 우리는 이 함수를 세미노름이라고 부른다.
+    \begin{enumerate}[(a)]
+        \item 모든 벡터 $x \in V$에 대해, $0 \leq \|x\|$이다.
+        \item 모든 벡터 $x \in V$와 (실수 또는 복소수인) 스칼라 $\alpha$에 대해, $\|\alpha x\| = |\alpha| \|x\|$이다.
+        \item 모든 벡터 $x, y \in V$에 대해, 삼각부등식 $\|x + y\| \leq \|x\| + \|y\|$이 성립한다.
+    \end{enumerate}
+    벡터공간 $V$와 세미노름 $\|\cdot\|$을 묶어 세미노름벡터공간이라고 부른다.
+\end{definition}
+
+\begin{definition}
+    집합 $\{1, \dots, d \} = I_d$에서, 음이 아닌 실수들로 가는 함수 $\mu$를 우리는 가중치함수라고 한다.
+    가중치에 대한 $a_m$의 급수를 다음과 같이 정의한다.
+    \begin{equation*}
+        \sum_m a_m \mu(m)
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+\label{def:lpspace2}
+    정의역 집합 $\{1, \dots, d\} = I_d$과, 치역인 세미노름벡터공간 $V$, 그리고 가중치함수 $\mu$에 대해, 모든 $f: I_n \to V$의 함수들의 벡터 공간에, 각 지수 $1 \leq p \leq \infty$에 대해서 다음과 같은 세미노름을 부여하자.
+    \begin{align}
+    \begin{split}
+        \|x\|_p &= \left( \sum_{i = 1}^d \|x_i\|^p \mu(i) \right)^{1/p} \quad (1 \leq p < \infty) \\
+        \|x\|_\infty &= \max_{1 \leq i \leq d} \|x_i\|
+    \end{split}
+    \end{align}
+    이 때, $\|\cdot\|_p$을 부여한 이 세미노름벡터공간을 우리는 $L^p_d(\mu; V)$로 부른다.
+\end{definition}
+
+\begin{remark}
+    세미노름과 노름의 정의의 차이는, 노름은 $\|x\| = 0 \iff x = 0$이라는 조건이 있으나, 세미노름은 이 조건이 없다.
+    우리가 세미노름을 취한 이유는 가중치 함수 $\mu$가 어떤 점에서 $0$인 경우, $\|x\| = 0$이나 $x \neq 0$ 일 수 있기 때문이다.
+    현대 적분론 그리고 측도론에서는 이 문제를 해결하기 위해, 각 함수들이 아닌, ``가중치 함수''가 $0$을 부여하는 집합에서만 서로 다른 함수들의 동치관계를 생각한다.
+    예를 들어, $[0, 1]$의 적분 가능한 복소함수들의 공간 $L^1[0, 1]$에서, $0$에서 $1$이고 나머지 부분에서 $0$인 함수와, 그냥 영함수는 같은 원소이다.
+    그렇기 때문에 $\mu$-a.e., 즉 가중치 $\mu$가 $0$일 수 있는 부분을 제외하고 라는 뜻의 표현을 자주 볼 수 있다.
+    그러나 우리는 $L^p$공간을 자세하게 다룰 것이진 않을 것이므로, 간편성을 위해, 노름이라는 조건을 세미노름으로 약화시켰다.
+\end{remark}
+
+\begin{example}
+    가중치함수 $\mu$를 $\mu(i) = 1$로 정의하고, 치역을 $\mathbb{C}$로 하면, \Cref{def:lpspace1}의 $L^p_d$ 공간을 얻을 수 있다.
+    일반적으로, $\mu(i) = 1$인 가중치 함수를 가진 $L^p_d(\mu; V)$ 공간을 우리는 $L^p_d(V)$로 축약해 쓴다.
+    비슷하게, $V = \mathbb{C}$이면, $L^p_d(\mu; V)$ 공간을 우리는 $L^p_d(\mu)$로 축약해 쓴다.
+\end{example}
+
+\begin{remark}
+    가중치함수는 엄밀한 의미의 일반화는 아니지만, (cf. \Cref{exer:lpgenholder}), 몇가지 증명을 더 간단하게 할 수 있다.
+    예를 들어, \Cref{thm:youngconvineq}의 $|x|^p$를 쪼개는 과정을, 가중치함수를 $\mu'(m) = |x(m)|\mu(m)$으로 변화하는 과정으로 더 쉽게 볼 수 있다.
+\end{remark}
+
+\begin{example}
+    $e_i \in \mathbb{C}^n$를 $i$번째 성분이 $1$이고 나머지 성분이 $0$인 벡터로 정의하고, 각 $i$에 대해, $f_i = e_1 + \dots + e_i$로 정의하자.
+    그러면 함수 (또는 순서쌍) $f = i \mapsto f_i$는 공간 $L^p_d(L^p_d)$의 원소이다.
+    이 벡터의 노름은
+    \begin{equation*}
+        \|f\|_p = \left( \sum_m \|f_m\|^p_p \right)^{\frac{1}{p}} = \left( \sum_m \sum_l |f_{m, l}|^p \right)^{\frac{1}{p}}
+    \end{equation*}
+    으로, $(d(d + 1)/2)^{(1/p)}$이다.
+\end{example}
+
+\begin{exercise}
+    다음을 $x \in L^p_d(\mu;V)$에 대해 증명하시오.
+    \begin{equation*}
+        \| \sum_m x(m) \mu(m) \| \leq \sum_m \|x(m)\| \mu(m)
+    \end{equation*}
+\end{exercise}
+
+이 일반적인 경우에 대해서도 같은 부등식들을 증명할 수 있다.
+
+\begin{theorem}[Generalized H\"older, $L^p$]
+\label{thm:lpholder} \index{H\"older's inequality} \index{횔더 부등식}
+    지수 $1 \leq p, q, r \leq \infty$가
+    \begin{equation*}
+        \frac{1}{p} + \frac{1}{q} = \frac{1}{r}
+    \end{equation*}
+    를 만족하고, $x \in L^p_d(\mu), y \in L^q_d(\mu; V)$이면, $\|xy\|_r \leq \|x\|_p\|y\|_q$이다.
+    여기서 $xy$는, 각 $i$에 대해 $x(m)y(m)$의 값을 가지는 $L^r_d(\mu; V)$의 원소이다.
+\end{theorem}
+\begin{exercise}
+\label{exer:lpgenholder}
+    \Cref{exer:genholder}와 같은 방법으로 증명하시오. [\textit{힌트}: $|\mu(n)|^r = |\mu(n)|^{r/p}  |\mu(n)|^{r/q}$]
+\end{exercise}
+
+\begin{theorem}[H\"older, $L^p$ Converse]
+\label{thm:holderconvlp}
+    지수 $1/p + 1/q = 1, 1 \leq p,q \leq \infty$이라고 하자.
+    만약 $x \in L^p_d(\mu)$가 모든 $y \in L^q_d(\mu)$에 대해 $|\sum x(n) y(n) \mu(n)| \leq C \|y\|_q$이면, $\|x\|_p \leq C$이다.
+\end{theorem}
+
+\begin{exercise}
+    \Cref{thm:holderconvlp}를 증명하시오.
+\end{exercise}
+
+\begin{theorem}[Minkowski, $L^p$]
+\label{thm:lpminkowski} \index{Minkowski's inequality} \index{민코프스키 부등식}
+    지수 $1 \leq p \leq \infty$와, $x, y \in L^p(\mu; V)$에 대해 $\|x + y\|_p \leq \|x\|_p + \|y\|_p$가 성립한다.
+\end{theorem}
+\begin{exercise}
+    \Cref{thm:minkowineq}와 같은 방법으로 증명하시오.
+\end{exercise}
+
+\begin{lemma}
+\label{lem:genminkowski}
+    벡터 $K \in L^1_{d_1}(\mu_1; L^p_{d_2}(\mu_2; V))$를, $K(m, n) = (K(m))(n)$으로, 즉 $K(m) \in L^p_{d_2}(\mu_2; V)$의 $n$번째 성분을 $K(m, n)$으로 표기하자.
+    만약 $1 \leq p \leq \infty$이면, 다음이 성립한다.
+    \begin{equation*}
+        \left( \sum_n \left( \sum_m |K(m, n)| \mu_1(m) \right)^p \mu_2(n) \right)^{1/p} \leq \sum_m \left( \sum_n |K(m, n)|^p \mu_2(n)\right)^{1/p} \mu_1(m)
+    \end{equation*}
+    더 축약하여, $K(n)$을 $K(m, n)$의 $m$에 대한 함수로, $L^1_{d_1}(\mu_1; V)$의 원소로 취급하면, 다음이 성립한다.
+    \begin{equation*}
+        \left( \sum_n \|K(n)\|^p_1 \mu_2(n) \right)^{1/p} \leq \sum_m \|K(m)\|_p \mu_1(m)
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    이 식의 우변은 다음과 같이 쓸 수 있다.
+    \begin{equation*}
+        \sum_m \|K(m)\|_p \mu_1(m)
+    \end{equation*}
+    그러나 \Cref{thm:lpminkowski}에 의해, 다음이 성립한다.
+    \begin{equation*}
+        \left\| \sum_m K(m) \mu_1(m) \right\|_p \leq \sum_m \|K(m)\|_p \mu_1(m)
+    \end{equation*}
+    좌변 안의 급수의 $n$번째 성분은 $\sum_m K(m, n) \mu_1(m)$과 같다.
+    즉 여기에 $\|\cdot\|_p : L^p_{d_2}(\mu_2; V) \to \mathbb{R}$의 정의를 사용하면
+    \begin{equation*}
+        \left( \sum_n \left| \sum_m K(m, n) \mu_1(m) \right|^p \mu_2(n) \right)^{1/p}
+    \end{equation*}
+    가 된다.
+    절댓값을 안에 넣기 위해서는, $K(m, n)$의 모든 원소에 절댓값을 미리 취해준 $|K(m, n)| \in L^q_{d_1}(\mu_1; L^p_{d_2}(\mu_2; \mathbb{R}))$에 이 정리를 적용하면, 원했던 식을 얻는다.
+\end{proof}
+
+\begin{theorem}[Generalized Minkowski, $L^p$]
+\label{thm:genminkowski} \index{Minkowski's inequality!generalized} \index{민코프스키 부등식!일반화된}
+    지수 $1 \leq p, q \leq \infty$가 $ p \leq q$을 만족하고, \Cref{lem:genminkowski}의 표기법에 따른 $K \in L^q_{d_1}(\mu_1; L^p_{d_2}(\mu_2; V))$와, $K'(n, m) = K(m, n)$으로 정의된 $K' \in L^p_{d_2}(\mu_2; L^q_{d_1}(\mu_1; V))$에 대해, $\|K'\|_p \leq \|K\|_q$가 성립한다.
+    더 자세히 쓰면,
+    \begin{equation*}
+    \begin{split}
+        &\left( \sum_m \left( \sum_n |K(m, n)|^p \mu_2(n) \right)^{q/p} \mu_1(m) \right)^{1/q}  \\
+        &\leq \left( \sum_n \left( \sum_m |K(m,n)|^q \mu_1(m) \right)^{p/q} \mu_2(n) \right)^{1/p}
+    \end{split}
+    \end{equation*}
+    가 성립한다.
+\end{theorem}
+\begin{proof}
+    지수 $k = q/p$와 벡터 $|K|^p$를 \Cref{lem:genminkowski}에 적용해라.
+\end{proof}
+
+\begin{remark}
+    \Cref{thm:genminkowski}는 $0 < p \leq q$일때 또한 성립하나, 우리는 $0 < p < 1$인 지수는 고려하지 않을 것이다.
+\end{remark}
+
+다음 정의는 특히 선형인 부등식에서, 결과를 쉽게 정리하는데 도움을 준다.
+
+\begin{definition}
+\label{def:opnorm} \index{operator norm}\index{연산자 노름}
+    두 세미노름벡터공간 $V, W$에 대해서, $T: V \to W$가 모든 $x \in V$에 대해 $\|Tx\| \leq C\|x\|$가 성립하도록 하는 $C$의 최솟값을 $T$의 (존재하면) 연산자 노름이라고 하고, $\|T\|$로 표기한다.
+\end{definition}
+
+\begin{example}
+    벡터 $x \in L^q_d$에 대해서, $T : L^p_d \to \mathbb{C}$를 $T(y) = \sum x(n)y(n)$으로 정의하면, $\|T\| = \|x\|_q$이다. (\Cref{thm:holderineq}, \Cref{thm:holderconv})
+\end{example}
+\begin{example}
+    지수 $1 \leq p \leq \infty$에 대해서 $1/p + 1/q = 1 + 1/r$이라고 하자.
+    벡터 $y \in L^p_d$를 고정하고, $x \in L^q_d$에 대해 $T: L^q_d \to L^r_d$를 $(Tx)(n) = (y * x)(n)$으로 정의하면, $\|T\| \leq \|y\|_p$이다. (\Cref{thm:youngconvineq})
+\end{example}
+
+이 예제를 다음과 같이 일반화할 수 있다.
+\begin{theorem}
+\label{thm:kernelop1}
+    벡터 $K \in L^{p'}_d(\mu_1; L^q(\mu_2))$를 고정해 각 $x \in L^p(\mu_2)$에 대해서, $T: L^p(\mu_2) \to L^q(\mu_2)$를 다음과 같이 정의하자.
+    \begin{equation*}
+        (T(x))(m) = \sum_n K(m, n) x(n) \mu_2(n)
+    \end{equation*}
+    만약 $1/p' + 1/p = 1$이면, $\|T\| \leq \|K\|_{p'}$이다.
+\end{theorem}
+\begin{exercise}
+    \Cref{thm:kernelop1}을 증명하시오.
+\end{exercise}
+
+기타 $L^p$의 부등식을 하나 더 살펴보자.
+
+\begin{theorem}[Hardy-Littlewood-Polya]
+\label{thm:hdypolyaineq}
+    지수 $1 < p < \infty$와, $1/p + 1/q = 1$인 $q$를 고정하자.
+    $1$이상의 자연수들의 쌍에 정의된 함수 $K : \mathbb{N}_{+}^2 \to \mathbb{R}$이 $0 \leq K$이고, $K(sa, sb) = s^{-1}K(a, b)$을 만족하며, $K(x, 1)x^{-1/p}, K(1, y)y^{-1/q}$이 $x, y$에 대해 (단조)감소함수이고
+    \begin{align*}
+        \int_0^\infty K(x, 1) x^{-1/p} dx &= A \\
+        \int_0^\infty K(1, y) y^{-1/q} dy &= A'
+    \end{align*}
+    이면, 모든 $N, M$과, $x \in L^p_N(\mu_1), y \in L^q_M(\mu_2)$에 대해,
+    \begin{equation*}
+        \left| \sum_m \sum_n K(m,n)x(m)y(n) \mu_2(n) \mu_1(m) \right| \leq A^{1/p} A'^{1/q} \|x\|_p \|y\|_q
+    \end{equation*}
+    가 성립한다.
+    
+\end{theorem}
+
+\begin{exercise}
+    다음은 \Cref{thm:hdypolyaineq}의 증명이다.
+    \begin{enumerate}[(a)]
+        \item 모든 $n, N, M$에 대해, 다음이 성립함을 보여라.
+        \begin{align*}
+            \sum_{k = 1}^N K\left(\frac{k}{n}, 1\right) \left(\frac{k}{n}\right)^{-1/p} \frac{1}{n} &\leq A \\
+            \sum_{k = 1}^M K\left(1, \frac{k}{n}\right) \left(\frac{k}{n}\right)^{-1/q} \frac{1}{n} &\leq A'
+        \end{align*}
+        \item 공간 $L^p_{m \times n}(\mu, V)$를 \Cref{def:lpspace2}와 같지만, 정의역을 $I_m \times I_n$으로 하도록 정의하고, 
+        \begin{equation*}
+            \mu(m, n) = |K(m, n)| \mu_1(m)\mu_2(n)
+        \end{equation*}
+        으로 정의하면,
+        \begin{equation*}
+            \left| \sum_{m, n} x(m)y(n) \mu(m, n) \right| \leq A^{1/p} A'^{1/q} \|x\|_p \|y\|_q
+        \end{equation*}
+        임을 증명하면 충분함을 보여라.
+        \item 급수 안의 $x(m)y(n)$을 $x(m)(m/n)^{1/pq} y(n)(n/m)^{1/pq}$으로 정의한 후, 횔더 부등식을 써서, 증명을 마쳐라.
+    \end{enumerate}
+\end{exercise}
+
+\begin{theorem}[Hilbert's Double Series]
+\label{thm:hilbertineq} \index{Hilbert's double series inequality} \index{힐베르트의 이중 급수 부등식}
+    지수 $1 < p < \infty$와, $1/p + 1/q = 1$인 $q$를 고정하자.
+    다음 부등식이 모든 $M, N$, $x \in L_M^p, y \in L_N^q$에 대해 성립한다.
+    \begin{equation*}
+        \left| \sum_m \sum_n \frac{x(m)y(n)}{m + n} \right| \leq \frac{\pi}{\sin(\pi/p)} \|x\|_p \|y\|_q
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    \Cref{thm:hdypolyaineq}에서, $K(m, n) = 1/(m + n)$을 사용하라.
+\end{proof}
+
+\section{지수의 볼록성}
+
+먼저, 다변수함수 $f$의 볼록성을 고려하자.
+\begin{definition}
+\label{def:multiconvex} \index{convex function!multivariate} \index{볼록함수!다변수}
+    유클리드 공간 $\mathbb{R}^d$의 볼록한 부분집합 $S$에 정의된 함수 $f: S \to \mathbb{R}$가 모든 $0 \leq t \leq 1$과 $x, y \in S$에 대해 $f(tx + (1 - t)y) \leq tf(x) + (1 - t)f(y)$가 성립하면, $f$를 볼록하다고 한다.
+\end{definition}
+
+다음은 볼록함수들의 일반적 성질 몇가지이다.
+
+\begin{exercise}
+    평면 $\mathbb{R}^2$에 정의된 함수 $|x|^2 = |x_1|^2 + |x_2|^2$가 볼록함을 보여라.
+\end{exercise}
+\begin{exercise}
+    평면 $\mathbb{R}^2$에 정의된 함수 $f$가, 모든 $x, y \in \mathbb{R}$에 대해서 $z \mapsto f(x, z)$와 $z \mapsto f(z, y)$가 볼록함수라고 해서 $f$가 볼록함수일 필요는 없음을 보이시오.
+\end{exercise}
+\begin{exercise}
+    두 실수 $a, b$가 양수이고, $f, g$가 같은 정의역 위 정의된 볼록함수이면, $af + bg$ 또한 볼록함수임을 보이시오.
+\end{exercise}
+\begin{exercise}
+    유클리드 공간 $\mathbb{R}^d$에 대해 $0 \leq a_1, \dots, a_d$를 고정하고, $f : \mathbb{R}^d \to \mathbb{R}$을 $f(t) = a_1^{t_1} \dots a_d^{t_d}$로 정의하자.
+    함수 $f$가 볼록함을 보이시오.
+\end{exercise}
+
+\begin{theorem}[Jensen]
+\label{thm:multivariatejensen} \index{Jensen's inequality} \index{젠센 부등식}
+    임의의 $0 \leq \lambda_i \leq 1, \sum \lambda_i = 1$에 대해서, $f$가 볼록하면, $f(\lambda_1 x_1 + \dots + \lambda_n x_n) \leq \sum \lambda_i f(x_i)$가 성립한다. (cf. \Cref{thm:Jensen})
+\end{theorem}
+\begin{exercise}
+    \Cref{thm:multivariatejensen}을 증명하시오.
+\end{exercise}
+
+이제 \Cref{thm:youngconvineq}의 훨씬 좋은 증명을 보일 것이다.
+먼저 합성곱의 (실질적으로 같은) $L^p$ 정의를 하자.
+\begin{definition}
+    두 $x\in L^p(\mu), y \in L^q(\mu)$에 대해 합성곱 $x * y \in L^r(\mu)$를 다음과 같이 정의한다.
+    \begin{equation*}
+        (x*y)(n) = \sum_m x(m) y(n - m) \mu(m)
+    \end{equation*}
+\end{definition}
+
+\begin{exercise}
+    모든 $x \in L^p(\mu), y \in L^q(\mu), z \in L^r(\mu)$에 대해 $x * y = y * x$와, $(x * y) * z = x * (y * z)$를 증명하시오.
+    또한, $a, b \in \mathbb{C}$에 대해, $(ax + by) * z = a (x * z) + b (y * z)$를 증명하시오. [지금까지 그랬듯이, 증명에 큰 차이가 없을 것이다.]
+\end{exercise}
+
+\begin{lemma}
+\label{lem:youngineq2}
+    임의의 $N$에 대해서, $1 \leq i \leq N$에 각각 $x_i \in L^{p_i}_d(\mu)$를 대응하자.
+    지수들 $1 \leq p_i \leq \infty$가 $\sum 1/p_i = N - 1$을 만족하면, $|(x_1 * x_2 * \dots * x_N)(0)| \leq \|x_1\|_{p_1} \dots \|x_N\|_{p_N}$가 성립한다.
+\end{lemma}
+\begin{proof}
+    어느 $\|x_i\|_{p_i} = 0$이면, 자명하므로, 모두 $0$이 아니라고 가정하고, 각 $x_i$를 $\|x_i\|_{p_i}$로 나누면, 모든 $\|x_i\|_{p_i} = 1$이라고 가정 가능하다.
+    또한 어느 $p_i = \infty$이면, 나머지 $p_j = 1$이므로, 이 경우는 완전히 자명하다. ($p_i = \infty$ 인 $x_k$를 횔더 부등식을 사용해 제거한 후, 모든 $p_j = 1$이므로, 귀납법과 횔더 부등식을 사용해라.)
+    마지막으로, $y_i(n) = |x_i(n)|^{p_i}$, 그리고, $s_i = 1/p_i$로 정의하면, 모든 $y_i \in L^1_d(\mu), \|y_i\|_1 = 1$에 대해,
+    \begin{equation}
+    \label{eq:youngineq1}
+        |(y_1^{s_1} * \dots * y_N^{s_N})(0)| \leq 1
+    \end{equation}
+    임을 증명하는 것으로 간단화 할 수 있다.
+    여기서부터 $y_i$를 고정하자.
+    
+    모든 $0 \leq a_1, \dots, a_N$에 대해서, $t \in \mathbb{R}^N$에 대해 $f(t) = a_1^{t_1} \dots a_N^{t_N}$로 정의하면, (모든 $i$에 대해) $0 \leq t_i \leq 1$인 영역에서 $f$는 볼록이다.
+    \Cref{eq:youngineq1}의 좌변을 $s \in \mathbb{R}^N$의 함수 $F(s)$로 보자.
+    이 때 $F(s)$는 모두 $a_1^{s_1} \dots a_N^{s_N}$ 꼴의 항들의 합으로 표현되므로, 이 함수는 $0 \leq s_i \leq 1$인 영역에서 볼록이다.
+    그런데
+    \begin{equation*}
+        \sum s_i = N - 1
+    \end{equation*}
+    이므로, $f_i$를 $i$번째 성분이 $0$이고 나머지 성분이 $1$인 $\mathbb{R}^N$의 원소로 놓으면
+    \begin{equation}
+    \label{eq:youngineq2}
+        (s_1, \dots, s_N) = \sum (1 - s_i) f_i
+    \end{equation}
+    가 성립한다.
+    \Cref{eq:youngineq2}의 식을 사용해 $F$의 볼록성을 (cf. \Cref{thm:multivariatejensen}) 사용하자.
+    그러나 우리가 말했듯이 $F(f_i) \leq 1$이므로, ($p_i = \infty$인 경우에 대응된다.)
+    \begin{equation*}
+        F(s) \leq \sum (1 - s_i) F(f_i) \leq \sum (1 - s_i) \leq 1
+    \end{equation*}
+    에서 증명이 끝났다.
+\end{proof}
+
+\begin{theorem}[Young]
+\label{thm:youngineq2} \index{Young's convolution inequality} \index{영의 합성곱 부등식}
+    임의의 $N$에 대해서, $1 \leq i \leq N$에 각각 $x_i \in L^{p_i}_d(\mu)$이고, 모든 지수$1 \leq p_i \leq \infty$가 $\sum 1/p_i = N - 1 + 1/q$를 만족하면,
+    \begin{equation*}
+        \|x_1 * \dots * x_N\|_q \leq \|x_1\|_{p_1} \dots \|x_N\|_{p_N}
+    \end{equation*}
+    이다.
+\end{theorem}
+\begin{proof}
+    먼저 지수 $q'$를 $1/q + 1/q' = 1$이도록 잡자.
+    각 $x \in L^{q'}_d(\mu)$에 대해 $(Rx)(n) = x(d - n + 1)$으로 정의하면,
+    \begin{equation*}
+        (x_1 * \dots * x_N) * (Rx)(0) = \sum_n (x_1 * \dots * x_N)(n)x(n) \mu(n)
+    \end{equation*}
+    이고, $\|Rx\|_{q'} = \|x\|_{q'}$이다.
+    
+    \Cref{thm:holderconvlp}를 \Cref{lem:youngineq2}와, $(x_1 * \dots * x_N), x$에 적용하면, 원하는 결론이 나온다.
+\end{proof}
+
+\begin{exercise}
+    \Cref{thm:youngineq2}과 같은 방법으로 일반화된 횔더 부등식, 즉, $1 \leq p_i, r \leq \infty$가 $\sum 1/p_i = 1/r$을 만족하면, 모든 $x_i \in L^{p_i}_d(\mu)$에 대해
+    \begin{equation*}
+        \|x_1 \dots x_N\|_r \leq \|x_1\|_{p_1} \dots \|x_N\|_{p_N}
+    \end{equation*}
+    를 만족함을 보이시오.
+\end{exercise}
+
+\Cref{thm:pnormint1}, \Cref{thm:hdypolyaineq}, 그리고 \Cref{lem:youngineq2}의 증명은 $\|\cdot\|_p$간의 ``연속적 보간''이 가능할 수도 있다는 인상을 준다.
+이것이 실제로 가능하다는 놀라운 사실이 바로 다음 정리이다.
+
+다음 정리에서도 변함 없이 모든 지수는 $[1, \infty]$의 범위로 본다.
+\begin{theorem}[Riesz-Thorin]
+\label{thm:rieszint} \index{Riesz-Thorin interpolation theorem} \index{리에즈-쏘린 보간 정리}
+    선형 함수 $T: \mathbb{C}^d \to \mathbb{C}^{d'}$, 즉 모든 $c \in \mathbb{C}, x, y \in \mathbb{C}^d$
+    \begin{align*}
+        T(x + y) &= Tx + Ty \\
+        Tcx &= cTx
+    \end{align*}
+    를 만족하는 $T$에 대해, $T$를 $L^{p_1}_d(\mu) \to L^{q_1}_{d'}(\mu')$로 본 함수를 $T_1$, $L^{p_2}_d(\mu) \to L^{q_2}_{d'}(\mu')$로 본 함수를 $T_2$라고 정의하자.
+    그러면, 모든 $0 \leq t \leq 1$에 대해
+    \begin{equation*}
+        \left(\frac{1}{p}, \frac{1}{q}\right) = t \left(\frac{1}{p_1}, \frac{1}{q_1}\right) + (1 - t) \left(\frac{1}{p_2}, \frac{1}{q_2}\right)
+    \end{equation*}
+    이면, $L^p_d(\mu) \to L^q_d(\mu')$로 본 $T'$은 $\|T'\| \leq \|T_1\|^t \|T_2\|^{1 - t}$를 만족한다.
+\end{theorem}
+
+\begin{example}
+    선형 함수 $L: \mathbb{C}^d \to \mathbb{C}^{d'}$을 $K(m, n) \in \mathbb{C}^{d \times d'}$, 즉 $1 \leq m \leq d, 1 \leq n \leq d'$에 정의되어 있는 $K$에 대해,
+    \begin{equation*}
+        (Lx)(n) = \sum_{m = 1}^d K(m, n)x(m)
+    \end{equation*}
+    으로 정의하고, $\sum_m |K(m, n)| \leq M_1, \sum_n |K(m, n)| \leq M_2$라고 하자.
+    그러면,
+    \begin{equation*}
+        \|Lx\|_1 \leq \sum_{m = 1}^d M_2 |x(m)| = M_2\|x\|_1
+    \end{equation*}
+    이고,
+    \begin{equation*}
+        \|Lx\|_\infty \leq \max_n \left| \sum_{m = 1} K(m, n)x(m) \right| \leq \|x\|_\infty \max_n \left| \sum_{m = 1} K(m,n) \right| \leq \|x\|_\infty M_1
+    \end{equation*}
+    이므로,
+    \begin{equation*}
+        \|Lx\|_p \leq M_2^{1/p} M_1^{1 - 1/p} \|x\|_p
+    \end{equation*}
+    가 성립한다.
+\end{example}
+
+\begin{example}
+    일반화된 횔더 부등식, 즉 $x_i \in L_{p_i}^d (\mu)$일 때,
+    \begin{equation*}
+        \sum \frac{1}{p_i} = \frac{1}{r}
+    \end{equation*}
+    이면,
+    \begin{equation*}
+        54
+    \end{equation*}
+\end{example}

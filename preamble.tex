@@ -1,0 +1,143 @@
+%\usepackage[a4paper, margin=3cm]{geometry}
+%\usepackage[shortlabels]{enumitem}
+%\usepackage{amsmath}
+%\usepackage{amsthm}
+%\usepackage{amssymb}
+%\usepackage{kotex}
+%\usepackage{hyperref}
+%\usepackage{cleveref}
+
+
+
+%%% FONT
+\usepackage[finemath]{kotex} % ``한글''
+\usepackage{dhucs-nanumfont} % <= 나눔폰트
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[english]{babel}
+\usepackage{csquotes}
+
+\usepackage{epigraph} 
+
+\usepackage{titlesec}
+\addto\captionsenglish{\renewcommand{\chaptername}{챕터}}
+\addto\captionsenglish{\renewcommand{\partname}{단원}}
+\addto\captionsenglish{\renewcommand{\figurename}{자료}}
+
+% \titleformat{\section}{\normalfont\Large\bfseries}{\Roman{chapter}.\arabic{section}}{1em}{}
+% \renewcommand \thesubsection{\Roman{chapter}.\arabic{section}.\arabic{subsection}}
+% \titleformat{\chapter}%
+  % {\normalfont\bfseries\Huge}{\Roman{chapter}.}{10pt}{}
+%\titleformat{\chapter}{\normalfont\Large\bfseries}{\thechapter}{1em}{}
+
+\addto\captionsenglish{% Replace "english" with the language you use
+  \renewcommand{\contentsname}%
+    {목차}%
+}
+
+%%% BASIC TOOLS
+\usepackage{amsmath, amsthm, amssymb, amsfonts, amscd} % Useful math symbols and theorem environments
+
+
+\usepackage{ifthen} % if statement
+\usepackage{color} % Color
+\usepackage{mathrsfs} % mathscr
+\usepackage{tikz} % Drawing Diagrams
+\usepackage{graphicx} % Figures, ...
+\usepackage[shortlabels]{enumitem}
+\usepackage{imakeidx}
+
+
+\makeindex[title=찾아보기, intoc]
+
+
+\usetikzlibrary{cd}
+
+%%% BIBLIOGRAPHY
+
+%%% REFERENCING
+\usepackage{hyperref}
+\usepackage{cleveref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue}
+
+%%% Theorem and Environments
+\theoremstyle{definition}
+\newtheorem{theorem}{정리}[section]
+\newtheorem{corollary}{따름정리}[theorem]
+\newtheorem{lemma}[theorem]{보조정리}
+\newtheorem{claim}[theorem]{주장}
+\newtheorem*{remark}{참고}
+\newtheorem{proposition}[theorem]{명제} %유클리드 원론에서 따옴
+\newtheorem*{question}{질문}
+\newtheorem{conjecture}[theorem]{추측}
+\newtheorem{definition}{정의}[section]
+\newtheorem{axiom}[definition]{공리}
+\newtheorem*{example}{예시}
+\newtheorem{notation}[theorem]{표기법} 
+\newtheorem{exercise}{연습문제}[section]
+\newtheorem{hint}{힌트}[section]
+
+\crefname{theorem}{정리}{정리}
+\crefname{corollary}{따름정리}{따름정리}
+\crefname{lemma}{보조정리}{보조정리}
+\crefname{claim}{주장}{주장}
+\crefname{remark}{참고}{참고}
+\crefname{proposition}{명제}{명제}
+\crefname{question}{질문}{질문}
+\crefname{conjecture}{추측}{추측}
+\crefname{definition}{정의}{정의}
+\crefname{axiom}{공리}{공리}
+\crefname{example}{예시}{예시}
+\crefname{notation}{표기법}{표기법}
+\crefname{exercise}{연습문제}{연습문제}
+\crefname{hint}{힌트}{힌트}
+\crefname{equation}{식}{식}
+\crefname{figure}{자료}{자료}
+
+\Crefname{theorem}{정리}{정리}
+\Crefname{corollary}{따름정리}{따름정리}
+\Crefname{lemma}{보조정리}{보조정리}
+\Crefname{claim}{주장}{주장}
+\Crefname{remark}{참고}{참고}
+\Crefname{proposition}{명제}{명제}
+\Crefname{question}{질문}{질문}
+\Crefname{conjecture}{추측}{추측}
+\Crefname{definition}{정의}{정의}
+\Crefname{axiom}{공리}{공리}
+\Crefname{example}{예시}{예시}
+\Crefname{notation}{표기법}{표기법}
+\Crefname{exercise}{연습문제}{연습문제}
+\Crefname{hint}{힌트}{힌트}
+\Crefname{equation}{식}{식}
+\Crefname{figure}{자료}{자료}
+
+\crefformat{section}{#2#1절#3}
+\Crefformat{section}{#2#1절#3}
+\crefformat{chapter}{#2#1장#3}
+\Crefformat{chapter}{#2#1장#3}
+\crefformat{part}{#2#1단원#3}
+\Crefformat{part}{#2#1단원#3}
+
+%%% SYMBOLS
+\renewcommand{\qed}{\vspace{0.5em}\hfill////} % End of proof symbol
+
+\newcommand*{\dd}{\mathop{\mathrm{d}\!}}
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Hom}{Hom}
+
+\DeclareMathOperator{\Domain}{Dom}
+\DeclareMathOperator{\Codomain}{Cod}
+
+\DeclareMathOperator{\ArithMean}{AM}
+\DeclareMathOperator{\GeomMean}{GM}
+\DeclareMathOperator{\HarmMean}{HM}
+
+
+\DeclareMathOperator{\ImageMap}{Im}
+\DeclareMathOperator{\KernelMap}{Ker}
+\DeclareMathOperator{\Span}{Span}

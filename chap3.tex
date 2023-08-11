@@ -1,0 +1,132 @@
+\part{다항식}
+\chapter{환론과 다항식}
+\section{아이디얼}
+\section{다항식환}\label{sec:polyring}
+
+앞서 복소수에서와 마찬가지로, 다항식에서 새로운 formal symbol t의 도입은 말 그대로 편의를 위한 것이다. 예를 들어, $\mathbb{R}$ 위에서의 다항식 $f(t)=5t^5-3t^2+t+2$라는 다항식은 실수열 $(2, 1, -3, 0, 0, 5, 0, 0, \cdots)\in \mathbb{R}^\mathbb{N}$로 표현된다. 물론 $n$번째 원소 (0-index를 사용)는 $n$차항의 계수와 대응된다. \\
+다른 말로, 어떤 집합 $S$ 위에서의 다항식 $f(t)=\sum{a_it^i}$은 $\{a_i\}\in S^\mathbb{N}$과 대응된다. 여기서 붙는 추가적인 조건은 어떤 $N$이 존재해 $a_N=a_{N+1}=a_{N+2}=\cdots=0$이라는 것이다. 이 조건이 다항식의 차수가 유한함을 보장해 준다. \\
+이렇게 해서 만들어진 집합을 $S[t]$, $S$ 위의 다항식 집합이라고 한다. 유한 차수 조건 없이 만들어진 집합은 $S[[t]]$라고 하며, $S$ 위의 formal power series 집합이라고 부른다. 단어 formal(형식적)은 수렴성을 요하지 않는다는 의미이다. 
+\begin{exercise}
+다음 명제들을 증명하여라.
+\begin{enumerate}[label=(\alph*)]
+    \item $\mathbb{Z}[t]$가 셀 수 있는(가산) 집합임을 보여라. 즉, $|\mathbb{Z}[t]|=|\mathbb{Z}|$임을 보여라. 
+    \item $|\mathbb{R}[t]|=|\mathbb{R}|$임을 보여라. Hint: $|\mathbb{R}\times\mathbb{R}|=|\mathbb{R}|$이다. 
+    \item $\mathbb{Z}[[t]]$는 셀 수 없는 집합임을 보여라. Hint: 실수의 부분집합 $[0, 1)$는 셀 수 없다.
+\end{enumerate}
+\end{exercise}
+\begin{remark}
+일반적으로 $S$가 무한집합이면 항상 $|S[t]|=|S|$이다. \cref{sec:card}을 확인하라.
+\end{remark}
+
+다항식을 정의하는 데는 $S$에 대한 추가적인 조건이 필요하지 않음에 주목하라. 그러니 물론 $\{e, \pi\}$ 위에서의 다항식을 생각할 수도 있다. 그러나 다항식 사이의 덧셈과 곱셈을 정의해야 비로소 다항식을 제대로 활용할 수 있으므로, 우리는 그 계수인 $S$가 먼저 덧셈과 곱셈이 잘 정의되어 있음을 가정하는 편이 좋을 것이다. 이런 집합 $S$를 환이라고 부른다. 즉 우리는 일반적인 환 $R$에 대해 $R[t]$를 환으로 만들 것이다. 덧셈은 element-wise, 즉 i차항은 i차항끼리만 더해지도록 정의하며, 곱셈은 convolution(합성곱)으로 정의한다. 즉 $\{a_i\}\times\{b_i\}=\{c_i\}$일 때 $c_i=\sum a_j b_{i-j}$가 된다. 
+\begin{exercise}
+    앞서 배웠던 환의 정의를 복습하자. $(R, +, \times)$가 다음 조건들, 
+    \begin{enumerate}
+        \item $(R, +)$는 abelian group(항등원을 0이라고 함)
+        \item $\times$는 결합법칙 만족: $a\times(b\times c)=(a\times b)\times c$(따라서 이를 편의상 $abc$로 씀)
+        \item 분배법칙: $a(b+c)=ab+ac, (a+b)c=ac+bc$
+    \end{enumerate}
+    을 만족하면 $(R, +, \times)$를, 혼동의 여지가 없을 때는 간단히 $R$을 환(ring)이라고 한다. $R$이 환이면 $R[t]$도 환임을 보여라. 특히, $R$이 ring with 1(또는 identity)이면, 즉 곱셈의 항등원 1을 가지면 $R[t]$도 ring with 1임을 보여라. $R$이 가환환(곱셈의 교환법칙을 만족하는 환)이면 $R[t]$도 가환환임을 보여라. 
+\end{exercise}
+\begin{exercise}
+    임의의 환 $R$에 대해, 집합으로서의 $R[t]$가 가질 수 있는 서로 다른 환 구조를 몇 개만 찾아보아라. 
+\end{exercise}
+\section{PID}
+\section{ED}
+\chapter{다항식의 여러 성질}
+\section{보간법}
+1차 다항식의 그래프는 서로 다른 두 점, 즉 서로 다른 두 $x$에 대한 함숫값을 알면 완전히 결정된다. 마찬가지로 2차 다항식은 세 점을 알면 완전히 결정되는데, 이는 2차 다항식에는 미지수가 3개 있기 때문이다. 이와 같은 자유도(degree of freedom) 논증은 일반적으로는 엄밀한 정당화를 거쳐야 한다. 먼저 이 문제를 다른 식으로 서술해 보자. $n$차 다항식 $p(x)=a_0+a_1x+\cdots a_nx^n$가 있고, $n$개의 값 $x_0, \cdots, x_n$에 대해 함숫값 $p(x_0), \cdots, p(x_n)$가 주어져 있을 때 $a_i$들을 모두 알아내고 싶다. 이때 $p(x_j)=\sum_i a_i x_j^i$이므로 이를 행렬 표현으로 쓸 수 있다. 
+\begin{equation*}
+    \begin{pmatrix}
+1 & x_0 & x_0^2 &\cdots &x_0^n\\
+1 & x_1 & x_1^2 &\cdots &x_1^n\\
+\vdots & \vdots &\vdots &\vdots &\vdots\\
+1 & x_n & x_n^2 &\vdots &x_n^n
+\end{pmatrix}
+\begin{pmatrix}
+a_0\\
+a_1\\
+\vdots\\
+a_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+p(x_0)\\
+p(x_1)\\
+\vdots\\
+p(x_n)
+\end{pmatrix}
+\end{equation*}
+여기서 $(n+1)\times(n+1)$ 행렬을 $X$라고 하자. 이 행렬을 $x_0, \cdots, x_n$에 대한 Vandermonde matrix라고 한다. $X$의 행렬식이 0이 아니라면 $X^{-1}$을 양변에 곱해 
+\begin{equation*}
+\begin{pmatrix}
+a_0\\
+a_1\\
+\vdots\\
+a_n
+\end{pmatrix}
+=
+    \begin{pmatrix}
+1 & x_0 & x_0^2 &\cdots &x_0^n\\
+1 & x_1 & x_1^2 &\cdots &x_1^n\\
+\vdots & \vdots &\vdots &\vdots &\vdots\\
+1 & x_n & x_n^2 &\vdots &x_n^n
+\end{pmatrix}^{-1}
+\begin{pmatrix}
+p(x_0)\\
+p(x_1)\\
+\vdots\\
+p(x_n)
+\end{pmatrix}
+\end{equation*}
+를 얻는다. 따라서 이때는 모든 $n$차 다항식 $p$에 대해서 항상 이 접근을 통해 성공적으로 $p$의 계수들이(따라서 $p$가) 유일하게 결정됨을 알 수 있다. 이제 항상 $\det(X)\neq 0$임을 보이면 충분하다. 
+\begin{exercise}\label{exer:vandet}
+    $\det(X)=\prod_{i<j}(x_j-x_i)$로 주어짐을 보여라. 행렬식의 정의 및 성질은 \cref{def:determinant}를 참조하라. 
+\end{exercise}
+여기까지 행렬식을 통한 전통적인 접근을 살펴보았다. 그러나 선형성에 의해 다른 접근을 시도해 볼 수 있다. 
+\begin{exercise}
+    $j$를 고정하자. $p_j(x_j)=1$, $i\neq j$에 대해 $p_j(x_i)=0$이 성립하는 다항식 $p_j$를 하나 찾아라. Hint: $i\neq j$일 때 $p_j(x_i)=0$이므로 $p_j$는 $(x-x_i)$를 근으로 가져야 한다.  
+\end{exercise}
+\begin{exercise}
+    원래 문제에서 찾고 싶은 다항식 $p(x)$의 한 후보를 $p_j(x)$들의 선형 결합으로 나타내어라. 
+\end{exercise}
+\begin{exercise}
+    위 연습문제에서 찾은 후보만이 유일한 답임을 보여라. Hint: $p(x_i)=q(x_i)$가 모든 $x_i$에 대해 성립한다면 $p-q$는 $(x-x_i)$를 근으로 갖는다. 
+\end{exercise}
+정리하면: 
+\begin{theorem}[Lagrange interpolation]\label{thm:lagrange-intp}\index{라그랑주 보간법}\index{Lagrange interpolation}
+$n$차 이하 다항식 $p$의 $x_0, \cdots, x_n(x_i\neq x_j)$에서의 값이 주어져 있다고 하자. $$p_j(x)=\prod_{i\neq j} \frac{x-x_i}{x_j-x_i}$$라고 할 때, $p$는 $$p(x)=\sum p(x_j)p_j(x)$$와 같이 유일하게 결정된다. 
+\end{theorem}
+\begin{exercise}
+    세 실근을 갖는 삼차함수가 있다. 두 근에서의 기울기가 각각 5와 -2이다. 나머지 한 근에서의 기울기는 얼마인가? 일반화해 보라. 
+\end{exercise}
+출처: \url{https://en.wikipedia.org/wiki/Polynomial_interpolation}, \url{https://en.wikipedia.org/wiki/Vandermonde_matrix}
+
+\section{다항식의 판별식}
+이차 다항식 $f(x)=ax^2+bx+c$에 대해 그 판별식이 $D(f)=b^2-4ac$로 주어짐은 잘 알고 있다. 이제부터 판별식의 의미와 고차 다항식으로의 확장에 대해 논의해 볼 것이다. \\
+\begin{theorem}\label{thm:quad-discr}
+    실계수 이차 다항식 $f$에 대해, 
+    \begin{enumerate}
+        \item $D(f)>0$이면 $f$는 서로 다른 두 실근을 갖는다. 
+        \item $D(f)=0$이면 $f$는 중근을 갖는다.
+        \item $D(f)<0$이면 $f$는 서로 켤례인 두 허근을 갖는다. 
+    \end{enumerate}
+\end{theorem}
+하지만 아직 $D$의 정확한 값이 무엇을 의미하는지는 모른다. 따라서 근의 공식으로부터 시작하자. 두 근 $\alpha, \beta$로부터 $D$를 얻는 방법은 바로 $D=a^2(\alpha-\beta)^2$이다. 최고차항의 계수를 1로 가정하면 $D=(\alpha-\beta)^2$라는 간결한 식을 얻는다. 
+\begin{exercise}
+    이 식으로부터 위 정리를 유도하여라. 
+\end{exercise}
+이제 이를 3차 다항식으로 일반화할 방법을 생각해 보자. 마찬가지로 서로 다른 세 실근을 가질 때는 $D>0$, 중근을 가질 때는 $D=0$, 허근을 가질 때는 $D<0$이 되도록 하고 싶다. 이차 다항식에서 근의 차를 제곱한 것이 $D$임으로부터 착안해 보면, 세 근 $\alpha, \beta, \gamma$에 대해 $D=((\alpha-\beta)(\beta-\gamma)(\gamma-\alpha))^2$로 정의하면 이 성질을 만족할 것이라고 예상할 수 있다. 
+\begin{exercise}
+    \cref{thm:quad-discr}의 3차 analogue는 첫 두 경우에 대해서는 거의 자명하다. 이제 세 번째, 즉 허근을 갖는 경우에 대해 증명하여라. Hint: 실계수 3차 다항식이 허근 $z$를 가진다면 $\overline{z}$ 역시 근으로 가지고, 나머지 한 근은 실근이다. 
+\end{exercise}
+일반화해 보자. 먼저 최고차항의 계수가 1인 $n$차 다항식 $f(x)=x^n+a_{n-1}x^{n-1}+\cdots$가 근 $x_1, \cdots, x_n$을 가질 때 $D(f)=\prod_{i<j}(x_j-x_i)^2$으로 정의한다. 
+\begin{remark}
+    이때 판별식은 근들에 대한 Vandermonde matrix의 determinant의 제곱이다. (\cref{exer:vandet}을 참조하라)
+\end{remark}
+그런데 이는 물론 $x_i$에 대한 $n(n-1)$차 대칭 다항식이므로 기본 대칭 다항식들에 대한 다항식으로 표현된다. 
+
+\begin{definition}\label{def:discriminant}
+$n$차 다항식 $f(x)=a_nx^n+\cdots+a_0$에 대해, 그 판별식 $D(f)=a_n^{2n-2}\prod_{i<j}(x_j-x_i)^2$로 정의한다. 
+\end{definition}
+출처: \url{https://en.wikipedia.org/wiki/Discriminant}

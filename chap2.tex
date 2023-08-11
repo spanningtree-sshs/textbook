@@ -1,0 +1,1131 @@
+\part{실수와 복소수}
+\chapter{대수적 구조: 군, 환, 체}
+\section{연산의 성질}
+\begin{definition}
+    집합 $S$와 $S$ 위에 주어진 이항연산(함수) $\cdot: S\times S\to S$에 대해, 
+    \begin{enumerate}[(i)]
+        \item $(a\cdot b)\cdot c=a\cdot(b \cdot c)$가 항상 성립한다면 $\cdot$을 결합적(associative)이라고, 또는 결합법칙(associativity)을 만족한다고 한다. $(a\cdot b)\cdot c$는 괄호 없이 $a\cdot b\cdot c$로 적어도 좋을 것이다. 
+        \item $a\cdot b=b\cdot a$가 항상 성립한다면 $\cdot$을 가환적이라고(commutative), 또는 교환법칙(commutativity)을 만족한다고 한다. 
+        \item\index{항등원}\index{identity} $e\cdot a=a$(또는 $a\cdot e=a$)를 항상 만족하는 $e$가 존재한다면 $e$를 좌(우)항등원(identity)이라고 한다. 좌항등원이면서 우항등원인 원소를 (존재한다면) 항등원이라고 한다. 
+        \item\index{역원}\index{inverse} 항등원 $e$가 존재할 때, $r\cdot a=e$($a\cdot r=e$)인 원소 $r$이 존재한다면 $r$을 $a$의 좌(우)역원(inverse)이라고 한다. $a$의 좌역원이면서 우역원인 원소를 (존재한다면) $a$의 역원이라고 한다. $a$의 역원은 주로 $a^{-1}$로 표기한다. 
+    \end{enumerate}
+\end{definition}
+\chapter{정수론}
+\section{정수론: 개요}
+실수와 복소수로 가는 길에 있어서 정수는 나눗셈이 불가능한 마지막 대수적 구조이다. 그렇기 때문에 몫과 나머지라는 특별한 연산이 생겨나고, 약수와 배수의 개념을 논할 수 있게 된다. 이를 일반화시킨 것이 환이라고 할 수 있다. 이제 정수가 갖는 여러 신기한 성질을 살펴보자. 
+\begin{definition}
+    $x$ 이하의 소수 개수를 $\pi(x)$로 표기한다. 
+\end{definition}
+\begin{theorem}[Euclid]
+    소수는 무한히 많다. 즉, $\pi(x)$는 발산한다. 
+\end{theorem}
+\begin{proof}
+    최대 소수 $N$을 가정하자. $N!+1$은 2 이상 $N$ 이하의 약수를 가지지 않으므로 모순이다. 
+\end{proof}
+\begin{exercise}
+    $n$과 $n!+2$ 사이에 항상 소수가 존재함을 보여라. 
+\end{exercise}
+물론 더 나은 결과가 존재한다. 
+\begin{theorem}[Bertrand's postulate]
+    2 이상의 $n$에 대해 $n$과 $2n$ 사이에 항상 소수가 존재한다.
+\end{theorem}
+\begin{theorem}[Prime number theorem]\label{thm:pnt}
+    $\lim_{x\to \infty} \pi(x)\log x/x=1$이다. 
+\end{theorem}
+\begin{theorem}[Dirichlet's theorem on arithmetic progressions]
+초항과 공차가 서로소인 등차수열에는 무한히 많은 소수가 존재한다. 
+\end{theorem}
+
+\chapter{실수}
+\section{실수의 정의}
+우리는 실수라는 구조가 다음의 성질을 가지기를 바란다.
+\begin{enumerate}[(i)]
+    \item 유리수들을 순서 성질과 대수적 성질들을 유지하면서 부분집합으로 가진다.
+    \item 적당한 극한들을 취할 수 있다.
+\end{enumerate}
+여기서 두번째 조건인 `극한들을 취할 수 있다'를 생각해 보자.
+유리수에서 성립하지 않으나 우리가 친숙하게 알고 있는 극한의 정리에는 단조수렴정리가 있다.
+즉 단조수렴정리가 성립하고, 순서와 대수적 성질들이 있으며, 유리수를 이러한 성질들이 보존되도록 부분집합으로 가지는 집합을 실수라고 할 수 있을 것이다.
+
+\begin{definition}
+\label{def:reals}
+    다음 조건들을 고려하자.
+    \begin{enumerate}[(a)]
+        \item 이항연산 $+, \times$와 관계 $\leq$를 가진다.
+        \item \label{item:order1} 모든 원소 $a, b, c$에 대해서 $a \leq a$가 성립하고, $a \leq b$와 $b \leq a$가 성립하면 $a = b$이며, $a \leq b$, $b \leq c$가 성립하면 $a \leq c$가 성립한다.
+        \item \label{item:order2} 임의의 두 원소 $a, b$에 대해서, $a \leq b$ 또는 $b \leq a$가 성립한다.
+        \item \label{item:field1} 연산 $+$와 $\times$는 교환법칙과 결합법칙을 만족하고, 분배법칙 $a(b + c) = ab + ac$또한 성립한다.
+        \item \label{item:field2} 연산 $+$에 대한 항등원 $0$과, $\times$에 대한 항등원 $1$이 있고, $0 \neq 1$이다.
+        \item \label{item:field3} 모든 원소에 대해서 $+$에 대한 역원이 존재하며, $0$이 아닌 원소에 대해서 $\times$에 대한 역원이 존재한다.
+        \item \label{item:ofield1} 원소 $a, b, c$에 대해서, $b \leq c$이면 $a+b \leq a+c$가 성립한다.
+        \item \label{item:ofield2} 원소 $a, b$에 대해서, $0 \leq a, b$이면 $0 \leq ab$가 성립한다.
+        \item \label{item:ratcontain} 유리수 $\mathbb{Q}$를 부분집합으로 가지고, $+$, $\times$ 그리고 $\leq$를 그대로 가진다.
+        \item \label{item:mctthm} 단조수렴정리가 성립한다. 즉, 모든 단조이고 유계인 수열이 수렴한다. (cf. \Cref{def:seqconverge}) \index{단조수렴정리}\index{monotone convergence theorem}
+    \end{enumerate}
+    조건 \ref{item:order1}와\ref{item:order2}를 만족하는 관계 $\leq$를 가지는 집합을 전순서집합(Totally ordered set)이라고 한다.\index{전순서집합}\index{totally ordered set}
+    또한, 조건 \ref{item:field1}, \ref{item:field2}와 \ref{item:field3}을 가지는 집합을 체(Field)라고 한다.\index{체}\index{field}
+    전순서집합이면서 체이며, 조건 \ref{item:ofield1}와 \ref{item:ofield2}를 만족하는 집합을 순서체(Ordered field)라고 한다.\index{순서체}\index{체!순서}\index{ordered field}\index{field!ordered}
+    
+    \textbf{실수}란, 위의 성질을 모두 만족하는 집합을 말한다.\index{실수}\index{real}
+\end{definition}
+체와 순서체에서는 우리가 지금까지 배운 수학의 연산들이 그대로 성립하는 것을, 정의로부터 확인할 수 있다.
+특수한 경우로 유리수는 \ref{item:mctthm}를 제외한 모든 조건을 만족하는 것을 볼 수 있다.
+
+\begin{exercise}
+    체의 정의만을 사용해 다음을 증명하여 보시오.
+    \begin{enumerate}[(a)]
+        \item $0a = 0$.
+        \item $ab = 0$이 성립하면 $a = 0$ 또는 $b = 0$.
+        \item $(-1)a + a = 0$, 즉 $(-1)a = -a$.
+        \item $(-1)(-1) = 1$.
+    \end{enumerate}
+    여기서 $-1$은 곱셈의 항등원 $1$의 덧셈에 대한 역원이다.
+\end{exercise}
+\begin{exercise}
+    순서체의 정의만을 사용해 다음을 증명하여 보시오.
+    \begin{enumerate}[(a)]
+        \item $0 < x$이면 $0 > -x$.
+        \item $0 < x$이면, $0 < x^{-1}$, 반대로 $x < 0$이면, $x^{-1} < 0$.
+        \item $a \leq b$이고, $0 < x$이면, $ax \leq bx$.
+        \item $a \leq b$이고, $x < 0$이면, $bx \leq ax$.
+        \item $1 < x$이면, $0 < x^{-1} < 1$.
+        \item 임의의 $0$이 아닌 $x$에 대하여, $0 < x^2$.
+        \item $0 < 1$.
+    \end{enumerate}
+    여기서 $-x$는 $x$의 덧셈에 대한 역원, $x^{-1}$은 곱셈에 대한 역원, $x^2$는 $x \times x$이다.
+\end{exercise}
+\begin{exercise}
+    \Cref{def:reals}에서 조건 \ref{item:ratcontain}은 엄밀히 말하여 없어도 되는 조건이다.
+    순서체 $A$를 고정하자.
+    \begin{enumerate}[(a)]
+        \item 귀납적으로, $f: \mathbb{N} \to A$를, $f(0) = 0_A$, 그리고 $f(n + 1) = f(n) + 1_A$으로 정의하자.
+        이 때, $f$가 단사함수임을 증명하시오.
+        \item $1$이상의 자연수 $n$와 정수 $m$에 대해, $(m/n)_A$을 $mn^{-1}$이라고 정의하자.
+        이 때, $(a/b)_A = (c/d)_A$일 필요충분조건이, $ad = bc$임을 보이시오.
+        \item 함수 $f: \mathbb{Q} \to A$를 $f(m/n) = (m/n)_A$로 정의하자.
+        이 함수가 단사함수이고, $f(xy) = f(x)f(y)$, $f(x + y) = f(x)f(y)$를 만족하며, $a \leq b$이면, $f(a) \leq f(b)$임을 보이시오.
+    \end{enumerate}
+    그러나 우리는 이 절에서 혼동을 줄이기 위해, 유리수를 사용하는 순서체를 단조수렴정리를 제외한 \Cref{def:reals}의 모든 조건을 만족하는 순서체라고 표기할 것이다.
+\end{exercise}
+제일 중요한 조건 \ref{item:mctthm}를 엄밀하게 말하기 위해서 우리는 수렴성을 정의해야 한다.
+그러기 위해, 우리는 먼저 숫자 사이 거리를 정의하는 함수인 절댓값 함수를 임의의 순서체에 다음과 같이 정의한다.
+\begin{equation}
+\label{def:absval}
+    |x| = \begin{cases}
+    x \quad&(0 \leq x) \\
+    -x \quad&(0 > x)
+    \end{cases}
+\end{equation}
+이 정의에서 우리는 $0 \leq |x|$와 $x \leq |x|$가 모든 $x$에 대해서 성립함을 볼 수 있다.
+또한, $|x - y| = 0$이면 $x = y$인 것도 볼 수 있다.
+즉, $|x - y|$가 작을수록 $x$와 $y$가 가깝다고 말할 수 있다.
+이렇게 생각함이 타당하다는 것을 뒷받침해주는 중요한 정리로 삼각부등식이 있다.
+\begin{lemma}[Triangle Inequality]
+\label{lem:triineq}
+    순서체 $A$에 대해서, $|a + b| \leq |a| + |b|$가 모든 $a, b \in A$에 대해 성립한다.
+\end{lemma}
+\begin{proof}
+    정의 \ref{def:absval}에 의해, 우리는 경우를 나누는 수밖에 없다.
+    \begin{enumerate}[(a)]
+    \item 원소 $a, b$가 모두 $0$ 이상이거나 미만일 경우는, 양변이 같은 것이 확인된다.
+    \item 원소 $a, b$의 부호가 다르면, 대칭성에 의하여, $a < 0 \leq b$임을 가정하여도 된다.
+    또한, $|a + b|$는 $a + b$이거나 $-a - b$이다.
+    그러나 $a + b \leq -a + b$와 $-a - b \leq -a + b$이므로, 이 경우 또한 쉽게 확인된다.
+    \end{enumerate}
+\end{proof}
+\begin{exercise}
+    순서체의 두 원소 $x, y$에 대하여, $|xy| = |x||y|$임을 보여라.
+\end{exercise}
+
+절댓값 함수의 다음 성질은 매우 중요하다.
+\begin{lemma}
+\label{lem:epsroom}
+    순서체 $A$에서 임의의 $\epsilon > 0$에 대하여, $|x - y| < \epsilon$이면, $x = y$가 성립한다.
+\end{lemma}
+\begin{proof}
+    만약 $x \neq y$이면, $x - y \neq 0$으로, $0 < |x - y|$이다.
+    그러나, $\epsilon = |x - y|$라고 놓으면, $1 < 1$으로 모순이다.
+\end{proof}
+\begin{exercise}
+    \Cref{lem:epsroom}의 테크닉은 다른 상황에도 적용될 수 있다.
+    \begin{enumerate}[(a)]
+        \item 임의의 $\epsilon > 0$에 대하여, $x \leq y + \epsilon$이면, $x \leq y$이다.
+        \item 임의의 $\epsilon > 0$에 대하여, $x < y + \epsilon$이면, $x < y$이 아닐 수도 있음을 보여라.
+    \end{enumerate}
+\end{exercise}
+우리는 절댓값 함수를 바탕으로 수열의 수렴을 정의할 것이다.
+\begin{definition}
+\label{def:seqconverge}
+    \begin{enumerate}[(a)]
+        \item 순서체 $A$에 대해서, $A$의 수열이란, $a: \mathbb{N} \to A$인 함수를 말하고, 우리는 주로 $a(n)$을 $a_n$으로 표기한다.\index{수열}\index{sequence}
+        \item 수열 $A$가 유계라는 것은, $M > 0$이 존재해, 모든 $n \in \mathbb{N}$에 대해서 $|a_n| \leq M$이 성립함을 말한다.\index{수열!유계인}\index{sequence!bounded}
+        \item 수열 $A$가 단조라는 것은, 모든 $n \in \mathbb{N}$에 대해서 $a_n \leq a_{n + 1}$이 성립하거나, 모든 $n$에 대해서 $a_{n + 1} \leq n$이 성립함을 말한다.\index{수열!단조인}\index{sequence!monotone}
+        \item 순서체 $A$에 대해, 수열 $a_n$이 $x$로 수렴한다는 것은, 모든 $\epsilon > 0$에 대해서, $N(\epsilon) \in \mathbb{N}$이 존재해, 모든 $N(\epsilon) \leq n$에 대해 $|a_n - x| < \epsilon$이 성립한다는 것을 뜻한다.\index{수렴}\index{convergence}\index{수열!의 수렴}\index{sequence!convergence of}
+        이 때 우리는 $\lim_{n \to \infty} a_n = x$이라고 표기한다.
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    프로그래밍에 익숙한 독자들에게 설명을 하자면 수열의 정의를 쓰는 증명은, 저수준 언어와 같다.
+    이 정의의 복잡함은 꽤 악명이 높으나, 이 $\epsilon$과 $N$을 적절히 사용하면서 증명할 수 있는 정리들은, 주로 단조수렴정리와 극한의 대수적 성질들을 가지고 할 수 있는 것보다 주로 더 강력하다.
+\end{remark}
+
+\begin{remark}
+    우리가 수렴을 정의할 때에, 순서체의 곱셈에 관련한 성질을 쓰지 않았음을 보았을 것이다.
+    실제로 우리는 \Cref{chap:metrictop}에서 이 아이디어를 더 전개할 것이다.
+\end{remark}
+\begin{exercise}
+    모든 수렴하는 수열은 유계임을 보여라.
+\end{exercise}
+\begin{exercise}
+    수열 $a_n$이 $x$로 수렴하고, 또한 $y$로 수렴하면, $x = y$임을 보여라.
+\end{exercise}
+\begin{exercise}
+    수열 $a_n$이 $a$로 수렴하고, 수열 $b_n$과 어떤 자연수 $N$에 대해서 수열 $c_n$을
+    \begin{equation*}
+        c_n = \begin{cases}
+            a_n \quad (N \leq n) \\
+            b_n \quad (n < N)
+        \end{cases}
+    \end{equation*}
+    으로 정의하면, $c_n$ 또한 $a$로 수렴함을 보여라.
+\end{exercise}
+
+수열이 발산할 수 있는 방법들 중, 제일 ``잘 행동하는'' 방법은 무한으로 발산하는 것이다.
+\begin{definition}
+\label{def:convergeinfty}
+    수열 $a_n$이, 임의의 $M > 0$에 대해서, $N$이 존재해, 모든 $N \leq n$에 대해 $M < a_n$이 성립하면, $a_n$이 무한으로 다가간다고 (또는 수렴, 또는 발산한다고) 하고, $\lim_{n \to \infty} a_n = \infty$로 표기한다.
+    비슷하게, 임의의 $M < 0$에 대해서, $N$이 존재해, 모든 $N \leq n$에 대해 $a_n < M$이 성립하면, $a_n$이 음의 무한으로 다가간다고 하고, $\lim_{n \to \infty} a_n = -\infty$로 표기한다.
+\end{definition}
+\begin{exercise}
+    수열 $a_n$이 무한이나 음의 무한으로 다가가면, $1/a_n$은 $0$으로 수렴함을 보이시오.
+\end{exercise}
+\begin{exercise}
+    반대로, $a_n$이 $0$으로 수렴하면, $1/|a_n|$은 무한으로 다가감을 보이시오.
+\end{exercise}
+
+이제 독자는 \Cref{def:reals}의 조건 \ref{item:mctthm}을 정확하게 이해할 수 있을 것이다.
+\begin{exercise}
+    임의의 단조증가하는 실수열은 수렴하거나, 무한으로 다가감을 보이시오.
+\end{exercise}
+\begin{exercise}
+    이 연습문제는 유리수가 단조수렴정리를 만족하지 않음을 증명하는 한 가지 방법이다.
+    독자가 다른 방법을 생각해 보는 것도 좋을 것이다.
+    우리는 독자가 \Cref{sec:card}를 읽었음을 가정할 것이다.
+    \begin{enumerate}[(a)]
+        \item $1$과 $0$으로 구성된 수열 중, 어떤 $n$이 존재하여, $n$자리 이후의 수들이 모두 $1$이거나 모두 $0$인 수열들의 집합 $S$가 비가산집합임을 보여라.
+        \item 각 수들을 이진수의 ``무한소수''로 생각하자.
+        유리수에서 각 $s \in S$에 대해서, $s$의 첫 $n$자리를 소숫점 아래 $n$자리로 가지는 이진수 유한소수 $f(s, n)$을 정의한다.
+        이 때, 각 $s$에 대해서 $f(s, n)$은 유계이고 단조인 유리수열임을 보여라.
+        \item 만약 두 $s, s'\in S$에 대해, $s \neq s'$이면, 어떤 유리수 $q$와 자연수 $N$에 대해서, 모든 $N \leq n$에 대해 $q < |f(s, n) - f(s',n)|$이 성립함을 보여라. (이것은 각 $f(s, n)$이 다른 수로 ``수렴''함을 보장해 준다.)
+        \item 유리수가 가산집합임을 사용하여, 단조수렴정리를 만족하지 않음을 보여라.
+    \end{enumerate}
+\end{exercise}
+
+\section{실수와 유리수의 관계}
+우리는 \Cref{def:reals}의 조건을 만족하는 아무 순서체 $F$를 $\mathbb{R}$로 표기할 것이다.
+먼저 다음 보조정리가 필요하다.
+\begin{lemma}[Archimedes]
+\label{thm:archimedes}
+\index{아르키메데스 성질}\index{Archimedean property}
+    임의의 실수 $r \in \mathbb{R}$에 대해서, 자연수 $n \in \mathbb{N}$이 존재해 $|r| \leq n$이 성립한다.
+\end{lemma}
+\begin{proof}
+    귀류법을 사용하자.
+    어떤 $r$가 해당 정리를 만족하지 않으면, 수열 $a_n = n$이 단조수렴정리에 의해 어떤 $x$로 수렴한다.
+    그러면 수렴의 정의에 의해, $N(1/3)$이 존재해 모든 $N \leq n$에 대하여, $|n - r| < 1/3$이 성립한다.
+    그러나 이것은 삼각부등식에 의해, $|n - (n + 1)| < 2/3$임을 뜻하므로 모순이다.
+\end{proof}
+이 정리로부터 우리는 유리수를 사용해 실수를 근사할 수 있다.
+\begin{definition}
+\label{def:realdense}
+    순서체 $A$의 부분집합 $S$에 대해서, 임의의 $a \in A$와, ``오차'' $\epsilon > 0$에 대해, $|a - s| < \epsilon$인 $s \in S$가 존재하면, $S$를 $A$에서 조밀(Dense)하다고 한다.
+    \index{dense}\index{조밀}
+\end{definition}
+
+\begin{theorem}
+\label{thm:ratdense}
+    \begin{enumerate}[(a)]
+        \item 임의의 $\epsilon > 0$에 대해, 자연수 $n$이 존재해 $0 < 1/n < \epsilon$이 성립한다.
+        \item 유리수는 실수의 조밀한 부분집합이다.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    첫번째 부분은, $\epsilon^{-1}$에 \Cref{thm:archimedes}를 적용하라 (등호가 성립하지 않게 하기 위해, $n$에 $1$을 더하여도 된다).
+
+    첫번째 부분에 따라, 우리는 임의의 $1$이상의 자연수 $n$에 대하여, $|q - r| \leq 1/n$인 수를 찾으면 충분하다.
+    이것을 하기 위하여, $n|r| < N$인 자연수 $N$을 선택하고, 자연수의 부분집합 $\{m: nr + N \leq m\}$의 최소원소 $m_0$을 선택하자.
+    이 때, $0 < nr + N$에서 다음 식이 성립하고,
+    \begin{equation*}
+        nr + N \leq m_0 \leq nr + N + 1
+    \end{equation*}
+    양변에서 $N$을 뺀 후 $n$으로 나누면,
+    \begin{equation*}
+        r \leq \frac{m_0 - N}{n} \leq r + \frac{1}{n}
+    \end{equation*}
+    으로, $|r - (m_0 - N)/n| \leq 1/n$임을 볼 수 있다.
+\end{proof}
+이 정리에서, 우리는 임의의 실수 $r$에 대해, $r$로 수렴하는 유리수 수열을 획득할 수 있다.
+
+\begin{exercise}
+    실수에서, 정수 $p, q$에 대해 $\frac{p}{2^q}$로 표현되는 숫자들의 집합을 $S$라고 하자.
+    $S$가 조밀함을 증명하시오.
+\end{exercise}
+\begin{exercise}
+    모든 $n$ 에 대해 $0 < a_n$인 수열 $a_n$을 고정하자.
+    정수 $p$와 자연수 $q$에 대해서 $p/a_q$ 꼴의 실수들의 집합을 $S$로 정의한다.
+    만약, $\lim_{n \to \infty} a_n = \infty$이면, $S$가 조밀함을 증명하시오.
+\end{exercise}
+
+\section{완비성의 다양한 표현}
+\Cref{def:reals}의 제일 중요한 조건 \ref{item:mctthm}는 실수의 완비성을 표현하는 한 가지 방법이다.
+실수에서 성립하나 유리수에서는 성립하지 않는 정리들을 증명할 때에는, 조건 \ref{item:mctthm}를 필연적으로 써야 하고, 상황에 맞게 쓸 수 있도록 이 조건을 다양한 방법으로 표현하는 것이 매우 편리할 것이다.
+
+\subsection{볼자노-바이어슈트라우스 정리}
+\begin{definition}
+\label{def:subseq}
+\index{부분수열}\index{수열!부분}\index{subsequence}\index{sequence!sub}
+    수열 $a_n$의 부분수열 $b_n$은, 단사이고 증가하는 함수 $f: \mathbb{N} \to \mathbb{N}$이 존재하여, $b(n) = a(f(n))$이 성립하는 수열을 말한다.
+    (여기서 $f$는 $n < m$이면 $f(n) < f(m)$인 강한 조건의 증가를 만족해야 한다.)
+\end{definition}
+\begin{theorem}[Bolzano-Weierstrass]
+\label{thm:bolzweier}
+\index{볼자노-바이어슈트라우스 정리}\index{Bolzano-Weierstrass theorem}
+    임의의 유계인 실수열 $a_n$은 수렴하는 부분수열 $b_n$을 포함한다.
+\end{theorem}
+\begin{proof}
+    우리는 단조인 부분수열을 만들 것이다.
+    자연수 $n$에 대하여, $n$을 단조증가인 부분수열에 포함할 있는 필요조건은, $a_n \leq a_m$이고 $n \leq m$인 $m$의 개수가 무한한 것이다.
+    이 조건을 만족하는 자연수들의 부분집합을 $S$라고 정의하자.
+    
+    \begin{enumerate}[(a)]
+        \item 집합 $S_0 = S$가 무한집합이라고 하자.
+        귀납적으로, $m_n$을 $S_n$에서 최소원으로 선택하고, $S_n$에서 제거한다.
+        이 때, $a_{m_n} \leq a_m$인 $m_n \leq m$의 개수가 유한하고, $S_n$은 무한하므로, 모든 $m \in S_{n + 1}$에 대해 $a_m \leq a_{m_n}$이 성립하도록 $S_n$에서 원소를 제거해 $S_{n + 1}$을 만들 수 있다.
+        집합 $S_{n + 1}$ 또한 무한하며, 여기서 다시 최소원으로 $m_{n + 1}$을 선택하면, 단조감소하는 수열이 생성된다.
+        \item 집합 $S$가 유한집합이면, 귀납적으로, $m_n$이 주어졌을 때, $a_{m_n} \leq a_m$이고 $m_n \leq m$인 $m$이 무한하므로, $S$를 제외하고 이 중에서 $m_{n + 1}$을 선택할 수 있다.
+        이러면 단조증가하는 수열이 생성된다.
+    \end{enumerate}
+    두 경우에서 단조이고 유계인 부분수열이 선택되었으므로, 증명이 끝났다.
+\end{proof}
+\begin{exercise}
+    볼자노-바이어슈트라우스 정리와, 단조수렴정리를 제외한 \Cref{def:reals}의 모든 조건을 만족하는 순서체 $A$에 대하여, 단조수렴정리를 증명하여라.
+\end{exercise}
+
+\subsection{코시 수열}
+\begin{definition}
+\label{def:cauchyseq}
+\index{수열!코시}\index{sequence!Cauchy}
+    코시 수열이란, 임의의 $\epsilon > 0$에 대하여, $N(\epsilon)$이 존재해, 모든 $N(\epsilon) \leq n, m$에 대하여 $|a_n - a_m| < \epsilon$이 성립하는 수열을 말한다.
+\end{definition}
+코시 수열을 판별할 때의 장점은, 극한의 정의 (cf. \Cref{def:seqconverge})와 다르게 극한을 계산할 필요가 없다는 것이다.
+\begin{exercise}
+    임의의 수렴하는 수열 $a_n$은 코시 수열임을 증명하여라.
+\end{exercise}
+
+\begin{theorem}
+\label{thm:realcomp}
+\index{수렴!코시 수열의}\index{convergence!Cauchy}
+    실수의 코시 수열 $a_n$은 어떤 극한 $x$로 수렴한다.
+\end{theorem}
+\begin{proof}
+    먼저 코시 수열 $a_n$은 유계이다.
+    이것을 보기 위해서는, $\epsilon = 1$을 선택하고, 모든 $N \leq n$에 대하여 $|a_n - a_N| < 1$임을 확인한 후, $M = \max \{|a_n| : n \leq N\} + 1$로 정의하면 된다.
+    
+    \Cref{thm:bolzweier}에 의하여, 코시 수열 $a_n$은 $x$로 수렴하는 부분수열 $a_{m_n}$을 포함한다.
+    임의의 $\epsilon > 0$에 대하여, $N \leq n$이면 $|a_{m_n} - x| < \epsilon/2$인 $N$을 선택한다.
+    그리고 나서 $a_n$이 코시 수열임을 이용해, $N_1 \leq m, n$이면 $|a_m - a_n| < \epsilon/2$인 $N_1$을 선택한다.
+
+    수열 $m_n$은 증가하는 수열이므로, $N_1 \leq m_{n'}$인 $m_{n'}$이 존재한다.
+    즉 $N_1 \leq n$이면,
+    \begin{equation*}
+        |a_n - x| \leq |a_{m_{n'}} - a_n| + |a_{m_{n'}} - x| < \epsilon
+    \end{equation*}
+    이 성립함을 볼 수 있다.
+\end{proof}
+\begin{exercise}
+    위 정리의 증명에서 우리는 어떤 값이 $\epsilon$보다 작은 것을 보이기 위해 두 부등식을 결합하였다.
+    이런 종류의 부등식에 쓸모있는 테크닉은 다음과 같다.
+
+    실수열 $a_n$이, 임의의 $\epsilon > 0$에 대해, $N_1(\epsilon)$이 존재하여, $N_1(\epsilon) \leq n$인 모든 $n$에 대해 $|a_n - x| < M\epsilon$이 성립한다 (여기서 $M$은 $0$초과인 어떤 고정된 실수이다).
+    이럴 때, $a_n$이 $x$로 수렴함을 보이시오.
+\end{exercise}
+\begin{exercise}
+    위 연습문제에서 $M\epsilon$이, 이차다항식 $p(x) = ax^2 + bx + c$에 대하여, $p(\epsilon)$으로 교체되었다고 하자.
+    이 때, $a_n$이 $x$로 수렴하기 위해 $p$의 충분조건에는 무엇이 있는가?
+\end{exercise}
+\begin{exercise}
+    \Cref{thm:realcomp}과 \Cref{thm:archimedes}를 만족하고, 단조수렴정리를 제외한 \Cref{def:reals}의 모든 조건을 만족하는 순서체 $A$가, 단조수렴정리를 만족함을 보이시오. [\textit{힌트}: 수열이 포함된 구간을 잘게 나누어라.]
+\end{exercise}
+\begin{exercise}
+    위 연습문제에서 왜 \Cref{thm:archimedes}을 또한 가정하였는지 생각해 보아라. (반례는 만들 필요 없다.)
+\end{exercise}
+\subsection{축소구간열 성질}
+이 정리는 실수에서 가끔씩 사용되는 ``구간 분할''의 테크닉에 쓰인다.
+\begin{theorem}[Nested Interval Property]
+\label{thm:nip}
+\index{축소구간열 성질}\index{nested interval property}
+    각 자연수 $n$에 대하여, 실수의 폐구간 $I_n = [a_n, b_n]$이 존재해, $I_{n + 1} \subset I_n$가 성립하면, 모든 $I_n$에 포함된 실수 $x$가 존재한다.
+\end{theorem}
+\begin{proof}
+    수열 $a_n$은 증가하는 수열이고, 모두 절댓값이 $\max(|b_0|, |a_0|)$이하이다.
+    즉 단조수렴정리에 의해 $a_n$은 어떤 극한 $x$로 수렴한다.
+
+    임의의 자연수 $n$을 고정하자.
+    임의의 실수 $\epsilon > 0$에 대하여, $n \leq N$이고 $|a_N - x| < \epsilon$인 $N$이 존재한다.
+    이 때, $a_n \leq a_N$에서, $a_n + \epsilon \leq x$이 성립한다.
+    마찬가지로, $a_N \leq b_n$에서, $x \leq b_n - \epsilon$이 성립한다.
+
+    만약 $a_n > x$이면, $a_n > (a_n + x)/2 > x$으로, $\epsilon = (a_n - x)/2$에서 모순이다.
+    마찬가지로, $b_n < x$이면, $\epsilon = (x - b_n)/2$에서 모순이다.
+    즉 $a_n \leq x \leq b_n$이므로, 증명이 끝났다.
+\end{proof}
+\begin{remark}
+    이 증명은, 수열 $a_n$이 모든 $n$에 대하여 $A \leq a_n$을 만족하고, $a$로 수렴하면, $A \leq a$임을 보인다.
+\end{remark}
+\begin{exercise}
+    만약 \Cref{thm:nip}에서 구간 $[a_n, b_n]$을 $(a_n, b_n)$꼴이나, $[a_n, b_n)$꼴로 하였을 때 정리가 성립하는가?
+\end{exercise}
+\begin{exercise}
+\label{exer:niptobolz}
+    축소구간열 성질과 \Cref{thm:archimedes}를 가정하고, \Cref{thm:bolzweier}을 증명하여라.
+    [\textit{힌트}: 수열이 포함된 구간을 각 단계에서 절반으로 나누고, 해당 수열의 원소가 무한하게 많은 쪽을 선택하여 다시 절반으로 분할하여라. 이 때 수렴을 하는 것을 보이기 위해서, \Cref{thm:nip}와 $2^{-n} \to 0$이라는 사실을 쓸 것이다.]
+\end{exercise}
+
+\subsection{최소상계공리}
+
+이 공리는 실수의 해석학에서 주로 실수의 완비성을 표현하기 위해 선택되는 공리이다.
+집합 $[0, 1)$은 유계인 실수의 부분집합이 최댓값을 가지지 않을 수 있음을 보여준다.
+그러나 이 제일 우측의 빈 "구멍"을 채우기 위해 다음 두 정의를 통해 조금 돌아가면, 최댓값과 비슷한 것을 얻을 수 있다.
+\begin{definition}
+\label{def:leastup}
+    \begin{enumerate}[(a)]
+        \item 실수의 부분집합 $S$에 대해, 만약 $x$가 $S$의 모든 원소 이상이면, $x$를 $S$의 상계 (Upper bound)라고 한다. \index{upper bound} \index{상계}
+        \item 실수의 부분집합 $S$에 대해, $S$의 모든 상계들의 집합 $T$가 최솟값을 가지면, 그 최솟값을 $S$의 최소상계 (Least upper bound or Supremum)라고 하고, $\sup S$로 표기한다. \index{least upper bound} \index{최소상계} \index{supremum}
+    \end{enumerate}
+\end{definition}
+\begin{figure}[ht]
+    \centering
+    \begin{tikzcd}
+    S \arrow[rr, "\leq"] \arrow[dd, "\leq"] &  & \sup S \arrow[lldd, "\leq"] \\
+                                            &  &                             \\
+    x                                       &  &                            
+    \end{tikzcd}
+    \caption{최소상계의 도식적 표현}
+    \label{fig:lubfigure}
+\end{figure}
+\Cref{fig:lubfigure}에서, $a \to b$를 $a \leq b$로 해석하면, $\sup S$는 $S$의 모든 원소 이상이며, 임의의 $S \leq x$, 즉 임의의 $S$의 상계에 대해 $\sup S \leq x$인 성질을 가짐을 볼 수 있다.
+
+\begin{theorem}
+\label{thm:lubprop}
+    실수의 모든 유계이고 공집합이 아닌 부분집합 $S$는 최소상계를 가진다.
+\end{theorem}
+\begin{proof}
+    이 증명은 \Cref{exer:niptobolz}와 같은 테크닉으로, \Cref{thm:nip}을 사용할 때 주로 쓰이는 테크닉이다.
+    
+    집합 $S$가 $[-M, M]$에 포함되어 있다고 볼 수 있다.
+    이 때, $S$의 최대가 어디 있는지 ``이분 탐색''을 실행하자.
+    귀납적으로, $[-M, M] = [a_0, b_0]$이라고 하고, 만약 $[(a_n + b_n)/2, b_n]$에 $S$의 원소가 있다면, 이 구간을 $[a_{n + 1}, b_{n + 1}]$로 놓고, 만약 $S$의 원소가 그 ``오른쪽'' 분할에 없으면, $[a_n, (a_n + b_n)/2]$를 $[a_{n + 1}, b_{n + 1}]$로 놓자.
+    그러면, \Cref{thm:nip}에 의해 $[a_n, b_n]$에 모두 포함된 $x$가 존재한다.
+    또한, 만약 다른 $y$가 모든 $[a_n, b_n]$에 포함되어 있으면, $|x - y| \leq 2^{-n}(b_0 - a_0)$가 성립하고 \Cref{thm:archimedes}와 \Cref{lem:epsroom}에 의해 $x = y$이므로, $x$는 유일하다.
+
+    먼저 임의의 $s \in S$를 고정하고 $s \leq x$임을 보이자.
+    만약 어떤 $n$에 대해 $s \not\in [a_n, b_n]$이면, 이러한 최소의 $n$에 대해서, $s$는 $[a_{n - 1}, (a_{n - 1} + b_{n - 1})/2]$의 원소이고, $x$는 $[(a_{n - 1} + b_{n - 1})/2, b_{n - 1}]$의 원소이므로, $s \leq x$이다.
+    만약 모든 $n$에 대해 $s \in [a_n, b_n]$이면, $x$의 유일성에 의해 $s = x$이다.
+
+    반대로, 어떤 $t$가 모든 $s \in S$에 대해 $s \leq t$를 만족한다고 가정하고 $x \leq t$를 증명하자.
+    그러면 $t$는 $[-M, \infty)$에 포함되어있고, 일반성을 잃지 않고 $[-M, M]$의 원소라고 볼 수 있다.
+    만약 어떤 $n$에 대해 $t \not\in [a_n, b_n]$이면, 이러한 최소의 $n$에 대해서, $t$가 왼쪽 분할에 들어가고 오른쪽 분할이 $[a_n, b_n]$인 경우, 오른쪽 분할에 $S$의 원소가 있으므로, $t$는 $a_n$으로 고정되고, 반대로 $t$가 오른쪽 분할에 들어가고 왼쪽 분할에 $x$가 있으면 바로 $x \leq t$이다.
+    마지막으로 모든 $[a_n, b_n]$에 $t$가 있으면 다시 $t = x$로 끝난다.
+\end{proof}
+
+\begin{exercise}
+    \Cref{def:leastup}와 비슷하게, $S$의 모든 원소 $s$ 에 대해 $x \leq s$인 $x$를 $S$의 하계 (Lower bound)로, 그리고 하계 중 최댓값을 최대하계 (Greatest lower bound 또는 Infimum)로 정의하고, $\inf S$로 표기하자.
+    \Cref{thm:lubprop}을 사용해 모든 유계이고 공집합이 아닌 부분집합 $S$가 최소하계를 가짐을 보이시오.
+\end{exercise}
+\begin{exercise}
+    \Cref{thm:lubprop}을 강화해, $S$가 유계가 아니여도, 어떤 상계를 가지면, 최소상계를 가짐을 보이시오.
+\end{exercise}
+\begin{exercise}
+    \Cref{def:reals}중 단조수렴정리를 제외한 모든 조건을 만족하는 순서체 $A$가 \Cref{thm:lubprop}을 만족하면, \Cref{thm:archimedes}와 단조수렴정리를 만족함을 보이시오.
+    [\textit{힌트}: \Cref{thm:archimedes}를 증명하기 위해서는, $\mathbb{N}$이 유계임을 가정하고, 최소상계를 잡아라.]
+\end{exercise}
+
+\section{극한의 계산}
+다음 두 정리는 대부분의 교과서에서 증명 없이 쓰인다.
+\begin{theorem}
+\label{thm:alglimit}
+    실수열 $a_n$과 $b_n$이 각각 $a$와 $b$로 수렴한다고 하자.
+    \begin{enumerate}[(a)]
+        \item 실수열 $a_n + b_n$은 $a + b$로 수렴한다.
+        \item 실수열 $a_n b_n$은 $ab$로 수렴한다.
+        \item 만약 모든 $n$에 대해 $a_n \neq 0$이고 $a \neq 0$이면, $1/a_n$은 $1/a$로 수렴한다. 
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    먼저 임의의 $0 < \epsilon$을 잡자.
+    어떤 $N$에 대해서 $|(a_n + b_n) - (a + b)| < \epsilon$이 모든 $N \leq n$에 대해 성립해야 한다.
+    그러나 우리는 $a_n$이 $a$로, $b_n$이 $b$로 수렴하는 것을 알고 있으므로, $|a_n - a| < \epsilon$ 그리고 $|b_n - b| < \epsilon$이 각각 모든 $N_1 \leq n$과 $N_2 \leq n$에 대해 성립하는 것을 알 수 있다.
+    이 두 부등식을 결합한 후 삼각부등식을 쓰면, $|a_n + b_n - a - b| < 2\epsilon$이 모든 $\max(N_1, N_2) \leq n$에 대해 성립한다.
+    우리는 처음에 $\epsilon$을 잡을 때, 주어진 $\epsilon$에 대해 $\epsilon/2$로 (또는 $\epsilon/1000$로도!) 선택 가능하므로, 이렇게 하면 $|a_n + b_n - a -b | <\epsilon$ (또는 $\epsilon/500$)에서 증명이 끝난다.
+
+    다음으로 임의의 $0 < \epsilon$을 잡고, $a_n b_n \to ab$를 보이자.
+    우리는 다음 오차
+    \begin{equation*}
+        |a_n b_n - ab|
+    \end{equation*}
+    를, $|a_n - a|$와 $|b_n - b|$가 충분히 작다는 사실을 사용해 작도록 만들어야 한다.
+    이렇게 하기 위해 인수분해를 하듯 식을 쪼게자.
+    \begin{equation*}
+        |a_n b_n - ab| \leq |a_n b_n - a_n b| + |a_n b - ab| = |a_n| |b_n - b| + |b| |a_n - a|
+    \end{equation*}
+    먼저 두번째 항은 $a_n$의 수렴에서, $\epsilon/|b|$를 선택하면, $|a_n - a| < \epsilon/|b|$가 모든 $N_1 \leq n$에 대해 성립하므로 $|b| |a_n - a| < \epsilon$이 성립한다.
+    그러나 첫번째 항은 $|b_n - b|$가 작아도, $|a_n|$이 $n$에 따라서 바뀌므로, 고정된 상수 $\epsilon$ 미만으로 보내기 힘들어 보인다.
+    이 문제는 $|a_n| < M$이 모든 $n$에 대해서 성립하는 $M$을 찾으면, $|b_n - b| < \epsilon/M$으로 잡으면 해결된다.
+    이러한 $M$을 찾기 위해서 우리는 \Cref{thm:realcomp}의 첫번째 부분의 논법을 사용할 것이다.
+    
+    $\epsilon = 1$을 선택하면, $|a_n - a| < 1$이 모든 $N \leq n$에 대해 성립하고,
+    \begin{equation*}
+        M = \max \{ |a| + 1, |a_0|, |a_1|, \dots, |a_N| \}
+    \end{equation*}
+    으로 선택하면, (삼각부등식의 도움을 한번 받고) $|a_n| \leq M$임을 볼 수 있다.
+    즉, $N_2 \leq n$인 모든 $n$에 대해 $|b_n - b| < \epsilon/M$이도록 $N_2$를 선택하면,
+    \begin{equation*}
+        |a_n| |b_n - b| < \epsilon \frac{|a_n|}{M} \leq \epsilon
+    \end{equation*}
+    이고, 두 부등식을 결합하면 이 증명이 완료된다.
+
+    마지막 부분의 증명 또한,
+    \begin{equation*}
+        |\frac{1}{a_n} - \frac{1}{a}| = |\frac{a_n - a}{a_n a}|
+    \end{equation*}
+    에서, 모든 $n$에 대해 $1/|a_n a| \leq M$인 $M$을 찾는 것으로 귀결되고, 이것은 모든 $n$에 대해 $\delta \leq |a_n|$인 $0 < \delta$를 찾는 것과 연결된다.
+    $\epsilon = |a|/2$로 선택하면, $|a_n - a| < |a|/2$가 모든 $N \leq n$에 대해 성립하고, 
+    \begin{equation*}
+        \frac{|a|}{2} = |a| - \frac{|a|}{2}< |a| - |a_n - a| \leq |a_n|
+    \end{equation*}
+    이다.
+    이 때,
+    \begin{equation*}
+        \delta = \min \{|a|/2, |a_1|, |a_2|, \dots, |a_N|\}
+    \end{equation*}
+    으로 정의하면, $0 < \delta$이고, 모든 $n$에 대해 $\delta \leq |a_n|$이다.
+    즉, 모든 $M \leq n$에 대해
+    \begin{equation*}
+        |a_n - a| < \epsilon |a| \delta
+    \end{equation*}
+    이도록 $M$을 선택하면,
+    \begin{equation*}
+        |\frac{1}{a_n} - \frac{1}{a}| = \frac{|a_n - a|}{|a_n a|} < \epsilon \frac{\delta}{|a_n|} \leq \epsilon
+    \end{equation*}
+    에서 증명이 끝났다.
+\end{proof}
+
+\begin{theorem}
+    \begin{enumerate}[(a)]
+        \item 만약 모든 $n$에 대해 $a_n \leq A$이고, $a_n$의 극한이 $a$이면, $a \leq A$이다.
+        \item 만약 모든 $n$에 대해 $a_n \leq b_n \leq c_n$이고, $a_n$과 $c_n$의 극한이 $a$이면, $b_n$ 또한 $a$로 수렴한다. \index{sandwich theorem} \index{샌드위치 정리}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    첫번째 부분을 증명하자.
+    극한의 정의에 따르면, 모든 $0 < \epsilon$에 대해, $N(\epsilon)$이 존재해, 모든 $N(\epsilon) \leq n$에 대해 $|a_n - a| < \epsilon$가 성립한다.
+    그러나 $a_n \leq A$이므로, 임의의 $\epsilon$에 대해
+    \begin{equation*}
+        a \leq a_n + |a - a_n| < A + \epsilon
+    \end{equation*}
+    가 성립하고, 만약 $a > A$이면, $\epsilon = (a - A)/2$에서 모순이 발생한다.
+
+    두번째 부분을 증명하기 위해서는, 모든 $\epsilon > 0$에 대해 $|b_n - a| < \epsilon$이 모든 충분히 큰 $n$에 대해 성립함을 보여야 한다.
+    이 부등식을 보이기 위해서는 $b_n - a < \epsilon$과 $a - b_n < \epsilon$을 보이면 충분하고, 이를 보이기 위해 각각 $c_n$과 $a_n$이 $a$로 수렴함을 쓸 것이다.
+    $N_1 \leq n$이면 $|c_n - a| < \epsilon$이도록 $N_1$을 잡을 수 있고, 이러면 
+    \begin{equation*}
+        b_n - a \leq c_n - a \leq |c_n - a| < \epsilon
+    \end{equation*}
+    이 성립한다.
+    반대로, $N_2 \leq n$이면 $|a_n - a| < \epsilon$이도록 $N_2$ 또한 잡을 수 있고, 이 때
+    \begin{equation*}
+        a - b_n \leq a - a_n \leq |a_n - a| < \epsilon
+    \end{equation*}
+    에서 두 부등식을 얻을 수 있다.
+    즉 $\max(N_1, N_2) \leq n$이면 $b_n - a < \epsilon$과 $a - b_n < \epsilon$이므로 $|a - b_n| < \epsilon$에서, 우리의 결론에 도달했다.
+\end{proof}
+
+다음 정의는 수렴하지 않을 수 있는 수열에 대해서도 극한을 일부 다룰 수 있게 해주는 유용한 도구이다.
+\begin{definition}
+    수열 $a_n$에 대해 상극한 (Limit superior)을
+    \begin{equation*}
+        \limsup_{n \to \infty} a_n = \lim_{n \to \infty} \sup_{n \leq k} a_k = \lim_{n \to \infty} \sup \{a_k : n \leq k \}
+    \end{equation*}
+    로 정의하고, 비슷하게 하극한 (Limit inferior)을
+    \begin{equation*}
+        \liminf_{n \to \infty} a_n = \lim_{n \to \infty} \inf_{n \leq k} a_k = \lim_{n \to \infty} \inf \{a_k : n \leq k \}
+    \end{equation*}
+    로 정의한다.
+\end{definition}
+
+\begin{exercise}
+    실수열 $a_n$이 유계이면 $\limsup_{n \to \infty} a_n$과 $\liminf_{n \to \infty} a_n$이 존재함을 보이시오. [\textit{힌트}: 단조수렴정리]
+\end{exercise}
+\begin{exercise}
+    유계인 실수열 $a_n$에 대해서, $\liminf_{n \to \infty} a_n \leq \limsup_{n \to \infty} a_n$을 보이시오.
+\end{exercise}
+\begin{exercise}
+    만약 실수열 $a_n$이 $\liminf_{n \to \infty} a_n = \limsup_{n \to \infty} a_n = a$를 만족한다면, $\lim_{n \to \infty} a_n = a$임을 보이시오.
+\end{exercise}
+\begin{exercise}
+    실수열 $a_n$이 모든 $n$에 대해 $a_n \leq M$을 만족하면, $\limsup_{n \to \infty} a_n \leq M$을 만족함을 보이시오.
+\end{exercise}
+
+다음은 급수의 정의이다.
+\begin{definition}
+\index{수렴!급수의} \index{급수}
+\index{convergence!of series} \index{series}
+    실수열 $a_n$에 대해 부분합 $s_n$을,
+    \begin{equation*}
+        s_n = \sum_{k = 0}^n a_k 
+    \end{equation*}
+    로 정의하고, 만약 $s_n$의 극한이 존재하면, 그 값을 $a_n$의 무한급수 (또는 급수)로 정의하고,
+    \begin{equation*}
+        \lim_{n \to \infty} s_n = \sum_{k = 0}^\infty a_k = S
+    \end{equation*}
+    로 정의한다.
+    이 때, 급수 $a_n$이 $S$로 수렴한다고 한다.
+\end{definition}
+
+\begin{definition}
+\index{절대수렴} \index{absolute convergence}
+\index{수렴!절대} \index{convergence!absolute}
+    급수 $a_n$에 대해
+    \begin{equation*}
+        \sum_{k = 0}^\infty |a_k|
+    \end{equation*}
+    가 수렴하면, 이 급수 $a_n$이 절대수렴한다고 한다.
+\end{definition}
+
+\begin{theorem}
+\label{thm:algseries}
+    급수 $a_n$과 $b_n$이 각각 $a$와 $b$로 수렴하면, 다음이 성립한다.
+    \begin{enumerate}[(a)]
+        \item 급수 $a_n + b_n$ 또한 $a + b$로 수렴한다.
+        \item 실수 $c$에 대해, 급수 $c a_n$ 또한 $ca$로 수렴한다.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \Cref{thm:alglimit}에서 바로 유도가 가능하다.
+\end{proof}
+
+\begin{theorem}
+\label{thm:absconvseries}
+    급수 $a_n$이 절대수렴하면, 급수 $a_n$은 수렴한다.
+\end{theorem}
+\begin{proof}
+    \Cref{thm:realcomp}을 급수에 대해 적용하면, 급수 $a_n$이 수렴할 필요 충분조건이, 모든 $\epsilon > 0$에 대해, $N$이 존재하여, 모든 $N \leq n \leq m$에 대해
+    \begin{equation}
+    \label{eq:cauchyseries}
+        \left| \sum_{k = n}^m a_k \right| < \epsilon
+    \end{equation}
+    이 성립하는 것이고, 급수 $|a_n|$이 수렴하므로, 어떤 $N$에 대해 모든 $N \leq n \leq m$에 대해 위 식, 즉
+    \begin{equation*}
+        \left| \sum_{k = n}^m |a_k| \right| < \epsilon
+    \end{equation*}
+    가 성립하며, 삼각부등식에 의해 \Cref{eq:cauchyseries} 또한 모든 $N \leq n \leq m$에 대해 성립한다.
+\end{proof}
+
+\begin{exercise}[비교판정법]
+\index{comparison test} \index{비교판정법}
+    모든 $n$에 대해, $0 \leq a_n \leq b_n$이 성립하고, 급수 $b_n$이 수렴하면, 급수 $a_n$ 또한 수렴함을 보이시오.
+\end{exercise}
+
+\begin{exercise}
+\Cref{thm:absconvseries}를, 급수 $a_n + |a_n|$을 사용해 증명하시오.
+\end{exercise}
+
+다음은 급수가 발산한다는 것을 보일 때 매우 쓸모있다.
+\begin{theorem}
+    급수 $a_n$이 수렴하면, $\lim_{n \to \infty} a_n$가 존재하고, 그 값은 $0$이다.
+\end{theorem}
+\begin{proof}
+    먼저, 수열 $s_n$이 수렴하면 $t_n = s_{n + 1}$로 정의된 수열 또한 같은 극한으로 수렴하는 것을 수렴의 정의에서 쉽게 확인할 수 있다.
+    즉, $s_n = \sum_{k = 0}^n a_k$이라고 놓으면, $s_n$과 $s_{n + 1}$은 같은 극한으로 수렴하므로,
+    \begin{equation*}
+        \lim_{n \to \infty} a_{n + 1} = \lim_{n \to \infty} s_{n + 1} - s_n = 0
+    \end{equation*}
+    이고, 이것은 $a_n$이 $0$으로 수렴함을 의미한다.
+\end{proof}
+
+\begin{definition}
+    실수열 $a_n$에 대해,
+    \begin{equation*}
+        f(x) = \sum_{k = 0}^\infty a_k x^k
+    \end{equation*}
+    로 $f$를 모든 수렴하는 실수 $x$에 대해 정의한 함수를 $a_n$에 대한 멱급수라고 한다.
+\end{definition}
+
+\begin{theorem}
+\label{thm:radconv}
+    수열 $a_n$에 대한 멱급수 $f$는,
+    \begin{equation*}
+        \frac{1}{r} = \limsup_{n \to \infty} |a_n|^{1/n}
+    \end{equation*}
+    으로 $r$을 정의하면, 모든 $|x| < r$인 $x$에 대해 수렴하고, $|x| > r$인 $x$에 대해 발산한다.
+    만약 우변의 값이 $0$이면 모든 $x$에 대해 수렴하며, 우변의 값이 무한으로 발산하면, 모든 $x$에 대해 발산한다.
+    이 $r$을 우리는 $f$의 수렴 반경이라고 한다.
+\end{theorem}
+
+%실수의 성질에서 시작해서 여러 대수적 성질들을 뽑아내자(결합, 교환, 분배, 항등원, 역원 등) +만족하지 않는 예시=>이들이 당연한 성질이 아니다!
+%pp. 32: definition of Q
+%=>eqv. class
+
+% pp. 32: dense subset
+
+% pp. 33: equal irrationals
+% square-free 자연수들에 대해 $\sqrt{n_i}$가 Q-lin. ind?
+%https://math.stackexchange.com/questions/30687/the-square-roots-of-different-primes-are-linearly-independent-over-the-field-of
+
+%pp. 43-45: 실수의 정의. 축소구간열, Cauchy seq, Dedekind cut; 완비성공리(R은 유일한 완비 순서체), 아르키메데스 장리, 데데킨트 정리
+
+% 2. 실수와 복소수
+%     1. 실수의 체계
+%         - Construction of Reals (Dedekind Cut)
+%         - Basic Topology
+%         - Completeness
+%     2. 복소수의 체계 
+%         - Introduction to field extensions
+%         - Symmetries of Roots of unity
+%         - Distances: Inner Product, Norms, Metrics, and Topology
+%         - Möbius Transformations, Riemann sphere, ...
+
+
+\section{극한의 계산 II} %김승원
+이 절의 테크닉들은 잘 알려져 있지 않지만, 몇가지 종류의 급수나 극한의 계산에 큰 도움을 준다.
+\begin{theorem}[Toeplitz]
+\label{thm:toeplitztrans} \index{Toeplitz transform} \index{토플리츠 변환}
+    실수열 $c_{n, k}$가 다음 세가지 조건을 만족한다고 가정하자.
+    \begin{enumerate}[(a)]
+        \item 각 $k$에 대해서, $ \lim_{n \to \infty} c_{n, k} = 0$이다.
+        \item 다음이 성립한다.
+        \begin{equation*}
+            \lim_{n \to \infty} \sum_{k = 0}^n c_{n, k} = 1
+        \end{equation*}
+        \item 어떠한 $C > 0$에 대해서, 모든 $n$에 대해 $\sum_{k = 0}^n |c_{n, k}| \leq C$가 성립한다.
+    \end{enumerate}
+    그리고 수열 $a_n$에 대해, ``변환된 수열'' $b_n$을
+    \begin{equation*}
+        b_n = \sum_{k = 0}^n a_n c_{n, k}
+    \end{equation*}
+    로 정의하면, $a_n$이 $a$로 수렴할 때, $b_n$ 또한 $a$로 수렴한다.
+\end{theorem}
+\begin{proof}
+    첫번째 조건은 수열의 한 항이 $b_n$을 전체적으로 영향을 주지 않는다는 뜻이고, 두번째 조건은 $a_n$의 가중치들이 $1$로 수렴해, $a$로 수렴하는 것을 보장한다.
+    먼저 임의의 $\epsilon > 0$을 고정하고, 모든 $N_a \leq n$에 대해 $|a_n - a| < \epsilon/C$이도록 $0 <N_a$를 잡자.
+
+    우리는 $0 \leq k < N_a$인 $a_k$들의 기여를 최소화해야 하는데, 각 $c_{n, k}$는 $n$이 무한으로 가면서 $0$으로 가므로,
+    \begin{equation}
+    \label{eq:toepest1}
+        |c_{n, k}| < \frac{\epsilon}{N_a (|a_k| + 1)}
+    \end{equation}
+    가 모든 $N_k \leq n$에 성립하도록 $0 \leq k < N_a$에 대해 각각 $N_k$를 고를 수 있다.
+    그리고 나서 
+    \begin{equation*}
+        N = \max_{0 \leq k < N_a} N_k
+    \end{equation*}
+    로 정의하면, \Cref{eq:toepest1}가 모든 $N \leq n$과 $0 \leq k < N_a$에 대해 성립한다.
+    그러면
+    \begin{equation*}
+        \left| \sum_{k = 0}^n c_{n, k} a_k  - a \right| \leq \left| \sum_{k = 0}^{N_a - 1} c_{n, k} a_k \right| + \left| \sum_{k = N_a}^n c_{n, k} a_k  - a \right|
+    \end{equation*}
+    이 성립하고, \Cref{eq:toepest1}을 적용하면, 모든 $N \leq n$에 대해 첫번째 항을 다음과 같이 조절할 수 있다.
+    \begin{equation*}
+        \left| \sum_{k = 0}^n c_{n, k} a_k  - a \right| \leq \epsilon + \left| \sum_{k = N_a}^n c_{n, k} a_k  - a \right|
+    \end{equation*}
+    두번째 항을 조절하기 위해서 삼각부등식을 쓰면,
+    \begin{equation*}
+        \left| \sum_{k = 0}^n c_{n, k} a_k  - a \right| \leq \epsilon + \left| \sum_{k = N_a}^n c_{n, k} (a_k - a) \right| + \left| \sum_{k = N_a}^n c_{n, k} - 1 \right| |a|
+    \end{equation*}
+    이고, 두번째 항은 삼각부등식과 $N_a$의 정의에 의해
+    \begin{equation*}
+        \left| \sum_{k = N_a}^n c_{n, k} (a_k - a) \right| \leq \sum_{k = N_a}^n |c_{n, k}| |a_k - a| < C \epsilon / C = \epsilon
+    \end{equation*}
+    으로 조절된다.
+    즉 
+    \begin{equation*}
+        \left| \sum_{k = 0}^n c_{n, k} a_k  - a \right| \leq 2\epsilon + \left| \sum_{k = N_a}^n c_{n, k} - 1 \right| |a|
+    \end{equation*}
+    이고, 다시 \Cref{eq:toepest1}에서 
+    \begin{equation*}
+        \left| \sum_{k = 0}^{N_a - 1} c_{n, k} \right| < \epsilon
+    \end{equation*}
+    이므로, 삼각부등식을 다음과 같이 사용해
+    \begin{equation*}
+        \left| \sum_{k = N_a}^n c_{n, k} - 1 \right| \leq \left| \sum_{k = 0}^n c_{n, k} - 1 \right| + \left| - \sum_{k = 0}^{N_a - 1} c_{n, k} \right| < \epsilon + \left| \sum_{k = 0}^n c_{n, k} - 1 \right|
+    \end{equation*}
+    마지막 이 식으로 도달한다.
+    \begin{equation*}
+        \left| \sum_{k = 0}^n c_{n, k} a_k  - a \right| \leq (2 + |a|)\epsilon + \left| \sum_{k = 0}^n c_{n, k} - 1 \right| |a|
+    \end{equation*}
+    두번째 조건에서 $N_b \leq n$에 대해 
+    \begin{equation*}
+        \left| \sum_{k = 0}^n c_{n, k} - 1 \right| < \epsilon
+    \end{equation*}
+    이도록 할 수 있으므로,
+    \begin{equation*}
+        \left| \sum_{k = 0}^n c_{n, k} a_k  - a \right| \leq (2 + 2|a|)\epsilon
+    \end{equation*}
+    을 $\max(N_a, N_b, N) \leq n$에 대해 획득하고, $|a|$는 미리 알려진 값이므로, 증명이 끝났다.
+\end{proof}
+
+\begin{corollary}
+    수열 $a_n$이 $a$로, $b_n$이 $b$로 수렴하면, 다음이 성립한다.
+    \begin{enumerate}[(a)]
+        \item \begin{equation*}
+            \lim_{n \to \infty} \frac{a_0 + a_1 + \dots + a_n}{n + 1} = a 
+        \end{equation*}
+        \item \begin{equation*}
+            \lim_{n \to \infty} \frac{(n + 1)a_0 + n a_1 + \dots + a_n}{(n + 1)^2} = \frac{a}{2}
+        \end{equation*}
+        \item \begin{equation*}
+            \lim_{n \to \infty} \frac{a_0 b_n + a_1 b_{n - 1} + \dots + a_n b_0}{n + 1} = ab
+        \end{equation*}
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    각각 \Cref{thm:toeplitztrans}을 수열 
+    \begin{align*}
+        c_{n, k} &= \frac{1}{n} \quad (0 \leq k \leq n) \\
+        c_{n, k} &= 2\frac{n - k + 1}{n^2} \quad (0 \leq k \leq n)\\
+        c_{n, k} &= \frac{b_k}{n} \quad (0 \leq k \leq n)
+    \end{align*}
+    에 적용하라.
+\end{proof}
+
+곱셈의 문제들은 가끔씩 로그로 덧셈의 문제들로 변환할 수 있다.
+다음 두 연습문제에서는, 만약 $0 < a_n$이 $0 < a$로 수렴하면,
+\begin{equation*}
+    \lim_{n \to \infty} \log(a_n) = \log \lim_{n \to \infty} a_n
+\end{equation*}
+임을 사용하여도 된다.
+
+\begin{theorem}
+    만약 양수인 수열 $a_n$이 $0 < a$로 수렴하면, $(a_1 a_2 \dots a_n)^{1/n}$ 또한 $a$로 수렴함을 보여라.
+\end{theorem}
+\begin{theorem}
+    양수인 수열 $a_n$에 대해서, 
+    \begin{equation*}
+        \lim_{n \to \infty} \frac{a_{n + 1}}{a_n} = a > 0
+    \end{equation*}
+    이면, $\lim (a_n)^(1/n)$ 또한 $a$임을 보이시오.
+\end{theorem}
+
+\begin{remark}
+    위에서 $a = 0$인 경우는 \Cref{thm:toeplitztrans}의 발산 버전에서 해결할 수 있다.
+\end{remark}
+
+\begin{lemma}
+\label{lem:stoltz}
+    수열 $0 \leq b_n$이
+    \begin{equation*}
+        \sum_{k = 0}^\infty b_k = \infty
+    \end{equation*}
+    를 만족하고, $a_n$이 $a$로 수렴하는 수열이면,
+    \begin{equation*}
+        \lim_{n \to \infty} \frac{a_0 b_0 + a_1 b_1 + \dots + a_n b_n}{b_0 + b_1 + \dots + b_n} = a
+    \end{equation*}
+    가 성립한다.
+\end{lemma}
+\begin{proof}
+    \Cref{thm:toeplitztrans}을
+    \begin{equation*}
+        c_{n, k} = \frac{b_k}{\sum_{l = 0}^n b_l}
+    \end{equation*}
+    로 정의하면 충분하다.
+\end{proof}
+\begin{theorem}[Stoltz]
+\label{thm:stoltz} \index{Stoltz theorem} \index{스톨츠 정리}
+    수열 $x_n$과 $y_n$에 대해 $y_n < y_{n + 1}$이고, $\lim y_n = \infty$이며,
+    \begin{equation*}
+        \lim_{n \to \infty} \frac{x_n - x_{n - 1} }{y_n - y_{n - 1}} = s
+    \end{equation*}
+    이면,
+    \begin{equation*}
+        \lim_{n \to \infty} \frac{x_n}{y_n} = s
+    \end{equation*}
+    이다.
+\end{theorem}
+\begin{proof}
+    수열 $a_n$을
+    \begin{equation*}
+        a_n = \frac{x_{n + 1} - x_n}{y_{n + 1} - y_n}
+    \end{equation*}
+    으로, 그리고 $b_n = y_{n + 1} - y_n$으로 정의하면,
+    \begin{equation*}
+        \frac{a_0 b_0 + a_1 b_1 + \dots + a_n b_n}{b_0 + b_1 + \dots + b_n} = \frac{x_{n + 1} - x_0}{y_{n + 1} - y_0}
+    \end{equation*}
+    이고, $(y_{n + 1} - y_0)/y_{n + 1}$은 $1$로, $x_0/(y_{n + 1} - y_0)$은 $0$으로 수렴하며, \Cref{lem:stoltz}의 조건이 모두 만족되므로, 위 식은 $s$로 수렴한다.
+    즉 $x_{n + 1}/y_{n + 1}$ 또한 $s$로 수렴한다.
+\end{proof}
+
+\begin{exercise}
+    다음을 계산하시오. [꼭 이 절의 내용만을 사용해야 하는 것은 아니다.]
+    \begin{enumerate}[(a)]
+        \item \begin{equation*}
+            \lim_{n \to \infty} n^{-p} (1^{p - 1} + 2^{p - 1} + \dots + n^{p - 1}) \quad (0 < p < 1)
+        \end{equation*}
+        \item \begin{equation*}
+            \lim_{n \to \infty} \sum_{k = 0}^n \frac{1}{n^k k!}
+        \end{equation*}
+    \end{enumerate}
+\end{exercise}
+
+\section{Miscellaneous: 무리수의 상등}
+유명한 문제를 생각하자. 
+\begin{example}
+    제곱 인수를 갖지 않는 두 자연수 $n\neq m$과 $p_1, p_2, q_1, q_2\in \mathbb{Q}$에 대해 $p_1\sqrt n + q_1\sqrt m = p_2\sqrt n + q_2 \sqrt m$이면 $p_1=p_2, q_1=q_2$이다. 
+\end{example}
+\begin{exercise}
+    증명하여라. 
+\end{exercise}
+이 명제를 다음과 같이 재해석할 수 있다. 
+\begin{example}
+    제곱 인수를 갖지 않는(square-free) 두 자연수 $n\neq m$과 $p, q\in \mathbb{Q}$에 대해 $p\sqrt n + q\sqrt m = 0$이면 $p=q=0$이다. 
+\end{example}
+\cref{chap:linalg}에서 보겠지만, 두 대상이 같을 조건은 위와 같이 적절한 선형성 아래서 어떤 대상이 0과 같을 조건으로 환원된다. 그리고 적당한 유리수 계수를 곱한 후 더해 0을 만드는 방법이 위처럼 (모든 계수가 0으로) 유일하면 이들을 $\mathbb{Q}$-선형 독립이라고 한다. 따라서 마지막으로 다음과 같이 재해석하자. 
+\begin{example}
+    square-free $n\neq m$에 대해 $\sqrt{n}$과 $\sqrt{m}$은 $\mathbb{Q}$-선형 독립이다. 
+\end{example}
+이제부터 이 명제의 일반화인 다음 정리의 증명을 살펴볼 것이다. 
+\begin{theorem}
+    square-free 자연수의 유한집합 $S$에 대해, $\{\sqrt{s}|s\in S\}$는 항상 $\mathbb{Q}$-선형 독립이다. 
+\end{theorem}
+\begin{proof}
+    \url{https://math.uchicago.edu/~may/VIGRE/VIGRE2007/REUPapers/FINALAPP/Jaffe.pdf}를 참고하라. 
+\end{proof}
+\chapter{복소수}
+\section{복소수의 대수적 정의}
+교과서에서 배운 복소수의 정의는 아직 해결해야 할 부분이 많다. 예를 들어, $i$는 어떤 집합에서 골라온 것일까? $\mathbb{C}$는 우리가 아는 집합들로부터 얻어진 집합이 맞을까? 이런 질문들에 답하기 위해서 $\mathbb{C}$를 $\mathbb{R}$로부터 정의하는 과정을 살펴보자. 
+\subsection{\texorpdfstring{$\mathbb{C}$}{C} as \texorpdfstring{$\mathbb{R}\times\mathbb{R}$}{RxR}}
+$i$라는 모호한 개념을 제하고 보면 결국 복소수는 실수부와 허수부라는 두 실수와 완전히 대응된다. 따라서 $a+bi$를 말할 때 실제로는 순서쌍 $(a, b)\in \mathbb{R}\times\mathbb{R}$을 생각한다고 하면 별다른 문제가 없다. 이제 $i$는 순전한 표기법으로 남게 되는 것이다. 그러나 순서쌍 위에는 연산이 주어져 있지 않으므로 $i^2=-1$임을 유념하여 순서쌍 위에 연산을 잘 정의해야 한다. 
+즉, $(a, b)+(c, d)$는 두 복소수 $a1+bi, c1+di$의 합을 의미하고, 1과 $i$는 '다른 것'이므로 그 합은 $(a+b)1+(c+d)i$, 또는 $(a+b, c+d)$가 되어야 한다. 또 $(a, b)\times(c, d)=ac+adi+bci+bdi^2$이고, $i^2=-1$이므로 이를 정리하면 $(ac-bd)+(ad+bc)i=(ac-bd, ad+bc)$가 된다. 이렇게 $\mathbb{R}^2$ 위에 두 연산 $+, \times$를 정의하면 실제로 그 결과는 체가 된다. 그러나 여전히 남는 의문은, 왜 하필 이런 식으로 정의해야 하는지, 그리고 $i^2=-1$이면서도 왜 $i$와 1은 '다른 것'인지, 등등이다. 다음 접근은 이러한 의문을 깔끔하게 해결한다. 
+\subsection{\texorpdfstring{$\mathbb{C}$}{C} as \texorpdfstring{$\mathbb{R}[t]/(t^2+1)$}{R[t]/t**2+1}}
+위 절의 내용을 되새겨 보자. 1과 $i$가 왜 다른지, 그리고 -1과 $i^2$은 왜 같은지, 이 두 질문이 결국 복소수를 구성하는 핵심 질문이다. 
+그런데 첫 번째 질문에 답하는 방법은 이미 알고 있다. 실계수 다항식들 또한 실수가 아닌 변수(indeterminate) $t$를 실수에 추가해서 만들어진 개념이므로, 1과 $t$는 다른 것이다. 이제 -1과 $t^2$이 같다는 성질, 실계수 다항식에서는 일어나지 않는 일을 만들어 주면 된다. \\
+그 방법은 단순하게도 $t^2+1=0$이라고 '믿는', 다른 말로는 'mod out'하는 것이다. 이 터무니없어 보이는 믿음은 실제로 자주 일어난다. 예를 들어 시계는 $12=0$이라고 '믿어서' 만들어진 것이며, 각도 역시 $360^\circ=0^\circ$이라고 '믿는' 것이다. 다른 말로, 시계에서는 12만큼 차이나는 수들은 같은 것으로 취급한다(이를 mod 12로 같다고 한다). 따라서 시계에서는 $\{\cdots,-24, -12, 0, 12, 24, \cdots\}$(coset이라고 한다)가 하나의 수 $[0]$이 되며, $\{\cdots, -17, -5, 7, 19, \cdots\}$는 다른 한 수 $[7]$이 된다. \\Mod out을 통해 만들어진 공간을 quotient space라고 한다. 마찬가지로 복소수에서는 $i^2+1=0$이라고 '믿으면' 된다. 대수학의 용어로는, $\mathbb{R}[t]$를 ideal $(t^2+1)$로 quotient를 취해 주면 된다. \\
+기존 공간에 있는 연산들을 quotient space로 가져오는 것 또한 자연스럽다. $[a]+[b]=[a+b], [a]\times [b]=[a\times b]$. 예리한 독자는 이것이 잘 정의되어 있는지 의문을 품을 것이다. 확인해 보라. \\
+복소수를 이렇게 생각했을 때 각 coset은 1차 이하의 다항식을 정확히 하나 포함한다. 따라서 그 상수항이 실수부가 되고, 일차항은 허수부가 된다. 이제 이 환이 체를 이루는지만이 남아 있다. 직접 확인해 볼 수도 있고, 아니면 일반적으로 '0이라고 믿는' 다항식이 기약다항식이기만 한다면 된다는 사실을 증명해 볼 수도 있다. 연습문제로 남긴다. 
+
+\section{대수학의 기본정리}
+\begin{remark}
+    이 절에서, 다항식이라고 하면 기본적으로 1차 이상의 다항식만을 의미한다. 이는 물론 상수 다항식 $1\in\mathbb{F}[t]$가 근을 가질 리가 만무하기 때문이다. 
+\end{remark}
+다항식 $p(t)\in\mathbb{R}[t]$(이 표현에 대해서는 \cref{sec:polyring}을 참조하여라)가 항상 $\mathbb{R}$에서 해를 갖는 것은 아니다. $F[t]$의 모든 (1차 이상의) 다항식이 $F$ 안에서 해 하나 이상을 갖는 field $F$를 algebraically closed field, 또는 대수적으로 닫힌 체라고 한다. 
+\begin{exercise}
+    $F$가 algebraically closed field라고 하자. $F[t]$의 모든 다항식은 $F[t]$ 안에서 일차식으로 완전히 인수분해됨을 보여라. 
+\end{exercise}
+\begin{remark}
+    field $F$에 대해 그 algebraic closure(대수적 폐포)란 $F$를 포함하고 대수적으로 닫힌 가장 작은 체를 말하며, $\overline{F}$로 표기한다. $F$가 algebraically closed라는 것은 $\overline{F}=F$와 동치이다. algebraic closure의 여러 성질---가령 up to isomorphism 유일성---에 대해서는 대수학 교재(e.g. 이인석 - ``대수학'')를 참조하라. 
+\end{remark}
+복소수는 대수적으로 닫혀 있을까? 복소수를 정의하는 방정식 $t^2+1\in \mathbb{C}[t]$는 물론 $(t-i)(t+i)$로 인수분해된다. 이제 의문은 임의의 복소 계수 방정식, 예를 들면 $t^4-it^3+t+2i+3=0$이라는 방정식이 복소근을 가질지이다. 결과부터 소개하자. 
+\begin{theorem}[대수학의 기본 정리]\label{thm:fta}
+$\mathbb{C}$는 대수적으로 닫혀 있다. 즉, 모든 1차 이상의 다항식 $p(t)\in \mathbb{C}[t]$는 일차식으로 완전히 인수분해된다. 
+\end{theorem}
+\begin{remark}
+그 이름에도 불구하고 이 정리는 순수하게 대수학적으로 증명할 수 없으며, 대수학에서 기본적이지도 않다. 여기서 대수(algebra)는 17세기의 대수, 즉 방정식을 푸는 학문을 지칭하고 있다. 
+\end{remark}
+이제부터 비교적 초등적으로 보이는 \cref{thm:fta}의 증명을 다룰 것이다.
+\cref{thm:fta}의 전통적인 증명에는 대수적 증명과 해석적 증명이 있으나 대수적 증명은 갈루아 이론을, 그리고 해석적 증명은 복소해석학을 사용한다.
+여기서 소개할 증명은 이런 고급 이론을 사용하지 않는 듯 보이지만, 그 기저에는 대수적 위상수학이라는 이론이 자리잡고 있으며 이들을 조금 더 암묵적으로 사용할 뿐이다.
+이를 유념하고 다음의 guided tour을 시작하자.
+\subsection{감은 수를 이용한 증명}
+$n(\geq 1)$차 다항식 $p(t)=t^n+a_{n-1}t^{n-1}+\cdots+a_0\in \mathbb{C}[t]$를 고정하자. 
+\begin{exercise}
+복소수에 대한 삼각 부등식 $|x+y| \leq |x|+|y|$를 증명하여라. 
+\end{exercise}
+\begin{exercise}
+    $R=\max(1, |a_{n-1}+\cdots+a_0|)$으로 정의하자. $|z|>R$이라면 $|p(z)|>0$임을 보여라. 
+\end{exercise}
+\begin{exercise}
+    $p_s(t)=(1-s)x^n+sp(t)$로 정의하자. $0\leq s \leq 1$에 대해 $|z|>R$이라면 $|p_s(z)|>0$임을 보여라.
+\end{exercise}
+\begin{exercise}
+    복소함수는 결국 복소수를 복소수로 보내는 것이므로, 복소함수 $p: \mathbb{C}\to \mathbb{C}$는 복소평면 위의 한 점을 다른 한 점으로 옮긴다. 즉, 점 $t$를 특정한 궤적을 따라 옮길 때, $p(t)$라는 점도 어떤 궤적을 그린다. $t$가 원점 주위를 1바퀴 감을 때 $t^n$은 원점 주위를 $n$바퀴 감음을 보여라. 
+\end{exercise}
+\begin{exercise}
+    $t$가 절댓값을 $R$보다 크게 유지하며 원점 주위를 1바퀴 감을 때, 이에 대응하는 $p_s(t)$의 값은 $0\leq s \leq 1$일 때 항상 원점 주위를 $n$바퀴 감음을 보여라. 특히, 이때 $p(t)$의 값이 원점 주위를 $n$바퀴 감는다. 
+\end{exercise}
+\begin{exercise}
+    그런데, $t$가 그리는 원의 반지름이 점점 작아져 한 점원(point-circle)을 그릴 때, 이에 대응하는 $p(t)$의 값은 마찬가지로 한 점이다. 
+    \begin{enumerate}
+        \item 이 한 점이 원점이라면 $p(t)$가 근을 가짐을 보여라. 
+        \item 이 한 점이 원점이 아니라면 감은 수가 0일 것이다. 이때도 $p(t)$가 근을 가지는 이유를 설명하여라. Hint: 곡선의 연속적인 변화에 대해 감은 수가 바뀌기 위해서는 어떤 일이 일어나야 하는가?
+    \end{enumerate}
+\end{exercise}
+\begin{remark}
+    `감은 수'는 연속적인 변화에 불변한다고 생각해 왔지만, 더 정확히는 연속적인 변화에 불변하는 값 그 자체가 `감은 수'이다. 공간 $X$의 기본군(fundamental group)을 다음과 같이 정의하는데, 먼저 $X$ 위의 모든 `연속적인' loop, 즉 연속함수 $[0, 1]/(0\sim 1)\to X$들의 집합 $S$를 생각한다. 이제 $S$에서 `연속적으로 변환 가능한' loop들 사이에 동치 관계를 준다. 말인즉슨, 연속함수 $\tau: [0, 1]\to S$에 대해 $\tau(0)\sim \tau(1)$로 생각하겠다는 뜻이다. 이제 $G=S/\sim$이라고 하면 $G$ 위에 두 loop를 `이어붙이는' 방식으로 이항연산을 부여할 수 있고, 이는 군을 이룬다(증명하여라). 위 증명은 $\mathbb{C}-\{0\}$, 또는 $[0, 1]/(0\sim 1)=S^1$의 기본군은 $\mathbb{Z}$라는 것을 암시적으로 가정하고 있다. 
+\end{remark}
+\subsection{복소해석적 증명}
+
+출처: \url{https://pi.math.cornell.edu/~hatcher/AT/AT.pdf}, \url{https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra}
+\section{1의 제곱근}
+
+\chapter{거리: 내적, 노름, 거리, 위상}
+\label{chap:metrictop}
+
+\section{거리}
+
+\subsection{정의}
+
+거리라는 개념 자체는 근본적인 개념일 뿐만 아니라, 근사값이 얼마나 가까운지를 다루는 해석학에서는 더욱 더 중요하다.
+이 거리를 수학적으로 다루기 위해서 가장 자연스러운 방법은 두 점 사이에 숫자를 하나 부여해주는 것이다.
+즉, 공간 $X$위의 어떤 함수 $\rho:X \times X \to \mathbb{R}$ ($d$라고도 표기한다.)가 다음 조건을 만족하며 존재하면 이를 \textbf{거리 함수}라고 불러준다.
+
+\begin{enumerate}
+    \item 모든 $x, y \in X$에 대해서 $0 \leq \rho(x, y) < \infty$
+    \item $x=y$와 $\rho(x, y) = 0$는 필요충분조건이다.
+    \item 모든 $x, y \in X$에 대해서 $\rho(x, y) = \rho(y, x)$
+    \item 모든 $x, y, z \in X$에 대해서 $\rho(x, y) \leq \rho(x,z) + \rho(z, y)$
+\end{enumerate}
+
+$\rho(x, y)$가 우리가 원래 $\mathbb{R}^2$ 등에서 상상하는 두 점 $x, y$ 사이의 거리라고 생각하면 자명한 명제들이다.
+이 중 가장 독특한 것은 네 번째 조건의 부등식인데, 이를 우리는 삼각부등식이라고 한다. 
+직관적으로는 $x$에서 $y$로 가는데, $z$를 거쳐서 가면 항상 길이가 같거나 길어진다는 것이다.
+또한 이 때 어떤 집합과 그 위의 거리함수를 묶은 $(X, \rho)$를 거리 공간이라고 한다.
+$X$의 원소를 점이라고도 말한다.
+
+거리 공간에 대한 정리들을 생각할 때 일반적인 유클리드 공간에서 생각하는 것이 큰 도움이 되고 증명의 아이디어를 제공해줄 수 있지만,
+일반화를 위해 위 조건들만을 이용해서 추상적으로 증명하는 것 역시 중요하다.
+
+\begin{remark}\label{rem:set_as_space}
+위에서 나는 $(X, \rho)$를 \textit{거리 공간}으로 언급하였다. 
+$X$는 $\rho$의 존재성과 상관 없이 어떤 집합일 뿐이기에, 또 모든 집합에는 해당하는 거리를 부여할 수는 있기 때문에 $X$ 자체를 거리 공간으로 말하는 것은 옳지 않다.
+하지만 $(X, \rho)$라고 매번 표기하는 것은 상당히 불편하고, 이미 다른 전문적 서적들도 이와 같은 표기법을 택하기에 앞으로 $X$를 거리 공간이라고 말할 것이다.
+\end{remark}
+
+\begin{example}
+$\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{C}$는 다음과 같은 거리 함수가 존재하기에 거리 공간이라고 할 수 있다.
+\begin{equation}
+    \rho(x, y) = |x - y|
+\end{equation}
+이 함수가 거리 함수임을 각각 증명하여라.
+\end{example}
+
+\begin{example}
+    유클리드 공간 $\mathbb{R}^n$는 $n$개의 실수로 이루어진 순서쌍의 집합이다.
+    \begin{equation}
+        \mathbb{R}^n = \{ (x_1, x_2, \dots, x_n) | \forall i \leq n, x_i \in \mathbb{R} \}
+    \end{equation}
+    이 공간에도 다음과 같은 거리 함수를 줄 수 있다.
+    어떤 $\mathbf{x} = (x_1, x_2, \dots, x_n) \in \mathbb{R}^n$에 대해서 
+    \begin{equation}
+        | x | = \sqrt{\sum{x_i^2}}
+    \end{equation}라고 하면, 함수
+\begin{equation}
+    \rho(x, y) = |x - y|
+\end{equation}
+는 거리 함수가 된다. 증명하여라. 
+\end{example}
+
+\begin{exercise}
+$\rho_0$가 어떤 거리 공간 $X$위의 거리 함수라고 하자.
+이 때 새로운 함수들 $\rho, \rho': X \times X \to [0, \infty)$을 다음과 같이 정의하자.
+\begin{equation}
+    \rho(x, y) = 2 \times \rho_0(x, y)
+\end{equation}
+\begin{equation}
+    \rho'(x, y) = \frac{\rho_0(x,y)}{1+ \rho_0(x,y)}
+\end{equation}
+$\rho, \rho'$ 또한 거리 함수임을 보여라.
+(이 거리 함수들은 전부 수치적으로는 다름에도 같은 이야기를 하고 있다.
+이후 등장하겠지만 ``이야기''라는 개념이 위상에 해당하는데, 따라서 이 거리 함수들에 해당하는 위상은 전부 같다!)
+\end{exercise}
+
+\begin{exercise}
+위의 참고의 ``모든 집합에는 해당하는 거리를 부여할 수는 있기 때문에 $X$ 자체를 거리 공간으로 말하는 것은 옳지 않다.''를 정당화 하라. 즉 임의의 집합에 대해서 거리 함수를 부여하라. (힌트: 쉽게 생각해라)
+\end{exercise}
+
+\subsection{위상적 성질}
+
+이후 ``거리'' 단원의 모든 이야기는 임의의 거리 공간 $(X, \rho)$ 위에서 논한다.
+
+\begin{definition}
+    어떤 점 $p$의 $r$-\textbf{근방}은, $\rho(p, q) < r$을 만족하는 모든 $q$의 집합이다. 
+    $N_r(p)$라고도 하고, 따라서
+    \begin{align*}
+        N_r(p) = \{ q \mid \rho(p, q) < r \}
+    \end{align*}
+    이다.
+\end{definition}
+
+이제 거리라는 개념이 있는 공간으로 우리가 알고 있는 수렴의 개념을 옮길 수 있다.
+
+\begin{definition}
+    점들의 열 $\{p_n\}$이 있다고 하자.
+    이 열이 어떤 점 $p$로 수렴한다 함은 다음과 같다.
+    임의의 $\varepsilon > 0$이 주어져도 어떤 자연수 $N$이 존재해서 $n \geq N$이라면 $\rho(p, p_n) < \varepsilon$이다.
+    
+    마지막 부분을 다르게 표현하자면 $p_n$이 $n \geq N$이면 전부 $N_\varepsilon(p)$안에 포함된다는 것이다.
+    또 이때 $p$를 $\{p_n\}$의 극한이라 한다.
+\end{definition}
+
+\begin{exercise}
+    실수에서 $a_n = 1 / n$이 수렴함을 보여라.
+\end{exercise}
+
+이 정의는 $\varepsilon-\delta$ 혹은 $\varepsilon-N$ 논법에 기초하고 있기에, 이 종류의 명제에 익숙하지 않으면 이해하기 힘들 것이다.
+이해를 돕기 위해 극한의 기본적인 성질들을 증명해보자.
+(만약 이 정의를 본 적이 있다면 증명을 보지 않고 스스로 시도해 보는 것을 추천한다!)
+
+\begin{theorem}
+    극한이 존재한다면, 이 극한은 유일하다.
+    즉, $\{p_n\}$은 동시에 서로 다른 점 $p, p'$에 수렴할 수 없다.
+\end{theorem}
+
+\begin{proof}
+    귀류법을 사용하여 이 극한이 유일하지 않다고 가정하여, $\{p_n\}$이 서로 다른 점 $p, p'$에 수렴하다고 하자.
+    직관적으로 이것이 안되는 이유는 $n$이 충분히 커지면 대부분의 점들이 $p$로 가야 $p$로 수렴하는데 동시에 $p'$ 근처에도 점들이 많아야 하니 불가능하다고 할 수 있다.
+    이를 정확하게 말하기 위해서는 겹치지 않는 두 근방이 필요하다.
+    따라서, $r = \rho(p, p') / 2$라고 하고, $p$의 근방 $N_r(p)$와 $p'$의 근방 $N_r(p')$을 생각해보자.
+    이 두 근방은 겹치지 않는다. ($N_r(p) \cap N_r(p') = \emptyset$)
+    직관적으로 $\mathbb{R}^2$에서 생각해보아도 당연하고, 이를 믿지 못한다 하더라도 귀류법을 사용해 삼각 부등식에 위배됨을 보일 수 있다.
+    이 때 극한의 정의를 사용하자. $\{p_n\}$이 $p$에 수렴해야 하기에 어떤 $N_1$이 존재해서
+    \begin{equation}
+        n \geq N_1 \quad \implies \quad p_n \in N_r(p) 
+    \end{equation}
+    이다. 똑같이 $p'$에 대해 생각하면 어떤 $N_2$가 존재하여
+    \begin{equation}
+        n \geq N_2 \quad \implies \quad p_n \in N_r(p')
+    \end{equation}
+    하지만 이때 $N_1, N_2$보다 더 큰 $n$, 즉 $n \geq N_1$과 $n \geq N_2$를 동시에 만족하는 $n$이 존재하는데, $p_n \in N_r(p)$와 $p_n \in N_r(p')$을 동시에 만족하기에 이 두 근방이 겹치지 않음에 모순이다.
+\end{proof}
+
+\begin{remark}
+   이런 증명을 할 때는 귀류법을 많이 사용하게 되는데, 귀류법을 사용하면 더 자연스럽지만 사실 귀류법은 최소한으로 줄이는 것이 좋다.
+   J.P. Serre가 말했듯이 일반적으로 증명을 하다가 실수해서 모순이 나오면 본인이 틀렸음을 알아낼 수 있는데, 귀류법을 하다가 실수해서 모순이 나오면 좋은 결과가 나왔다고 착각할 수도 있다.
+   개인적인 의견으로는 굳이 귀류법을 사용하지 않아도 될 때 귀류법을 사용하면 논리가 더 ``더러워지고'' 말이 많아져서 사용하지 않는 것을 권장한다.
+
+   \begin{displayquote}[G.H. Hardy, A Mathematician's Apology, 1940.]
+        \textit{Reductio ad absurdum, which Euclid loved so much, is one of a mathematician's finest weapons.
+        It is a far finer gambit than any chess gambit: a chess player may offer the sacrifice of a pawn or even a piece, but a mathematician offers the game.}
+   \end{displayquote}
+
+   위 증명은 사실 귀류법을 요하지 않는다. 귀류법을 사용하지 않고 같은 명제를 증명해보아라!
+\end{remark}
+
+\begin{exercise}
+    위 증명과 유사하게 다음 명제들을 증명해보아라.
+
+    \begin{enumerate}
+        \item $\{p_n\}$이 $p$로 수렴하기 위해서는 모든 $p$의 근방에 유한 개의 점을 제외한 모든 $p_n$의 점이 포함돼있어야 한다.
+        \item 어떤 $r > 0$이 존재해서 모든 $p_n$이 전부 $N_r(p)$에 포함됨을 보여라. (따라서 수렴하는 열은 \textit{유계}이다.)
+    \end{enumerate}
+\end{exercise}
+
+수열이 아닌 집합에도 이렇게 근처에 있는 점이라는 개념을 부여할 수 있다.
+
+\begin{definition}
+    $p$가 집합 $E$의 극한점이기 위해선 모든 $p$의 근방과 $E$의 교집합이 공집합이 아니어야 한다.
+    즉 모든 $\varepsilon > 0$에 대해서 $N_\varepsilon(p) \cap E \neq \emptyset$이어야 한다.
+    모든 $E$의 극한점의 집합은 $E'$이라고 표기하고, $\overline{E} = E \cup E'$
+\end{definition}
+
+\section{위상}
+
+\section{노름}

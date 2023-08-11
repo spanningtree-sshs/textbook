@@ -1,0 +1,525 @@
+\section{용어}
+\begin{definition}
+	다음 기호들을 사용하자.
+	\begin{align}
+		2^A &= \{S : S \subset A\} \\
+		A \times B &= \{(a, b) : a \in A, b \in B\} \\
+		\prod_{i \in I} A_i &= \{f : f : I \to A_i\} \\
+		A^B &= \{f : f : B \to A\} \\
+		\emptyset &= \{\} \\
+		B \backslash A &= \{b : b \in B, b \not\in A\}
+	\end{align}
+\end{definition}
+\begin{definition}
+	\begin{enumerate}[(a)]
+		\item $\in$과 $=$가 정의되는 수학적인 물체들을 클래스라고 한다.
+		\item 클래스 $A,\:B$에 대해서 $A \subset B$를 $a \in A \implies a \in B$로 정의한다.
+		\item 클래스 $A,\:B$에 대해서 $A = B \iff A \subset B \land B \subset A$가 성립한다.
+		\item 클래스 $A$에 대해서 클래스 $B$가 존재해 $A \in B$이면 $A$를 집합이라고 한다.
+		\item 모든 집합에 대한 명제 $p(x)$에 대해서 $a \in A \iff p(a)$인 클래스가 존재한다.
+		\item 클래스 $i \in I$와 집합들 $A_i$에 대해서 $\cup_{i \in I} A_i$와 $\cap_{i \in I} A_i$도 클래스이다. 
+		\item $A, A_i, I$가 집합이면 $\cup_{i \in I} A_i,\:\cap_{i \in I} A_i$와 $2^A$도 집합이다.
+	\end{enumerate}
+\end{definition}
+\begin{remark}
+	클래스에 대한 이론은 너무 복잡해서 공리를 통해 증명하는 과정은 거치지 않았으나, 기수를 정의하기 편하게 하기 위해서 도입하였다.
+\end{remark}
+
+\section{선택공리}
+\begin{axiom}[선택공리]
+\label{AoC}
+	모든 집합 $A$에 대해서 $f : 2^A \to A$이고 $S \neq \emptyset$이면 $f(S) \in S$인 $f$가 존재한다.
+\end{axiom}
+\begin{definition}
+	클래스 $S$의 모든 원소에 대해서 다음을 만족하는 관계 $\leq$를 부분 순서라고 하자.
+	\begin{enumerate}[(a)]
+		\item $s \leq s$ 
+		\item $a \leq b,\: b \leq a \implies a = b$
+		\item $a \leq b,\: b \leq c \implies a \leq c$
+	\end{enumerate}
+	만약 $a \leq b,\: a \neq b$이면 $a < b$로 표기한다.
+\end{definition}
+\begin{definition}
+	\begin{enumerate}[(a)]
+		\item 부분 순서가 있는 집합 $(S,\: \leq)$에 대해서 부분집합 $T$에 대해
+		모든 $a, b \in T$에 대해 $a \leq b$ 이거나 $b \leq a$이면 $T$를 사슬이라고 하자.
+		\item 어떤 부분 집합 $T$에서 모든 $t \in T$에 대해서 $t \leq a$면 $a$를 $T$의 상계라고 한다.
+		\item $a \leq b \implies b = a$인 원소 $a$를 극대라고 한다.
+	\end{enumerate}
+\end{definition}
+\begin{example}
+	\begin{enumerate}[(a)]
+		\item 자연수 집합에서 $a \leq b \iff a\:|\:b$라고 정의하면 $\leq$는 부분 순서이다.
+		\item 위의 부분 순서를 $\{2, 3, 5, 7\}$의 집합에 주면, 모든 원소는 극대이다.
+		\item $\mathbf{R}^2$에서 $a \leq b \iff a_1 \leq b_1,\: a_2 \leq b_2$로 정의하면, $\leq$는 부분 순서이다.
+		\item 위의 경우에서 $S = \{(x, 4) : x \in \mathbf{R} \}$로 정의하면 $S$는 상계가 없는 사슬이다.
+	\end{enumerate}
+\end{example}
+
+\begin{theorem}[초른의 보조정리]
+	공집합이 아닌 부분 순서가 있는 집합 $(S,\: \leq)$에 대해서, 모든 사슬이 상계를 $S$에서 가지면 $S$에 극대원소가 하나 존재한다.
+\end{theorem}
+\begin{remark}
+	위의 정리의 증명은 \Cref{AoC}에서 증명 가능하나, 길어서 생략한다.
+\end{remark}
+
+\section{기수}
+\begin{definition}
+	어떤 클래스 $A$에서 다음을 만족하는 관계를 동치관계라고 한다.
+	\begin{enumerate}[(a)]
+		\item $a \sim a$
+		\item $a \sim b \iff b \sim a$
+		\item $a \sim b,\: b \sim c \implies a \sim c$
+	\end{enumerate}
+\end{definition}
+\begin{example}
+	\begin{enumerate}[(a)]
+		\item 모든 $\mathbf{R}^2$에 있는 삼각형들의 집합에서 닮음은 동치관계이다.
+		\item $\mathbf{Z}$에서 $p\:|\:a - b \iff a \sim b$는 동치관계이다.
+	\end{enumerate}
+\end{example}
+\begin{definition}
+	클래스 $A$의 원소들에 동치관계 $\sim$이 존재할 때, $[a] = \{b : b \sim a, b \in A\}$로 정의하자.
+\end{definition}
+\begin{theorem}
+	\begin{enumerate}[(a)]
+		\item 클래스 $A$에 대해서 $[a] = [b]$이거나 $[a] \cap [b] = \emptyset$이다.
+		\item 집합 $A$에 대해서 $A = \cup_{a \in A}[a]$이다.
+	\end{enumerate}
+\end{theorem}
+\begin{theorem}
+	모든 집합의 클래스 $S$에 대해서 집합 $A$와 $B$에 대해서 $A \sim B$를 $A$와 $B$사이의
+	일대일 대응이 존재하는 것으로 정의하면, $\sim$은 동치관계이다.
+	이것을 크기가 같다고 정의하자.
+\end{theorem}
+\begin{definition}
+	집합 $S$가 어떤 집합 $S_n = \{1, 2, \dots, n\} = \{m : m \in \mathbf{N}, 1 \leq m \leq n\}$와 크기가 같으면, $S$가 유한하다고 하자.
+	$S$가 유한하지 않으면 무한하다고 하자.
+\end{definition}
+\begin{definition}
+	집합 $T$에 대해서 $T$의 기수를 크기가 같음에 대한 동치관계에서 $[T]$로 정의하자.
+	\begin{enumerate}[(a)]
+		\item 기수 $\alpha, \beta$에 대해서 $[A] = \alpha, [B] = \beta$이면 $\{(a, 0) : a \in A\} \cup \{(b, 1) : b \in B\}$의 기수를
+		$\alpha + \beta$로 정의하자.
+		\item 기수 $\alpha, \beta$에 대해서 $[A] = \alpha, [B] = \beta$이면 $\{(a, b) : a \in A, b \in B\}$의 기수를 $\alpha\beta$로 정의하자.
+		\item 기수 $\alpha, \beta$에 대해서 $[A] = \alpha, [B] = \beta$이면 $B^A$의 기수를 $\beta^\alpha$로 정의하자.
+	\end{enumerate}
+\end{definition}
+\begin{theorem}
+	위의 연산들은 $A, B$의 선택에 관계없이 같은 결과를 가진다.
+\end{theorem}
+\begin{proof}
+	모든 선택 $(A,\: B), (A',\: B')$에 대해서, $f : A \to A'$, $g : B \to B'$인 일대일 대응이 존재한다.
+	\begin{enumerate}[(a)]
+		\item 먼저 다음을 잡자.
+		\begin{align}
+			S &= \{(a, 0) : a \in A\} \cup \{(b, 1) : b \in B\} \\
+			S' &= \{(a, 0) : a \in A'\} \cup \{(b, 1) : b \in B'\}
+		\end{align}
+		이 때, $h : S \to S'$를 다음과 같이 정의하자.
+		\begin{equation}
+			h((a, n)) = \begin{cases}
+				(f(a), 0) \quad &n = 0\\
+				(g(a), 1) \quad &n = 1
+			\end{cases}
+		\end{equation}
+		그러면 $h$가 일대일 대응임이 쉽게 확인된다.
+		\item 다음 함수 $h: A \times B \to A' \times B'$를 잡자.
+		\begin{equation}
+			h((a, b)) = (f(a), g(b))
+		\end{equation}
+		일대일 대응임을 역시 쉽게 확인할 수 있다.
+		\item 함수 $h: B^A \to {B'}^{A'}$를 다음과 같게 잡자.
+		\begin{equation}
+			h(\tau) = \left( a \mapsto g\left(\tau\left(f^{-1}(a)\right)\right) \right)
+		\end{equation}
+		역시 쉽게 확인된다.
+	\end{enumerate}
+\end{proof}
+\begin{remark}
+	$\alpha,\: \beta < \infty$일 경우 위의 연산들은 자연수 ($0$ 포함)에서 우리와 친숙한 연산들과 맞는 것 ($0^0$ 제외)을 확인 할 수 있다.
+	$\alpha, \beta$가 무한일 경우 이제 어떤 결과가 나오는지 확인해보는 것이 이 문서의 목적이다.
+\end{remark}
+\begin{definition}
+	$[A] \leq [B]$를 $f : A \to B$인 일대일 함수가 존재함과 동치로 정의하자.
+\end{definition}
+\begin{lemma}
+	$A \subset B$이면 $[A] \leq [B]$이다.
+\end{lemma}
+\begin{proof}
+	항등함수를 고려하면 자명.
+\end{proof}
+\begin{lemma}
+\label{surjec}
+	$f : A \to B$인 전사함수가 있음과 $[B] \leq [A]$은 동치이다.
+\end{lemma}
+\begin{proof}
+	각 $B$에 대해서 $\{a : a \in A, f(a) = b\}$는 공집합이 아니다.
+	\Cref{AoC}에 의해서 $h : 2^A \to A$이고 $S \neq \emptyset$이면 $h(S) \in S$인 $f$가 존재한다.
+	이때 $g : B \to A$에서 $g(b) = h(\{a : a \in A, f(a) = b\})$로 정의하자.
+	$g(b) = g(a) = x$이면, $f(x) = b, f(x) = a$이므로 $a = b$이다. 
+
+	반대로, $[B] \leq [A]$이면 $h : B \to A$인 일대일 함수가 존재한다.
+	$B$가 공집합이면 공허하고, 아니면, $b \in B$를 하나 골라서 $f : A \to B$를
+	\begin{equation}
+		f(x) = \begin{cases}
+			h^{-1}(x) \quad &h^{-1}(x) \neq \emptyset \\
+			b \quad &h^{-1}(x) = \emptyset
+		\end{cases}
+	\end{equation}
+	로 정의하면 전사함수이다.
+\end{proof}
+\begin{theorem}[Schröder---Bernstein]
+\label{sbt}
+	$[A] \leq [B],\: [B] \leq [A] \implies [A] = [B]$
+\end{theorem}
+\begin{proof}
+	일대일 함수 $f : A \to B$, $g : B \to A$가 존재한다.
+	각 $a \in A$에 대해서 $g^{-1}(a)$는 원소 개수가 1개 이하이다.
+	만약 원소가 하나 있으면, $f^{-1}(g^{-1}(a))$또한 원소 개수가 1개 이하이다.
+	이것을 반복하면 언젠가는 공집합에 도달하거나, 이 과정이 끝나지 않을 수 있다.
+	이 과정이 끝나면, 그 끝난 원소를 원래 원소의 시조라고 하자.
+	\begin{align}
+		A_1 &= \{a : a \in A, \text{시조가 }A\text{ 에 존재}\} \\
+		A_2 &= \{a : a \in A, \text{시조가 }B\text{ 에 존재}\} \\
+		A_3 &= \{a : a \in A, \text{시조가 없음}\} \\
+		B_1 &= \{b : b \in B, \text{시조가 }A\text{ 에 존재}\} \\
+		B_2 &= \{b : b \in B, \text{시조가 }B\text{ 에 존재}\} \\
+		B_3 &= \{b : b \in B, \text{시조가 없음}\}
+	\end{align}
+	로 정의하면 쉽게 $A_1 \cup A_2 \cup A_3 = A, B_1 \cup B_2 \cup B_3 = B$가 확인되고, $h : A \to B$를 
+	\begin{equation}
+		h(x) = \begin{cases}
+			f(x) \quad &x \in A_1 \cup A_3 \\
+			g^{-1}(x) \quad &x \in A_2
+		\end{cases}
+	\end{equation}
+	로 정의시 일대일 대응임이 확인된다.
+\end{proof}
+\begin{theorem}
+	$\leq$는 모든 집합의 클래스에서 부분 순서이다.
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}[(a)]
+		\item $[A] \leq [A]$는 항등함수를 사용하면 확인된다.
+		\item $[A] \leq [B],\:[B] \leq [C] \implies [A] \leq [C]$는 $f : A \to B,\: g : B \to C$인 일대일 함수들이 있으므로
+		$g \circ f$를 사용하면 일대일 함수임이 확인된다.
+		\item \Cref{sbt}.
+	\end{enumerate}
+\end{proof}
+\begin{theorem}
+	모든 집합의 클래스에서 다음 중 하나가 성립한다.
+	\begin{equation}
+		[A] < [B], \quad [A] = [B], \quad [A] > [B]
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	$A$나 $B$가 공집합이면 자명하므로 아니라고 가정하자.
+	집합 $\mathscr{F} = \{(f, X) : X \subset A,\: f : X \to B \text{는 일대일 함수}\}$에 다음과 같이 부분 순서를 정의하자.
+	\begin{equation}
+		(f, X) \leq (g, Y) \iff X \subset Y,\: \forall x \in X, f(x) = g(x)
+	\end{equation}
+	그러면 이 순서는 부분 순서이다.
+	이 집합의 모든 사슬 $\mathscr{C} = \{(f_i, X_i)\}$에 대해서, $f : \cup X_i \to B$를 각 $x \in X_i$에 대해서 $f(x) = f_i(x)$로 정의하자.
+
+	만약 $x \in X_i, x \in X_j$이면 사슬의 성질에서 $(f_i, X_i) \leq (f_j, X_j)$이거나 그 반대 순서가 성립하고,
+	각 경우 $f_i(x) = f_j(x)$이므로 $f(x)$가 잘 정의된다.
+	일대일 함수임은, $f(x) = f(y)$일 경우, $x \in X_i, y \in X_j$이고, 그러면 사슬의 성질에서 $x, y \in X_i$이거나 $x, y \in X_j$인데, 일반성을 잃지 않고 
+	$i$라고 하면, $f_i(y) = f(y) = f(x) = f_i(x)$에서 $x = y$이다.
+	또한 모든 $i$에 대해서 $(f_i, X_i) \leq (f, \cup X_i)$임은 쉽게 확인된다.
+	즉 모든 사슬이 상계가 있다.
+	$\mathscr{F}$가 공집합이 아님은 $X$를 원소 한개 집합으로 잡으면 확인된다.
+	즉 극대원소 $(g, X)$를 얻을 수 있다.
+
+	$X = A$와 $g(X) = B$ 둘중 하나도 성립하지 않으면, $B \backslash g(X)$의 원소 $b$를 잡고, $A \backslash X$의 원소 $a$를 잡아서,
+	$h$를 $X$에서 는 $g$로, $h(a) = b$로 하면
+	일대일 함수임이 확인된다.
+	즉 극대성에 모순이므로 $X = A$이거나 $g(X) = B$이다.
+	첫번째 경우 $[A] \leq [B]$이고, 두번째 경우 $[B] \leq [A]$이다.
+	\Cref{sbt}를 사용하면 증명이 끝났다.
+\end{proof}
+\begin{theorem}[Cantor]
+	$[A] < [2^A]$
+\end{theorem}
+\begin{proof}
+	$[A] \leq [2^A]$는 $x \mapsto \{x\}$로 쉽게 확인된다.
+	일대일 대응 $f$가 존재한다고 가정하자.
+	$S = \{a : a \in A, a \not\in f(a) \}$를 생각하면, $f(s) = S$인 $s$가 존재한다.
+	이때 $f(s) \in S$이여도 모순이고, $f(s) \not\in S$여도 모순이다.
+\end{proof}
+\section{기수 연산}
+\begin{definition}
+	$[\mathbf{N}] = \aleph_0$보다 작거나 같은 크기를 가지는 집합을 가산이라고 하자.
+\end{definition}
+\begin{theorem}
+	가산집합의 무한한 부분집합은 $\mathbf{N}$과 크기가 같다.
+\end{theorem}
+\begin{proof}
+	$\mathbf{N}$의 모든 부분집합은 최소원소를 가진다.
+	(이 특성은 자연수의 정의에 포함되어 있다.)
+	일대일 대응을 사용하면 $\mathbf{N}$에서 증명하면 충분하다.
+	이 무한한 부분집합을 $D_1$이라고 하자.
+	이때 귀납적으로, $f(n)$을 $D_n$으로 정의하고, $D_{n+1} = D_n \backslash \{f(n)\}$으로 정의하자.
+	이때 $f$는 바로 일대일 함수임이 확인되고, 모든 $a \in D_1$에 대해서 $a$보다 작은 원소는 유한하므로, 최대 $a$번 후에 $a$가 대응됨을 볼 수 있다.
+\end{proof}
+\begin{corollary}
+\label{nsmallest}
+	$\alpha$가 무한하면, $\alpha \geq \aleph_0$.
+\end{corollary}
+\begin{proof}
+	$\alpha \leq \aleph_0$이면 $\alpha = [A]$에서 $f : A \to \mathbf{N}$인 일대일함수가 존재한다.
+	그런데 $[f(A)] = [A]$이고, $f(A)$는 $\mathbf{N}$의 무한한 부분집합이므로 $\mathbf{N}$과 크기가 같다.
+\end{proof}
+\begin{theorem}
+	\begin{enumerate}[(a)]
+		\item $[\mathbf{N}] + [\mathbf{N}] = [\mathbf{N}]$
+		\item $[\mathbf{N}] \times [\mathbf{N}] = [\mathbf{N} \times \mathbf{N}] = [\mathbf{N}]$
+		\item $[\prod_{i=1}^{n} \mathbf{N}] = [\mathbf{N}]$
+		\item $[\mathbf{Q}] = [\mathbf{N}]$
+		\item $D_i \in [\mathbf{N}] \implies \cup_{i = 1}^{\infty} D_i \in [\mathbf{N}]$
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}[(a)]
+		\item $\{(n, k) : n \in \mathbf{N}, k \in \{0, 1\} \}$에서 $f((n, k)) = 2n + k$로 정의하자. ($0 \in \mathbf{N}$)
+		\item $(n, m) \mapsto 2^n3^m$과 $n \mapsto (n, 0)$을 사용하면, \Cref{sbt}에서 유도된다.
+		\item 위 결과에 대해서 귀납법을 적용하면 된다.
+		\item $a, b \in \mathbf{N}, b \neq 0, k \in \{0, 1\}$이 유일하게 존재해서 ${(-1)}^k\frac{a}{b}$이고 $\gcd(a, b) = 1$이다.
+		이때 $(a, b, k) \mapsto 2^a3^b5^k$는 일대일 함수이고, $n \mapsto n$은 반대로 가는 일대일 함수이다. \Cref{sbt}.
+		\item 각 $i$에 대해서 일대일 대응 $f_i : D_i \to \mathbf{N}$을 정의하자.
+		$f : \mathbf{N}_{>0} \times \mathbf{N} \to \cup_{i = 1}^{\infty}$를 $f(i, k) = f_i(k)$로 정의하면 전사이다.
+		\Cref{surjec}을 사용하고, $[\cup_{i = 1}^{\infty}] \geq [\mathbf{N}]$은 자명이다. \Cref{sbt}.
+	\end{enumerate}
+\end{proof}
+\begin{theorem}
+	\begin{enumerate}[(a)]
+		\item $[A \cup B] \leq [A] + [B]$
+		\item $[A] + [B] = [B] + [A]$
+		\item $[A] + ([B] + [C]) = ([A] + [B]) + [C]$
+		\item $[A][B] = [B][A]$
+		\item $([A][B])[C] = [A]([B][C])$
+		\item $([A] + [B])[C] = [A][C] + [B][C]$
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	모두 다 적절한 일대일 대응을 만들면 해결된다.
+	\begin{enumerate}[(a)]
+		\item $(a, 0) \mapsto a, (b, 0) \mapsto b$를 쓰면 일대일 함수이다.
+		\item $(a, 0) \mapsto (b, 0),\: (b, 1) \mapsto (a, 1)$.
+		\item $(a, 0) \mapsto ((a, 0), 0),\: ((b, 0), 1) \mapsto ((b, 1), 0),\: ((c, 1), 1) \mapsto (c, 1)$
+		\item $(a, b) \mapsto (b, a)$
+		\item $((a, b), c) \mapsto (a, (b, c))$
+		\item $((a, 0), c) \mapsto ((a, c), 0),\: ((b, 1), c) \mapsto ((b, c), 1)$
+	\end{enumerate}
+\end{proof}
+\begin{theorem}
+	기수 $a \leq b, c \leq d$에 대해서 $a + c \leq b + d,\: ac \leq bd$이다.
+\end{theorem}
+\begin{proof}
+	집합 $A, B, C, D$를 대응되게 잡고, 일대일 함수 $f : A \to B,\: g : C \to D$를 잡자.
+	$(a, 0) \mapsto (f(a), 0),\: (c, 1) \mapsto (g(c), 1)$은 일대일 함수이다.
+	$(a, c) \mapsto (f(a), g(c))$또한 일대일 함수이다.
+\end{proof}
+\begin{theorem}
+	\begin{enumerate}[(a)]
+		\item $a^{b+c} = a^b a^c$
+		\item ${(ab)}^c = a^c b^c$
+		\item ${(a^b)}^c = a^{bc}$
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}[(a)]
+		\item $f \mapsto \left(b \mapsto f((b, 0)), c \mapsto f((c, 1)) \right)$
+		\item $f \mapsto \left(c \mapsto {f(c)}_0, c \mapsto {f(c)}_1 \right)$
+		\item $f \mapsto \left((b, c) \mapsto \left(f(c)\right)(b)\right)$.
+	\end{enumerate}
+\end{proof}
+\begin{theorem}
+	\begin{enumerate}[(a)]
+		\item $a \leq b,\: c \leq d \implies a^c \leq b^d$
+		\item $[2^A]= 2^a$
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}[(a)]
+		\item 일대일 함수 $f: A \to B,\: g : C \to D$를 잡자.
+		$h \mapsto f \circ h \circ g$는 일대일 함수이다.
+		\item $S$를 \begin{equation}
+			f_S(s) = \begin{cases}
+				0 \quad &s \not\in S\\
+				1 \quad &s \in S
+			\end{cases}
+		\end{equation}로 대응하면 집합의 정의에서 자명이다.
+	\end{enumerate}
+\end{proof}
+\begin{remark}
+	지금까지 증명했던 많은 정리들은 두 기수사이 연산이 자연수처럼 행동한다는 것을 보여준다.
+	이제 실제 이 기수들이 나타내는 집합들을 알고 있을때, 기수의 연산을 실제로 할 수 있는 도구들을 증명할 것이다.
+\end{remark}
+\begin{lemma}
+\label{countablecovering}
+	무한집합 $S$에 대해서, $\cup_{D_i \in \Gamma} D_i = S$이고, $i \neq j \implies D_i \cap D_j = \emptyset$이며,
+	$[D_i] = [\mathbf{N}]$인 $\{D_i\}, \Gamma$가 존재한다.
+\end{lemma}
+\begin{proof}
+	위의 성질을 $\cup_{D_i \in \Gamma} D_i = S$ 빼고 만족하는 $D_i$들을 생각하면, $B = \cup_{D_i \in \Gamma} D_i$라 할 때,
+	$\mathscr{F} = \{(B, \Gamma)\}$를 고려하자.
+	이 집합에 다음과 같이 부분 순서를 주자.
+	\begin{equation}
+		(B, \Gamma) \leq (B', \Gamma') \iff B \subset B', \Gamma \subset \Gamma'
+	\end{equation}
+
+	\Cref{nsmallest}에 의해서 $[D] = [\mathbf{N}], D \subset S$인 $D$가 존재한다.
+	즉 $(D, \{D\}) \in \mathscr{F}$이므로 $\mathscr{F}$는 비어있지 않다.
+	$\mathscr{F}$의 모든 사슬 $\mathscr{C} = \{(B_i, \Gamma_i)\}$에 대해서, $(\cup_i B_i, \cup_i \Gamma_i)$가 상계임을 보일 것이다.
+	모든 $D_i, D_j \in \cup_i \Gamma_i$는 어떠한 $\Gamma_k$에 둘 다 포함되어 있으므로, $D_i \cap D_j = \emptyset$이다.
+	같은 이유로 $[D_i] = [\mathbf{N}]$이고, $\cup_i \cup_{D \in \Gamma_i} D = \cup_i B_i$는 자명하다.
+	즉 모든 사슬에 대해서 상계가 존재하므로 극대원소 $(B, \Gamma)$가 존재한다.
+
+	만약 $S \backslash B$가 무한집합이면, \Cref{nsmallest}에 의해서 $S \backslash B$의 가산 무한집합이 존재하고, 이 원소에
+	가져다 붙이면 극대에 모순이다.
+	즉 $S \backslash B$는 유한집합이다.
+	만약 이 집합이 비지 않았으면, $D \in \Gamma$를 하나 선택해서, $D' = D \cup (S \backslash B)$로 정의하자.
+	그러면
+	\begin{equation}
+		[\mathbf{N}] = [\mathbf{N}] + [\mathbf{N}] \geq [D] + [S \backslash B] \geq [D'] = [D \cup (S \backslash B)] \geq [D] = [\mathbf{N}]
+	\end{equation}
+	에서 $[D'] = [\mathbf{N}]$이고, $D$ 대신 $D'$을 넣으면 극대성에 모순이다.
+	즉 $S = B$이다.
+\end{proof}
+\begin{theorem}
+	$[A]$가 무한하면, $[A][\mathbf{N}] = [A]$.
+\end{theorem}
+\begin{proof}
+	\Cref{countablecovering}에 의해서 $A = \cup_{i \in I} D_i$이고 $A \times \mathbf{N} = \cup_{i \in I} D_i \times \mathbf{N}$.
+	각 $f_i : D_i \times \mathbf{N} \to D_i$인 일대일 대응을 얻으면 ($[D_i][\mathbf{N}] = [D_i]$), $A \times \mathbf{N}$의 각 원소에 대해서,
+	그 원소가 포함된 $D_i \times \mathbf{N}$의 $f_i$로 보내는 대응을 $f$라고 하자.
+	$D_i$는 서로 교집합이 없으므로, $f(x) = f(y)$이면 어떤 $i$가 존재해 $f_i(x) = f_i(y)$이고, $x=y$이다.
+	또한 모든 $x \in D_i$에 대해서, ${f_i}^{-1}(x)$에 $f$를 보내면 $f$가 전사이다.
+	즉 $f : A \times \mathbf{N} \to A$는 일대일 대응이다.
+\end{proof}
+\begin{corollary}
+	$S$가 무한하며, $[A]$가 유한하고 $0$이 아니면, $[S][A] = [S]$.
+\end{corollary}
+\begin{proof}
+	$[S] \leq [S][A] \leq [S][\mathbf{N}] = [S]$.
+\end{proof}
+\begin{corollary}
+	$[A] \leq [B]$이고 $[B]$가 무한하면, $[A] + [B] = [B]$.
+\end{corollary}
+\begin{proof}
+	$[B] \leq [A] + [B] \leq [B] + [B] = [B][\{1, 2\}] = [B]$.
+\end{proof}
+\begin{theorem}
+	$A$가 무한하면, $[A][A] = [A]$.
+\end{theorem}
+\begin{proof}
+	$\mathscr{F}$를 $B \subset A$이고, $f : B \to B \times B$인 일대일 대응이 있는 모든 $(B, f)$의 집합으로 정의하자.
+	부분 순서를 $(B, f) \leq (B', f') \iff B \subset B',\: \forall x \in B, f'(x) = f(x)$로 정의하자.
+
+	$A$가 무한하므로, \Cref{nsmallest}에 의해서 가산 부분집합 $D$가 있고, $[D] = [D][D]$이므로 $\mathscr{F}$는 $(D, f)$를 가진다.
+	즉 $\mathscr{F}$는 비지 않았다.
+
+	모든 사슬 $\mathscr{C} = \{(B_i, f_i)\}$에 대해서, $B = \cup_i B_i$를 잡자.
+	$f : B \to B \times B$를, 모든 $x \in B$에 대해서 $x$가 포함된 $i$에 대해 $f_i(x)$로 정의하자.
+	그러면 $x \in B_i,\: x \in B_j$이면 $f_i(x) = f_j(x)$이므로 잘 정의된다.
+	모든 $x \in B \times B$에 대해서 $x = (x_1, x_2)$이고, 둘다 어떤 $B_i$에 포함되어 있으므로 $x \in B_i \times B_i$이다.
+	즉 $f$는 전사이다.
+	$f(x) = f(y)$이면, $f(x)$와 $f(y)$ 또한 어떤 $B_i$에 포함되어 있으므로, $f_i(x) = f_i(y)$이고 $x = y$이다.
+	즉 $f$는 일대일 대응이므로, $(B, f)$는 이 사슬의 상계이다.
+
+	극대원소 $(M, g)$를 얻자.
+	만약 $[M] \leq [A \backslash M]$이면, 
+	\begin{equation}
+		[M] \leq [A] = [M] + [A \backslash M] = [M]
+	\end{equation}
+	이므로 증명이 끝이다.
+
+	만약 $[M] < [A \backslash M]$이면, $M_1 \subset A \backslash M$이 존재해서, $[M_1] = [M]$이다.
+	\begin{align}
+		(M \cup M_1) & \times (M \cup M_1) \\
+		&= (M \times M) \cup (M \times M_1) \cup (M_1 \times M) \cup (M_1 \times M_1)
+	\end{align}
+	이고, $\mathscr{F}$의 성질에 의해 $[M][M] = [M]$이므로 마지막 $3$항의 합집합 $M_2$는 크기가 $M$과 같고, $(M \times M) \cap M_2 = \emptyset$이다.
+	즉
+	\begin{equation}
+		(M \cup M_1) \times (M \cup M_1) = (M \times M) \cup M_2
+	\end{equation}
+	인데,
+	\begin{equation}
+		g_1 : (M \cup M_1) \to (M \cup M_1) \times (M \cup M_1)
+	\end{equation}
+	를, $x \in M$이면 $g$로 정의하고, $x \in M_1$이면, $[M_1] = [M_2]$에 의한 일대일 대응으로 정의한다.
+	그러면 $(M \cup M_1, g_1) \geq (g, M)$에서 극대성에 모순이다.
+\end{proof}
+\begin{corollary}
+	$[A]$가 무한하면, $\prod_{i = 1}^{n} [A] = [A]$.
+\end{corollary}
+\begin{proof}
+	귀납법.
+\end{proof}
+\begin{corollary}
+	$A_1, \dots, A_n$이 공집합이 아닌 무한한 집합이고, $[A_i] \leq [A_n]$이면, $[\prod_{i = 1}^{n} A_i] = [A_n]$.
+\end{corollary}
+\begin{proof}
+	$[A_n] \leq [A_1]\cdots[A_n] \leq [A_n]\cdots[A_n] = [A_n]$.
+\end{proof}
+\begin{corollary}
+	$A$가 무한집합이라고 하자.
+	$A'$를 $A$의 모든 유한한 부분집합의 집합이라고 하면, $[A'] = [A]$.
+\end{corollary}
+\begin{proof}
+	$A'_n$을 원소 $n$개의 부분집합의 집합이라고 하자.
+
+	$\{x_1, \dots, x_n\} \mapsto (x_1, \dotsb, x_n)$을 고려하면, $[A'_n] \leq [A]$이다.
+	그러면 위의 일대일함수 $f_n$에서, $\cup_{n \geq 1} A'_n$에서 $a \mapsto (f(a), n)$을 하면,
+	$[\cup_{n \geq 1} A'_n] \leq [A][\mathbf{N}]$이다.
+	일대일함수의 증명은 $(f_n(a), n) = (f_{n'}(a'), n')$이면 $n = n'$이고, $f_n(a) = f_n(a')$에서 쉽게 된다.
+	즉
+	\begin{equation}
+		[A] \leq [\cup_{n \geq 1} A'_n] \leq [A][\mathbf{N}] = [A]
+	\end{equation}
+\end{proof}
+
+\section{적용}
+\begin{theorem}
+	$[\mathbf{R}] = {[\{0, 1\}]}^{[\mathbf{N}]} = 2^{\aleph_0}$.
+\end{theorem}
+\begin{proof}
+	$f : \mathbf{R} \to (0, 1)$를 탄젠트 등을 사용해서 일대일 대응을 만들 수 있다.
+	$(0, 1)$에서 모든 숫자는 이진법의 무한소수로 (유일하진 않지만) 나타낼 수 있고, 이것은 일대일 함수이다.
+	즉 $\mathbf{R} \leq {[\{0, 1\}]}^{[\mathbf{N}]}$이다.
+	반대로, 3진법의 숫자로 ${[\{0, 1\}]}^{[\mathbf{N}]}$를 대응하면, 이것은 일대일 함수이므로 $[\mathbf{R}] = {[\{0, 1\}]}^{[\mathbf{N}]}$이다.
+\end{proof}
+\begin{theorem}
+	$\aleph_0 = [\mathbf{N}]$, $\mathbf{c} = [\mathbf{R}] = 2^{\aleph_0}$이라고 하자.
+	\begin{enumerate}[(a)]
+		\item 모든 실수 수열의 집합의 크기는 $\mathbf{c}$과 같다.
+		\item 모든 $\mathbf{R} \to \mathbf{R}$의 함수의 집합의 크기는 $2^\mathbf{c}$과 같다.
+		\item 모든 연속인 $\mathbf{R} \to \mathbf{R}$의 함수의 집합의 크기는 $\mathbf{c}$와 같다.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}[(a)]
+		\item ${\mathbf{c}}^{\aleph_0} = {\left(2^{\aleph_0}\right)}^{\aleph_0} = 2^{\aleph_0 \aleph_0} = 2^{\aleph_0} = \mathbf{c}$.
+		\item ${\mathbf{c}}^{\mathbf{c}} = {(2^{\aleph_0})}^{2^{\aleph_0}} = 2^{\aleph_0 2^{\aleph_0}} = 2^{2^{\aleph_0}} = 2^{\mathbf{c}}$.
+		\item 모든 유리수 점에서 함숫값이 정해지면, 연속함수는 $x_n \to x$이면 $f(x_n) \to f(x)$이다.
+		즉 연속함수에서 그 함수의 유리수에서 함숫값의 수열로의 대응은 일대일 함수이다.
+		즉 해당 집합을 $S$라고 하면 $[S] \leq {[\mathbf{R}]}^{[\mathbf{Q}]} = \mathbf{c}^{\aleph_0} = \mathbf{c}$.
+		반대로 모든 상수함수는 연속이므로 $\mathbf{c} \leq [S]$.
+	\end{enumerate}
+\end{proof}
+\begin{theorem}
+	다음을 만족하는 함수 $f_n : [0, 1] \to \mathbf{R}$이 존재한다.
+	$n \to \infty$ 이면 (각 점에서) $f_n \to 0$이나, 어떠한 $\gamma_n \to \infty$에 대해서도 $\gamma_n f_n$는 어떤 점에서 수렴하지 않는다.
+\end{theorem}
+\begin{proof}
+	$0$으로 수렴하는 모든 실수 수열은 모든 실수 집합의 부분집합이나, 첫 항을 마음대로 바꿀 수 있으므로 크기가 $\mathbf{c}$이다.
+	즉 $[0, 1]$에서 $0$으로 수렴하는 모든 실수 수열의 일대일 대응이 존재한다.
+	$f_n$을 $[0, 1]$의 각 점에서 대응된 수열의 $n$번째 항으로 정의하자.
+	그러면 각 점에서 $n \to \infty$면 $f_n(x) \to 0$이다.
+
+	임의의 $\gamma_n \to \infty$에 대해서, $t_n$을 $\gamma_n$이 $0$이면 $1$로, 아니면 $|\gamma_n|^{-1/2}$로 정의하자.
+	그러면 $t_n\gamma_n \to \infty$이나, $t_n \to 0$이다.
+	어떠한 점 $x \in [0, 1]$에서 $f_n(x)$은 $t_n$이므로, $\gamma_n f_n(x) \to \infty$이다.
+\end{proof}
